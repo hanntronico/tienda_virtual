@@ -1,0 +1,7 @@
+shopgrup
+*chiappe@2013*
+
+BD: shopgrup_tienda
+usuario de BD: shopgrup_usu078
+password: *gp@123*
+
