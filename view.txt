@@ -5,3 +5,5 @@ BD: shopgrup_tienda
 usuario de BD: shopgrup_usu078
 password: *gp@123*
 
+datos ingreados por hanntronico desde la web
+
