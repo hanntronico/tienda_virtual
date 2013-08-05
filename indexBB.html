@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="es" class="no-js"> <!--<![endif]-->
+    <head>
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>MERCADO VIRTUAL</title>
+        <meta name="description" content="Sitio web de compras online">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <!-- <link rel="stylesheet" href="css/normalize.css"> -->
+<!--    <link rel="stylesheet" href="css/main.css"> -->
+        <link rel="stylesheet" href="css/estilos.css">
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/jquery-1.8.2.min.js">\x3C/script>')</script>
+        <script src="js/jquery.noconflict.js" type="text/javascript"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.1/modernizr.min.js" type="text/javascript"></script>         
+        
+<!--    <script src="js/vendor/modernizr-2.6.2.min.js"></script> -->
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+
+  <div class="login_register_stuff hide"><!-- Login/Register Modal forms - hidded by default to be opened through modal -->
+    <div id="login_panel">
+      <div class="inner-container login-panel">
+        <h3 class="m_title">INGRESE CON SU USUARIO PARA PODER COMPRAR
+          <!-- SIGN IN YOUR ACCOUNT TO HAVE ACCESS TO DIFFERENT FEATURES --></h3>
+        <form id="login_form" name="login_form" method="post">
+          <a href="#" class="create_account" onClick="ppOpen('#register_panel', '360');">REGISTRESE</a>
+          <input type="text" id="uscorreo" name="uscorreo" class="inputbox" placeholder="Correo">
+          <input type="password" id="uspassword" name="uspassword" class="inputbox" placeholder="Contraseña">
+          <input type="submit" id="login" name="submit" value="ENTRAR">
+          <!-- <a href="#" class="login_facebook">login with facebook</a> -->
+        </form><br>
+        <div class="links"><a href="#" onClick="ppOpen('#forgot_panel', '350');">Olvidó su usuario?</a> / <a href="#" onClick="ppOpen('#forgot_panel', '350');">Olvidó su contraseña?</a></div>
+      </div>
+    </div><!-- end login panel -->
+
+    <div id="register_panel">
+      <div class="inner-container register-panel">
+        <h3 class="m_title">REGISTRO DE USUARIO</h3>
+        <form id="register_form" name="register_form" method="post">
+<!--           <p>
+            <input type="text" id="reg-username" name="username" class="inputbox" placeholder="Usuario">
+          </p> -->
+
+          <table border="0" cellspacing="10" cellpadding="5">
+            <tr>
+                <td>Nombres:</td>
+                <td>
+                  <input type="text" id="txtnombres" name="txtnombres" class="inputbox" placeholder="Nombres">
+                </td>
+            </tr>
+            <tr>
+                <td>Apellidos:</td>
+                <td>
+                  <input type="text" id="txtapellidos" name="txtapellidos" class="inputbox" placeholder="Apellidos">
+                </td>
+            </tr>
+            <tr>
+                <td>Email: </td>
+                <td><input type="text" id="txtemail" name="txtemail" class="inputbox" placeholder="Correo electrónico"></td>
+            </tr>
+            <tr>
+                <td>Password: </td>
+                <td><input type="password" id="txtpassword" name="txtpassword" class="inputbox" placeholder="Contraseña"></td>
+            </tr>
+            <tr>
+                <td>Confirmar: </td>
+                <td><input type="password" id="txtconfpass" name="txtconfpass" class="inputbox" placeholder="Confirmar contraseña"></td>
+            </tr>
+            <tr>
+              <td colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <input type="submit" id="signup" name="submit" value="Crear mi cuenta">
+                <input type="reset" id="reset" name="reset" value="Cancelar">
+              </td>
+            </tr>
+
+          </table>
+<!--           <p>
+            Nombres: 
+            <input type="text" id="txtnombres" name="txtnombres" class="inputbox" placeholder="Nombres">
+          </p>
+          <p>Apellidos: 
+            <input type="text" id="txtapellidos" name="txtapellidos" class="inputbox" placeholder="Apellidos">
+          </p>
+          <p>Email: 
+            <input type="text" id="txtemail" name="txtemail" class="inputbox" placeholder="Correo electrónico">
+          </p>
+          <p>Password: 
+            <input type="password" id="txtpassword" name="txtpassword" class="inputbox" placeholder="Contraseña">
+          </p>
+          <p>Confirmar:
+            <input type="password" id="txtconfpass" name="txtconfpass" class="inputbox" placeholder="Confirmar contraseña">
+          </p>
+          <p>
+            <input type="submit" id="signup" name="submit" value="Crear mi cuenta">
+            <input type="reset" id="reset" name="reset" value="Cancelar">
+          </p> -->
+        </form>
+        <div class="links"><a href="#" onClick="ppOpen('#login_panel', '800');">Ya tiene una cuenta?</a></div>
+      </div>
+    </div><!-- end register panel -->
+
+    <div id="forgot_panel">
+      <div class="inner-container forgot-panel">
+        <h3 class="m_title">Olvidó sus datos de registro?</h3>
+        <form id="forgot_form" name="forgot_form" method="post">
+          <p>
+            <input type="text" id="forgot-email" name="email" class="inputbox" placeholder="Email Address">
+          </p>
+          <p>
+            <input type="submit" id="recover" name="submit" value="SEND MY DETAILS!">
+          </p>
+        </form>
+        <div class="links"><a href="#" onClick="ppOpen('#login_panel', '800');">Ya recordé mi cuenta!</a></div>
+      </div>
+    </div><!-- end register panel -->
+  </div><!-- end login register stuff -->
+
+
+
+
+
+
+
+
+
+        <header id="header">
+          <div id="logo">
+             <img src="img/logo2.png" alt="logo">
+          </div>
+
+          <div id="loginB">
+              <div id="menu">
+                Bienvenido a nustra tienda virtual <br>
+                <ul>
+                    <li><a href="#login_panel" data-rel="prettyPhoto[login_panel]">LOGIN</a>
+                    </li>
+                    <li>Carrito</li>
+                    <li>Pedidos</li>
+                    <li></li>
+                </ul>
+              </div>
+              
+              <div id="regis">
+                <!-- <a href="#login_panel" data-rel="prettyPhoto[login_panel]">REGISTRESE AQUÍ</a>  -->
+                <a href="#register_panel" data-rel="prettyPhoto[register_panel]">REGISTRESE AQUÍ</a><br>
+                <h6><a href="#login_panel" data-rel="prettyPhoto[login_panel]">Ingrese a su cuenta aquí</a></h6>
+                <!-- <a href="#" class="create_account" onClick="ppOpen('#register_panel', '280');">REGISTRESE</a> -->
+              </div>
+          
+          </div>
+
+        </header><!-- /header -->
+        
+        <nav class="">
+            <!-- aquí va el nav -->
+            <ul>
+              <li><a href="#">INICIO</a></li>
+              <li><a href="#">PRODUCTOS</a></li>
+              <li><a href="#">CATEGORIAS</a></li>
+              <li><a href="#">OPCION 2</a></li>
+            </ul>
+
+            <div id="buscar">
+              <form action="index_submit" method="get" accept-charset="utf-8">
+                <input type="text" name="txtbuscar" id="txtbuscar" value="" placeholder="Ingrese lo que desea buscar">
+              </form>
+            </div>
+
+        </nav>
+
+        <section id="contenedor">
+          <section id="land">
+            hann  ddd
+          </section>
+          
+          <section id="bloque01">
+            <div id="nompro">
+              <div id="subnompro">LECHE <br> GLORIA</div>
+              <div id="nubecompra">nube</div>
+            </div>
+            <article>
+                <img src="img/1.png" alt="">
+            </article>
+
+          </section>
+
+          <section id="bloque02">
+            <div id="nompro">
+              <div id="subnompro">LECHE <br> GLORIA</div>
+              <div id="nubecompra">nube</div>
+            </div>
+            <article>
+                <img src="img/1.png" alt="">
+            </article>
+          </section>
+
+          <section id="bloque03">
+            <div id="nompro">
+              <div id="subnompro">LECHE <br> GLORIA</div>
+              <div id="nubecompra">nube</div>
+            </div>
+            <article>
+                <img src="img/1.png" alt="">
+            </article>
+
+          </section>            
+
+          <section id="nuevos">
+              <hgroup> <h1>Nuevos Productos</h1> </hgroup>
+              <section id="bloqueA">
+                <div id="imgprod">
+                  &nbsp;
+                </div>
+                <div id="descprod"><a href="#">Descripción del producto aquí</a></div>
+                <div id="btnpro">
+                  <input type="button" value=" Comprar " class="btnprod">
+                </div>
+              </section>
+
+              <section id="bloqueB">
+                <div id="imgprod">
+                  &nbsp;
+                </div>
+                <div id="descprod"><a href="#">Descripción del producto aquí</a></div>
+                <div id="btnpro">
+                  <input type="button" value=" Comprar " class="btnprod">
+                </div>
+              </section>
+              
+              <section id="bloqueC">
+                <div id="imgprod">
+                  &nbsp;
+                </div>
+                <div id="descprod"><a href="#">Descripción del producto aquí</a></div>
+                <div id="btnpro">
+                  <input type="button" value=" Comprar " class="btnprod">
+                </div>
+              </section>
+
+              <section id="bloqueD">
+                <div id="imgprod">
+                  &nbsp;
+                </div>
+                <div id="descprod"><a href="#">Descripción del producto aquí</a></div>
+                <div id="btnpro">
+                  <input type="button" value=" Comprar " class="btnprod">
+                </div>
+              </section>
+          </section>
+
+        </section>
+
+          <!-- <aside>
+            esto es el aside
+          </aside> -->
+
+
+        <footer>
+          <section id="wrapper">
+              
+            <div id="col_1">
+               aqui va el facebook
+            </div>
+
+            <div id="col_2">
+               aqui va el facebook
+            </div>
+
+            <div id="col_3">
+               Email
+               <div id="correos">
+                <ul>
+                    <li>ventas@mercadovirtual.com</li>
+                    <li>servicio@mercadovirtual.com</li>
+                </ul>
+               </div>
+            </div>
+
+            <div id="col_4">
+               Síguenos 
+              <div class="sociales">
+                <a href="#"><img src="img/i1.gif" alt=""/></a>
+                <a href="#"><img src="img/i2.gif" alt=""/></a>
+                <a href="#"><img src="img/i3.gif" alt=""/></a>
+              </div>
+            </div>
+
+            <div id="datos">
+              &copy; <script type="text/javascript">var mdate = new Date(); document.write(mdate.getFullYear());</script>  Diseñado por MACBERRI SAC, Todos los derechos reservados
+            </div>
+
+          </section>  
+        </footer>
+
+        <br><br>
+
+
+<script type="text/javascript" src="js/bootstrap.min.js"></script><!-- Bootstrap Framework -->
+<script type="text/javascript" src="js/plugins.js"></script><!-- jQuery Plugins -->
+<script type="text/javascript" src="addons/superfish_responsive/superfish_menu.js"></script>
+<!-- Superfish Menu -->
+
+
+<script type="text/javascript" src="js/kalypso_script.js"></script><!-- custom scripts file -->
+
+<!-- prettyphoto scripts & styles -->
+<link rel="stylesheet" href="addons/prettyphoto/prettyPhoto.css" type="text/css" />
+<script type="text/javascript" src="addons/prettyphoto/jquery.prettyPhoto.js"></script>
+<script type="text/javascript">
+
+  function ppOpen(panel, width){
+    jQuery.prettyPhoto.close();
+    setTimeout(function() {
+      jQuery.fn.prettyPhoto({social_tools: false, deeplinking: false, show_title: false, default_width: width, theme:'pp_kalypso'});
+      jQuery.prettyPhoto.open(panel);
+    }, 300);
+  } // function to open different panel within the panel
+  
+  jQuery(document).ready(function($) {
+    jQuery("a[data-rel^='prettyPhoto'], .prettyphoto_link").prettyPhoto({theme:'pp_kalypso',social_tools:false, deeplinking:false});
+    jQuery("a[rel^='prettyPhoto']").prettyPhoto({theme:'pp_kalypso'});
+    jQuery("a[data-rel^='prettyPhoto[login_panel]']").prettyPhoto({theme:'pp_kalypso', default_width:800, social_tools:false, deeplinking:false});
+    
+    jQuery(".prettyPhoto_transparent").click(function(e){
+      e.preventDefault();
+      jQuery.fn.prettyPhoto({social_tools: false, deeplinking: false, show_title: false, default_width: 980, theme:'pp_kalypso transparent', opacity: 0.95});
+      jQuery.prettyPhoto.open($(this).attr('href'),'','');
+    });
+    
+  });
+
+</script>
+
+
+
+
+        <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>-->
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <!-- <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src='//www.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+         </script> -->
+    </body>
+</html>
