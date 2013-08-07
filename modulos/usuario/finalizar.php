@@ -9,7 +9,7 @@ $rz_ent=$_POST["txtrz"];
 $ruc_ent=$_POST["txtruc"];
 $comp=$_POST["chkfac"];
 
-
+date_default_timezone_set('America/Lima');
 
 
 function autogenerado($tabla,$campocodigo,$numcaracteres){

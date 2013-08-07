@@ -7,11 +7,12 @@
           <div id="loginB">
               <div id="menu">
                 Bienvenido a nuestra tienda virtual <br>
+
                 <ul>
-                    <li><a href="#">CUENTA</a></li>
+                    <li><a href="cuenta.php">
+                        <img src="../../img/profile.png" alt="" width="22" height="22"> CUENTA</a></li>
                     <li><a href="#" onclick="vercarrito(); return false;">CANASTA</a></li>
                     <li><a href="#" onclick="salir(); return false;">SALIR</a></li>
-                    <!-- <li></li> -->
                 </ul>
               </div>
               

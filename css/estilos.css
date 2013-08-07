@@ -537,7 +537,7 @@ section#wrapper {
 
 /**********************  ESTILOS DE USUARIO   *************************************/
 
-#control, #productos {
+#control, #productos, #content {
 	background: #FFEC83;
 	border-radius: 0.75em;
 	color: #004080;
@@ -557,6 +557,11 @@ section#wrapper {
 }
 
 #productos {
+	/*margin-left: 10px; */
+	width: 75%;
+}
+
+#content {
 	/*margin-left: 10px; */
 	width: 75%;
 }
@@ -635,12 +640,11 @@ select {
 
 .selcateg {
 	background: #FFEC83;
+	border: none;
 	color: #004080;
-	border: 1px solid #004080; 
+	font-size: 18px;
 	height: 180px;
 	width: 160px;
-	font-size: 18px;
-	border: none;
 }
 
 #msnvacio {
@@ -708,6 +712,20 @@ select {
 	min-width: 180px;
 	padding: 20px;
 	text-align: justify;
+}
+
+#control ul {
+	font-size: 14px;
+	list-style: none;
+}
+
+#control ul a:link, #control ul a:visited {
+	text-decoration: none;
+	color: #004080;
+}
+
+#control ul a:hover {
+	color: #E17100;
 }
 
 /*footer {

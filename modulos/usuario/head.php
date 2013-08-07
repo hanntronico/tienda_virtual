@@ -95,6 +95,15 @@
                 content.fadeIn('slow').load("vercarrito.php");
             }
 
+            function verform(opc) {
+                var content = jQuery("#content");
+                if (opc==1) {content.fadeIn('slow').load("dat_per.php");}
+                if (opc==2) {content.fadeIn('slow').load("miscompras.php");}
+                if (opc==3) {content.fadeIn('slow').load("ped_pend.php");}
+                if (opc==4) {content.fadeIn('slow').load("cambiapass.php");}
+            }
+
+
             // jquery(document).ready(function(){
             //     //div donde se mostrará calendario debe estar oculto                       
             //     jquery('#calendario').hide();
