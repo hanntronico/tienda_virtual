@@ -10,7 +10,7 @@
 
                 <ul>
                     <li><a href="cuenta.php">
-                        <img src="../../img/profile.png" alt="" width="25" height="25"> CUENTA</a></li>
+                        <!-- <img src="../../img/profile.png" alt="" width="25" height="25"> CUENTA</a></li> -->
                     <li><a href="#" onclick="vercarrito(); return false;">CANASTA</a></li>
                     <li><a href="#" onclick="salir(); return false;">SALIR</a></li>
                 </ul>
