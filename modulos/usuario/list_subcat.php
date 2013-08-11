@@ -13,9 +13,10 @@
         $link=Conectarse();
         
         if($codcat==0){
-          $sq="select * from subcategorias";
+          $sq="select * from categoria";
           $res=mysql_query($sq,$link);
           $numreg=mysql_num_rows($res);
+
         }elseif ($codcat>0) {
           $sq="select * from subcategorias where cod_tipo=".$codcat;
           $res=mysql_query($sq,$link);
@@ -58,14 +59,16 @@
       $row=@mysql_fetch_array($res);
                   
       if($codcat==0){
-        $sq="select * from subcategorias LIMIT $filini,6";
+        $sq="select * from categoria LIMIT $filini,6";
         $res=mysql_query($sq,$link);
+        $strimag="categorias/";
       }elseif ($codcat>0) {
         $sq="select * from subcategorias where cod_tipo=".$codcat." LIMIT $filini,6";
         $res=mysql_query($sq,$link);
+        $strimag="";
       }
       
-      // echo $sq; exit();          
+       // echo $sq; exit();          
                   
       while ($rwc=mysql_fetch_array($res))
        		{
@@ -74,7 +77,7 @@
               <section id="bloqueSC">
                 <a href="#" onClick="ver_prod(<?php echo $rwc[0]?>); return false;">
                   <div id="imgprod">
-                    <img src="../productos/<?php echo $rwc[3];?>" alt="<?php echo $rwc[3];?>">
+                    <img src="../productos/<?php echo $strimag.$rwc[3];?>" alt="<?php echo $strimag.$rwc[3];?>">
                   </div>
                 </a>    
   

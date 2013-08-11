@@ -5,15 +5,18 @@
           </div>
 
           <div id="loginB">
-              <div id="menu">
-                Bienvenido a nuestra tienda virtual <br>
-
-                <ul>
+              <div id="menu2">
+                <!-- Bienvenido a nuestra tienda virtual  -->
+                <a href="cuenta.php"><div id="cuenta">Cuenta</div></a>
+                <a href="#" onclick="vercarrito(); return false;"><div id="canasta">Canasta</div></a>
+                <a href="#" onclick="salir(); return false;"><div id="salir">Salir</div></a>
+<!--              <ul>
                     <li><a href="cuenta.php">
-                        <img src="../../img/profile.png" alt="" width="25" height="25"> CUENTA</a></li>
+                        <img src="../../img/profile.png" alt="" width="14" height="14">
+                        Cuenta</a></li>
                     <li><a href="#" onclick="vercarrito(); return false;">CANASTA</a></li>
                     <li><a href="#" onclick="salir(); return false;">SALIR</a></li>
-                </ul>
+                  </ul> -->
               </div>
               
               <div id="regis">
@@ -21,8 +24,8 @@
 
               <!-- <a href="#register_panel" data-rel="prettyPhoto[register_panel]">Bienvenid@</a><br> -->
                 <!-- <h6><a href="#login_panel" data-rel="prettyPhoto[login_panel]"></a></h6> -->
-                <h6><a href="#">Bienvenido(a):&nbsp;
-                <?php echo $solonom; ?></a></h6>
+                <div id="solo_nom"><a href="#">Bienvenido(a):&nbsp;
+                <?php echo $solonom; ?></a></div>
                 <a href="#" onclick="vercarrito(); return false;">Compra: S/. 
                 <?php 
 
