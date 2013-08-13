@@ -80,6 +80,11 @@
                 content.fadeIn('slow').load("list_subcat.php?cod="+id+"&pag="+pag);
             }
 
+            function verdatos()
+            {
+                var content = jQuery("#content");
+                content.fadeIn('slow').load("dat_per.php");
+            }
 
             function salir()
             {
@@ -137,6 +142,96 @@
                 // alert("Hola mundo");
             }
 
+            function validar() {
+                var passact = document.frm_cambiopass.txtpassact.value; 
+                if (passact==""){
+                  alert ("Por favor ingresar contraseña actual");
+                  document.frm_cambiopass.txtpassact.focus();
+                  return false;        
+                }
+
+                var newpass = document.frm_cambiopass.txtnuevapass.value;    
+                if (newpass==""){
+                  alert ("Por favor ingresar nueva contraseña");
+                  document.frm_cambiopass.txtnuevapass.focus();
+                  return false;        
+                }
+
+                var confpass = document.frm_cambiopass.txtconfpass.value;    
+                if (confpass==""){
+                  alert ("Por favor confirme contraseña");
+                  document.frm_cambiopass.txtconfpass.focus();
+                  return false;        
+                }
+                
+                if (newpass!=confpass){
+                    alert ("Contraseñas no coinciden");
+                    return false;
+                }    
+                return true;    
+            }    
+            
+            function validaform() {
+                var nom = document.frm_datper.txtnom.value;    
+                if (nom==""){
+                  alert ("Por favor ingrese nombre");
+                  // document.frm_datper.txtnom.focus();
+                  location.href = "cuenta.php";
+                  return false;        
+                } 
+
+                var ape = document.frm_datper.txtape.value;    
+                if (ape==""){
+                  alert ("Por favor ingrese apellido");
+                  // document.frm_datper.txtape.focus();
+                  location.href = "cuenta.php";
+                  return false;        
+                } 
+
+                var dni = document.frm_datper.txtdni.value;    
+                if (dni==""){
+                  alert ("Por favor ingrese dni");
+                  // document.frm_datper.txtdni.focus();
+                  location.href = "cuenta.php";
+                  return false;        
+                } 
+
+                var dir = document.frm_datper.txtdirec.value;    
+                if (dir==""){
+                  alert ("Por favor ingrese dirección");
+                  // document.frm_datper.txtdirec.focus();
+                  location.href = "cuenta.php";
+                  return false;        
+                } 
+
+                var telf = document.frm_datper.txttelf.value;    
+                if (telf==""){
+                  alert ("Por favor ingrese teléfono");
+                  // document.frm_datper.txttelf.focus();
+                  location.href = "cuenta.php";
+                  return false;        
+                } 
+
+                var email = document.frm_datper.txtemail.value;    
+                if (email==""){
+                  alert ("Por favor ingrese email");
+                  // document.frm_datper.txtemail.focus();
+                  location.href = "cuenta.php";
+                  return false;        
+                } 
+
+                return true;
+            }
+
+            function verlista() {
+                document.getElementById('list').style.display = "block" ;
+                var content = jQuery("#list");
+                content.fadeIn('slow').load("vercarritoside.php");
+            }
+             
+            function hidelista() {
+                document.getElementById('list').style.display = "none" ;
+            }                
 
         </script>       
         

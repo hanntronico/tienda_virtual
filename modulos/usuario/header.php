@@ -1,4 +1,5 @@
-
+        <div id="side"><a href="#" onclick="verlista(); return false;">Lista</a></div>
+          <div id="list"></div>
         <header id="header">
           <div id="logo">
              <img src="../../img/logo2.png" alt="logo">
@@ -56,4 +57,5 @@
 
               </div>
           </div>
+
         </header><!-- /header -->

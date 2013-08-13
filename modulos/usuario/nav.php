@@ -2,8 +2,8 @@
             <!-- aquí va el nav -->
             <ul>
               <li><a href="#">INICIO</a></li>
-              <li><a href="#">PRODUCTOS</a></li>
               <li><a href="principal.php">COMPRAR</a></li>
+              <li><a href="#">PRODUCTOS</a></li>
               <li><a href="#">CATEGORIAS</a></li>
               <li><a href="#">SUGERENCIAS</a></li>
             </ul>

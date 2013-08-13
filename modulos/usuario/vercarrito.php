@@ -189,8 +189,9 @@ else
 <br>
 	<div id="botonera" style="tex">
 		<input name="accion" type="submit" value="Recalcular" class="btnrecalc">
-		<input name="accion" type="submit" value="Seguir Comprando" class="boton">
-		<input name="accion" type="submit" value="Confirmar" class="boton">
+		<input name="accion" type="submit" value="Seguir Comprando" class="btnblue">
+		&nbsp;&nbsp;<input name="accion" type="submit" value="Confirmar" class="btnblue">
+		&nbsp;&nbsp;
 	</div>
 </form>
 </div>

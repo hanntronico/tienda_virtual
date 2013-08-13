@@ -610,6 +610,7 @@ section#wrapper {
 #content {
 	/*margin-left: 10px; */
 	width: 75%;
+	/*padding-left: 10px;*/
 }
 
 #opciones {
@@ -647,7 +648,7 @@ section#wrapper {
 	background:#3164AC url("../../img/footer_tile.gif") repeat-x;
 	border: 1px solid #3164AC;
 	color: #FFFFFF;
-	font-size: 16px;
+	font-size: 14px;
 }
 
 .tbcar tr, .tbcar2 tr {
@@ -774,6 +775,105 @@ select {
 	color: #E17100;
 }
 
+.btnblue {
+	background: url("../img/btn1.jpg");
+	border: none;
+	border-radius: 8px;
+	color: #FFFFFF;
+	font-family: tahoma;
+	font-size: 14px;
+	font-weight: bold;
+	/*width: 100px;*/
+	height: 28px; 
+	padding: 5px 20px;
+}
+
+.btnblue:active {
+	background: url("../img/btn2.jpg");
+	border: none;
+	color: #C0C0C0;
+}
+
+.tb_list_ped {
+	font-size: 12px;
+	font-family: Verdana;
+	font-weight:  normal;
+	width: 100%;
+	border-left: 1px solid #004080;
+	border-right: 1px solid #004080;
+}
+
+.tb_list_ped th {
+	background: #004080;
+	color: #FFFFFF;
+}
+
+.tb_list_ped td {
+	/*background: #B0D8FF;*/
+	border-bottom: 1px solid #004080;
+}
+
+.tb_list_ped tr:hover {
+	background: #D5EAFF;
+}
+
+.tb_list_ped caption {
+	font-weight: bolder;
+}
+
+.tbdatper th {
+	border: 1px solid #004080; 
+	background: #004080;
+	color: #FFFFFF;
+	padding-left: 8px;
+}
+
+fieldset {
+	padding: 8px; 
+}
+
+#side {
+	background: #004080;
+	border-radius: 40px;
+	position:  fixed;
+	margin-top: 8%;
+	margin-left: 95%;  
+	text-align: left;
+	width: 100%;
+	padding: 10px 10px;
+}
+
+#side a:link, #side a:visited,
+#list a:link, #list a:visited {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+#list {
+	background: #004080;
+	border-radius: 5px;
+	display: none;
+	margin-top: 8%;
+	margin-left: 74%;  
+	height: 300px;
+	overflow: auto;
+	padding: 10px 6px;
+	position: fixed;
+	text-align: left;
+	width: 25%;
+}
+
+.tbcar {
+	color: #004080;
+}
+
+.total {
+	font-size: 16px;
+}
+
+#chik {
+	
+}
 /*footer {
 	background: #1E6381;
 	background: url("../img/bg_footer.png") no-repeat 50% 0%;	
