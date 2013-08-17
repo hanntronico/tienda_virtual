@@ -1,4 +1,8 @@
-        <div id="side"><a href="#" onclick="verlista(); return false;">Lista</a></div>
+        <div id="side">
+            <a href="#" onclick="verlista(); return false;">
+            &nbsp;&nbsp;&nbsp;<img src="../../img/list.png" alt=""><br>
+            &nbsp;&nbsp;Lista            
+        </a></div>
           <div id="list"></div>
         <header id="header">
           <div id="logo">

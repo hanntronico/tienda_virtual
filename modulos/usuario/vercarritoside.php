@@ -25,7 +25,7 @@ function recalcula () {
 	if (count($k)==0) 
 	{
         echo "<a href='#' onclick='hidelista(); return false;'>Ocultar</a>";     
-		echo "TU CANASTA DE COMPRAS <br> ESTÁ VACÍA <br>";
+		echo "<div style='text-align: center;'>TU CANASTA DE COMPRAS <br> ESTÁ VACÍA</div>";
 		exit();
 	}else{
 
@@ -35,8 +35,7 @@ function recalcula () {
 		if ($acum==0) {
             echo "<a href='#' onclick='hidelista(); return false;'>Ocultar</a>";
 			echo "<div style='text-align: center;'>
-				TU CANASTA DE COMPRAS <br> ESTÁ VACÍA <br>	
-			</div>";
+				TU CANASTA DE COMPRAS <br> ESTÁ VACÍA</div>";
 			exit();
 		}
 	}

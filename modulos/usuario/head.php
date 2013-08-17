@@ -63,21 +63,39 @@
                 var posicion=document.getElementById('cbocateg').options.selectedIndex; //posicion
                 var cod =document.getElementById('cbocateg').options[posicion].value;
                 
-                var content = jQuery("#productos");
-                content.fadeIn('slow').load("list_subcat.php?cod="+cod);
+                if (cod==0){
+                    var content = jQuery("#productos");
+                    content.fadeIn('slow').load("list_cat.php?cod="+cod);
+                }else {
+                    var content = jQuery("#productos");
+                    content.fadeIn('slow').load("list_subcat.php?cod="+cod);
+                }
+
             }
 
-
-            function vertodos(id)
-            {
+            function ver_scat (id) {
                 var content = jQuery("#productos");
                 content.fadeIn('slow').load("list_subcat.php?cod="+id);
+            }
+
+            function vertodascat(id)
+            {
+                // var content = jQuery("#productos");
+                // content.fadeIn('slow').load("list_subcat.php?cod="+id);
+                var content = jQuery("#productos");
+                content.fadeIn('slow').load("list_cat.php?cod="+id);
             }
 
             function verpag(id,pag)
             {
                 var content = jQuery("#productos");
                 content.fadeIn('slow').load("list_subcat.php?cod="+id+"&pag="+pag);
+            }
+
+            function verpag2(id,pag)
+            {
+                var content = jQuery("#productos");
+                content.fadeIn('slow').load("list_cat.php?cod="+id+"&pag="+pag);
             }
 
             function verdatos()

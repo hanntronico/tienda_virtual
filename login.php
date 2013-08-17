@@ -100,7 +100,7 @@ if ($numfila<>0){
 
 		if ($row["cod_nivel"]==1)
 		{
-			header("location: info/");
+			header("location: modulos/admin/main_admin.php");
 			exit;
 		}
 		if ($row["cod_nivel"]==2)
