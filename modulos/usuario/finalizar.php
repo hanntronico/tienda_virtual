@@ -122,12 +122,18 @@ if (count($k)>0)
 
 	// exit();
 
+
+		}
+	}
+}
+
+
 $onombre=$rf[3]." ".$rf[4];
 $omail=$rf[8];
 // $opass=$secpass;
 
 
-$mensaje="Pedido ".$idpedido."realizado: "
+$mensaje="Pedido ".$idpedido." realizado"."<br>".
 		."Cliente :".$rf[0]."<br>".
 		"Email: ".$omail."<br>".
 		"Fecha de pedido: ".$fecha;
@@ -178,11 +184,6 @@ if(!$mail->Send()) {
 //   header("location: aviso.php");
 // }
 
-
-
-		}
-	}
-}
 unset($_SESSION["s_prod"]);
 header("location: finalizado.php");
 ?>
