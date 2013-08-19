@@ -59,6 +59,39 @@ function recalcula () {
 	frm01.accion[0].click();
 }
 
+function valid_form() {
+	
+	if (document.frm02.chktipago[0].checked==false && document.frm02.chktipago[1].checked==false) 
+		{
+			alert("Por favor seleccionar tipo de pago");
+			document.frm02.chktipago[0].focus();
+			return false;
+		}
+
+	if (document.frm02.fecha.value=="") {
+			alert("Por favor ingrese fecha");
+			document.frm02.fecha.focus();
+			return false;
+	}
+	if (document.frm02.txtnom.value=="") {
+			alert("Por favor ingrese fecha");
+			// document.frm02.txtnom.focus();
+			return false;
+	}
+	if (document.frm02.txtdir.value=="") {
+			alert("Por favor ingrese dirección");
+			// document.frm02.txtdir.focus();
+			return false;
+	}
+	if (document.frm02.txt3.value=="") {
+			alert("Por favor ingrese teléfono");
+			// document.frm02.txt3.focus();
+			return false;
+	}
+
+	return true;
+}
+
 
 
 </script>
@@ -119,7 +152,7 @@ if (count($k)>0)
 </tr>
 </table> -->
 
-<form name="frm02" action="finalizar.php" method="post"> 
+<form name="frm02" action="finalizar.php" method="post" onsubmit="return valid_form();"> 
 <table width="100%" class="tbcar2">
 	<thead>
 		<tr>
@@ -223,7 +256,7 @@ if (count($k)>0)
 <br>
 	<div id="botonera" style="tex">
 		<!-- <input name="accion" type="submit" value="Recalcular" class="btnrecalc"> -->
-		<input name="accion" type="submit" value="Finalizar" class="boton">
+		<input name="accion" type="submit" value="Finalizar" class="btnblue">
 	</div>
 </form>
 </div>
