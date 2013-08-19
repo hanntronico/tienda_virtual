@@ -149,17 +149,31 @@ case 'marca':
 
 /************************************************************************************************************************************************/
 
-case 'categoria':
+case 'subcategoria':
 			if($_POST["sw"]==1){
 			
-			$rs=mysql_query("SELECT * FROM categoria WHERE tipo='".$_POST["tipo"]."'",$link);
-			$numfilas=mysql_num_rows($rs);
+			$rs=mysql_query("SELECT * FROM subcategorias WHERE subcat='".$_POST["nomc"]."'",$link);
+			$numfilas=@mysql_num_rows($rs);
 			
-//		cod_tipo 	tipo 	descripcion
+
+// cod_subcat, subcat, desc_subcat, img_subcat, cod_tipo	
 		
 			if($numfilas == 0 ){
-				mysql_query("INSERT INTO categoria (tipo, descripcion) 
-							VALUES('".$_POST["tipo"]."','".$_POST["des"]."')",$link);				
+				$temporal=$_FILES['imag']['tmp_name'];
+				$nombre=$_FILES['imag']['name'];
+				
+				move_uploaded_file($temporal,"../productos/subcategorias/".$nombre);
+				   
+				if ($nombre=="")
+				  {   
+				   $nombre ="no_image.png";
+				  }
+				
+				$rs=@mysql_query("set names utf8",$link);
+				$fila=@mysql_fetch_array($res);
+
+				mysql_query("INSERT INTO subcategorias (subcat, desc_subcat, img_subcat, cod_tipo) 
+							VALUES('".$_POST["nomc"]."','".$_POST["des"]."','".$nombre."','".$_POST["codcat"]."')",$link);				
 				}
 			else
 			{ 
@@ -169,20 +183,105 @@ case 'categoria':
 			 }
 			}elseif($_POST["sw"]==2){
 
-				mysql_query("UPDATE categoria SET tipo='".$_POST["tipo"].
-										     "', descripcion='".$_POST["des"].
-										  "' WHERE cod_tipo='".$_POST["id"]."'",$link);
+			   $temporal=$_FILES['imag']['tmp_name'];
+			   $nombre=$_FILES['imag']['name'];
+			   
+			   $ruta=$nombre;
+			   
+			   if ($nombre =="")
+				{
+				 $ruta=$_POST["imgDef"];
+				}
+			
+			  move_uploaded_file($temporal,"../productos/subcategorias/".$nombre);
 	
+				$rs=@mysql_query("set names utf8",$link);
+				$fila=@mysql_fetch_array($res);
+	
+
+				mysql_query("UPDATE subcategorias SET subcat='".$_POST["nomc"].
+								 "', desc_subcat='".$_POST["des"].
+								 "', img_subcat='".$ruta.
+								 "', cod_tipo='".$_POST["codcat"].
+								 "' WHERE cod_subcat=".$_POST["id"],$link);
+
 			}else{
 				$numreg=count($_POST["check"]);
 				for ($i=0;$i<=$numreg-1;$i++){
-						mysql_query("DELETE FROM categoria WHERE cod_tipo='".$_POST["check"][$i]."'",$link);
+				mysql_query("DELETE FROM subcategorias WHERE cod_subcat='".$_POST["check"][$i]."'",$link);
+				}
+			}
+			break;
+
+
+
+/************************************************************************************************************************************************/
+
+case 'categoria':
+			if($_POST["sw"]==1){
+			
+			$rs=mysql_query("SELECT * FROM categoria WHERE subcat='".$_POST["nomc"]."'",$link);
+			$numfilas=@mysql_num_rows($rs);
+			
+
+		// cod_tipo, tipo, descripcion, imgcat
+		
+			if($numfilas == 0 ){
+				$temporal=$_FILES['imag']['tmp_name'];
+				$nombre=$_FILES['imag']['name'];
+				
+				move_uploaded_file($temporal,"../productos/categorias/".$nombre);
+				   
+				if ($nombre=="")
+				  {   
+				   $nombre ="no_image.png";
+				  }
+				
+				$rs=@mysql_query("set names utf8",$link);
+				$fila=@mysql_fetch_array($res);
+
+				mysql_query("INSERT INTO categoria (tipo, descripcion, imgcat) 
+							VALUES('".$_POST["tipo"]."','".$_POST["des"]."','".$nombre."')",$link);				
+				}
+			else
+			{ 
+			
+			$msg_error="Login ya existe, intente otro...";
+			
+			 }
+			}elseif($_POST["sw"]==2){
+
+			   $temporal=$_FILES['imag']['tmp_name'];
+			   $nombre=$_FILES['imag']['name'];
+			   
+			   $ruta=$nombre;
+			   
+			   if ($nombre =="")
+				{
+				 $ruta=$_POST["imgDef"];
+				}
+			
+			  move_uploaded_file($temporal,"../productos/categorias/".$nombre);
+	
+				$rs=@mysql_query("set names utf8",$link);
+				$fila=@mysql_fetch_array($res);
+	
+
+				mysql_query("UPDATE categoria SET tipo='".$_POST["tipo"].
+								 "', descripcion='".$_POST["des"].
+								 "', imgcat='".$ruta.
+								 "' WHERE cod_tipo=".$_POST["id"],$link);
+
+			}else{
+				$numreg=count($_POST["check"]);
+				for ($i=0;$i<=$numreg-1;$i++){
+				mysql_query("DELETE FROM categoria WHERE cod_tipo='".$_POST["check"][$i]."'",$link);
 				}
 			}
 			break;
 	
 
-/***********************************************************************************************************************************************/
+/*******************************************************************************************************************************************/
 
 case 'usuario_temporal':
 		

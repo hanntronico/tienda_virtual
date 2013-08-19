@@ -384,6 +384,8 @@ Global $link;
 
 //llenarcombo('proveedor','cod_prov, razon_prov',' ORDER BY 2', $pro, '','cod_prov')
 //llenarcombo('insumo','cod_ins, nom_ins',' ORDER BY 2', $pro, '','insumoselect');
+$rs=@mysql_query("set names utf8",$link);
+$fila=@mysql_fetch_array($res);
 
 $rs = mysql_query("select $campos from $tabla".$condicion,$link);
 echo "<select name=".$name." ".$parametroselect." class=Text>";

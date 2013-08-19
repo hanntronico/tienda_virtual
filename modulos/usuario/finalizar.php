@@ -134,7 +134,7 @@ $omail=$rf[8];
 
 
 $mensaje="Pedido ".$idpedido." realizado"."<br>".
-		."Cliente :".$rf[0]."<br>".
+		"Cliente :".$rf[0]."<br>".
 		"Email: ".$omail."<br>".
 		"Fecha de pedido: ".$fecha;
 

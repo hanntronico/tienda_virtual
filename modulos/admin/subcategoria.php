@@ -15,28 +15,25 @@
 	include("funciones/function.php");
 	include("conectar.php");
 	$link=Conectarse();
-	Title("PRODUCTOS");
-	$pag = 'producto';
+	Title("SUBCATEGORIAS");
+	$pag = 'subcategoria';
 	if($_GET["sw"]==1){ 		// NUEVO
-		$id=autogenerado("producto","cod_producto",6); 
+		$id=autogenerado("subcategorias","cod_subcat",6); 
 		$ing = 0;
 		$ing2 = 0;
 	}elseif($_GET["sw"]==2){ 	// EDITAR
 		$rs=@mysql_query("set names utf8",$link);
 		$fila=@mysql_fetch_array($res);
-		$sql="SELECT * FROM producto WHERE cod_producto='".$_GET["id"]."'";
+		$sql="SELECT * FROM subcategorias WHERE cod_subcat='".$_GET["id"]."'";
 		$rs=mysql_query($sql,$link);
 		$fila =mysql_fetch_object($rs);
 
-// cod_producto, descripcion, cod_subcat, precio, imagen, stock, cod_marca, prom		   
-		$id  = $fila->cod_producto;
-		$des = $fila->descripcion;		
-		$scat = $fila->cod_subcat;
-		$pre = $fila->precio;
-		$img = $fila->imagen;
-		$sto = $fila->stock;
-		$marc = $fila->cod_marca;
-		$prom = $fila->prom;
+// cod_subcat, subcat, desc_subcat, img_subcat, cod_tipo		   
+		$id  = $fila->cod_subcat;
+		$sc = $fila->subcat;
+		$des = $fila->desc_subcat;		
+		$img = $fila->img_subcat;
+		$cat = $fila->cod_tipo;
 		
 		
 		mysql_free_result($rs);
@@ -44,15 +41,13 @@
 		$rs=@mysql_query("set names utf8",$link);
 		$fila=@mysql_fetch_array($res);
 		
-		$sql="select cod_producto as COD, 
-					 descripcion as Descripcion, 
-					 cod_subcat as Subcat, 
-					 precio, 
-			         concat('<img src=../productos/',imagen,' width=50 height=50>') as Img, 
-			         stock, 
-			         cod_marca, 
-			         prom 
-			         from producto";   
+		$sql="select cod_subcat as COD, 
+		             subcat as Subcat, 
+		             desc_subcat as Descripcion, 
+		             concat('<img src=../productos/subcategorias/',img_subcat,' width=50 height=50>') as Img, 
+		             categoria.tipo 
+			 from subcategorias, categoria 
+			 where subcategorias.cod_tipo = categoria.cod_tipo";   
 		$tabla=$pag;
 		echo $msg_error; 
 		paginar($sql,$tabla,1);
@@ -92,45 +87,28 @@
 		  </tr>
 									  
 		  <tr> 
+			<td>Nombre :</td>
+			<td><input name="nomc" type="text" class="Text" id="nomc" value="<?=$sc?>" size="30"></td>
+		  </tr>
+          
+		  <tr> 
 			<td>Descripci&oacute;n  :</td>
 			<td><input name="des" type="text" class="Text" id="des" value="<?=$des?>" size="50"></td>
 		  </tr>
-          
-		  <tr>
-		    <td><div align="left">Subcategoria :</div></td>
-		    <td><div align="left">
-              <? llenarcombo('subcategorias','cod_subcat, subcat',' ORDER BY 2', $scat, '','codcat'); ?>
-            </div></td>
-	      </tr>
-          
-		  <tr> 
-			<td>Precio:</td>
-			<td>
-		    <input name="pre" class="Text" id="pre" value="<?=$pre?>" onKeyPress="return numeros(event)" size="10" maxLength="10">
-		    S/.</td>
-		  </tr>
- 	  		  			  
-		  <tr>
-		    <td><div align="left">Stock:</div></td>
-		    <td><div align="left">
-              <input name="stock" class="Text" id="stock" value="<?=$sto?>" onKeyPress="return numeros(event)" size="8" maxlength="5"  >
-            </div></td>
-	      </tr>
-          
+        
           <tr>
-		    <td><div align="left">Marca :</div></td>
+		    <td><div align="left">Categoria :</div></td>
 		    <td><div align="left">
-              <? llenarcombo('marca','cod_marca, desc_marca',' ORDER BY 2', $marc, '','codmarca'); ?>
+              <? llenarcombo('categoria','cod_tipo, tipo',' ORDER BY 2', $cat, '','codcat'); ?>
             </div></td>
 	      </tr>
-          
          
 		  <tr>
 		    <td>Imagen:</td>
 		    <td>		      <input name="imag" type="file" class="Text" id="imag" size="40"></td>
           </tr>
 		  
-          		  <?php 
+          	<?php 
 				if($_GET["sw"]==1){ 
 					echo "<tr>
 						    <td align='left'>&nbsp;</td>
@@ -140,14 +118,11 @@
 					echo "<tr>
 						    <td align='left'>Vista Previa :</td>
 	        				<td align='left'>"."&nbsp;&nbsp; 
-	        					<img src='../productos/$img' width='50' height='50'></td>
+	        					<img src='../productos/subcategorias/$img' width='50' height='50'></td>
                             <input type='hidden' name='imgDef' value='".$img."'>
 						  </tr>";
 				}
 			?>
-		  		  			  
-		  
-		  
 		  
 		  <tr>
 		    <td colspan="2" align="center">&nbsp;</td>
