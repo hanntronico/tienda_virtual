@@ -77,7 +77,7 @@
               <section id="bloqueSC">
                 <a href="#" onClick="ver_prod(<?php echo $rwc[0]?>); return false;">
                   <div id="imgprod">
-                    <img src="../productos/<?php echo $strimag.$rwc[3];?>" alt="<?php echo $strimag.$rwc[3];?>">
+                    <img src="../productos/subcategorias/<?php echo $strimag.$rwc[3];?>" alt="<?php echo $strimag.$rwc[3];?>">
                   </div>
                 </a>    
   
