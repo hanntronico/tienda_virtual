@@ -1,5 +1,5 @@
     <div id="opciones">
-      <?php //echo $_GET["cod"]; 
+        <?php //echo $_GET["cod"]; 
         $codcat=$_GET["cod"];
         $pag=$_GET['pag'];      
         if ($pag==""){
@@ -13,7 +13,7 @@
         $link=Conectarse();
         
         if($codcat==0){
-          $sq="select * from categoria";
+          $sq="select * from categoria order by 2";
           $res=mysql_query($sq,$link);
           $numreg=mysql_num_rows($res);
         }
@@ -38,6 +38,7 @@
                   }
                   echo $str1;
             ?>
+
           </td>
           <td align="right"><?php $npag=ceil($numreg/6); 
             for ($i=1; $i <= $npag; $i++) {
@@ -54,7 +55,7 @@
       $row=@mysql_fetch_array($res);
                   
       if($codcat==0){
-        $sq="select * from categoria LIMIT $filini,6";
+        $sq="select * from categoria order by 2 LIMIT $filini,6";
         $res=mysql_query($sq,$link);
         $strimag="categorias/";
 
@@ -66,6 +67,7 @@
        		{
            // cod_subcat	subcat	desc_subcat	img_subcat	cod_tipo
       ?> 
+             
               <section id="bloqueSC">
                 <a href="#" onClick="ver_scat(<?php echo $rwc[0]?>); return false;">
                   <div id="imgprod">
@@ -78,5 +80,4 @@
                   <?php echo $rwc[1]; ?> </a>
 	              </div>
               </section> 
-
       <?php } ?>      

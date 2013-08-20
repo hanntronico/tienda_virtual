@@ -24,7 +24,8 @@ function recalcula () {
 
 	if (count($k)==0) 
 	{
-        echo "<a href='#' onclick='hidelista(); return false;'>Ocultar</a>";     
+        echo "<a href='#' onclick='hidelista(); return false;'>
+                 <span class='tit_ocultar'>Ocultar</span></a>";     
 		echo "<div style='text-align: center;'>TU CANASTA DE COMPRAS <br> ESTÁ VACÍA</div>";
 		exit();
 	}else{
@@ -33,7 +34,8 @@ function recalcula () {
 		$acum+=$value;}
 
 		if ($acum==0) {
-            echo "<a href='#' onclick='hidelista(); return false;'>Ocultar</a>";
+            echo "<a href='#' onclick='hidelista(); return false;'>
+                  <span class='tit_ocultar'>Ocultar</span></a>";
 			echo "<div style='text-align: center;'>
 				TU CANASTA DE COMPRAS <br> ESTÁ VACÍA</div>";
 			exit();
@@ -41,7 +43,8 @@ function recalcula () {
 	}
 
 ?>
-<a href="#" onclick="hidelista(); return false;">Ocultar</a><br><br>
+<a href="#" onclick="hidelista(); return false;">
+	<span class="tit_ocultar">Ocultar</span></a><br><br>
 <form name="frm012" action="procesa.php" method="post"> 
 <table width="100%" class="tbcar">
 	<thead>

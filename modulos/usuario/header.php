@@ -1,7 +1,7 @@
         <div id="side">
             <a href="#" onclick="verlista(); return false;">
             &nbsp;&nbsp;&nbsp;<img src="../../img/list.png" alt=""><br>
-            &nbsp;&nbsp;Lista            
+            &nbsp;&nbsp;<span class="tit_lista">Lista</span>            
         </a></div>
           <div id="list"></div>
         <header id="header">

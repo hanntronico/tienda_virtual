@@ -73,6 +73,12 @@
 
             }
 
+            function verlist_bus () {
+                var dat=document.getElementById('txtbusqueda').value;
+                var content = jQuery("#productos");
+                content.fadeIn('slow').load("list_prod_bus.php?dat="+dat);
+            }    
+
             function ver_scat (id) {
                 var content = jQuery("#productos");
                 content.fadeIn('slow').load("list_subcat.php?cod="+id);
@@ -96,6 +102,14 @@
             {
                 var content = jQuery("#productos");
                 content.fadeIn('slow').load("list_cat.php?cod="+id+"&pag="+pag);
+            }
+
+            function verpag3(dat, pag)
+            {
+                // alert(dat+' '+pag);
+                // var dat = 'prod'
+                var content = jQuery("#productos");
+                content.fadeIn('slow').load("list_prod_bus.php?dat="+dat+"&pag="+pag);
             }
 
             function verdatos()
@@ -249,7 +263,23 @@
              
             function hidelista() {
                 document.getElementById('list').style.display = "none" ;
-            }                
+            }   
+            
+            function checkKey (key, id) {
+                var unicode;
+                if (key.charCode)
+                {unicode=key.charCode;}
+                else
+                {unicode=key.keyCode;}
+                //alert(unicode); // Para saber que codigo de tecla presiono , descomentar
+             
+                if (unicode == 13){
+                    var dat=document.getElementById('txtbuscar').value;
+                    // alert(dat);
+                    var content = jQuery("#productos");
+                    content.fadeIn('slow').load("list_prod_bus.php?dat="+dat);
+                }
+            }           
 
         </script>       
         

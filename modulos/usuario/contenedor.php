@@ -56,7 +56,12 @@
               </select>
               
               <br><br>
+              Buscar: <br><input type="text" name="txtbusqueda" id="txtbusqueda"> <br>
+              <input type="button" value="Aceptar" onclick="verlist_bus();">
+
             </div>
+
+
 
             <div id="productos"></div>
             
