@@ -15,7 +15,6 @@ if (isset($_SESSION["s_cod"]))
     }
 }
 
-
 include("modulos/conectar.php");
 $link=Conectarse();
 ?>

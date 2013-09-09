@@ -1,25 +1,3 @@
-<?php 
-session_start();
-// if (isset($_SESSION["s_cod"]))
-// {
-//   if (isset($_SESSION["s_tipo"]))  
-//     { 
-//      if($_SESSION["s_tipo"]==1) 
-//       {  
-//         header("location: modulos/admin/");
-//         exit;
-//       }elseif ($_SESSION["s_tipo"]==2) {
-//         header("location: modulos/usuario/principal.php");
-//         exit;
-//       }
-//     }
-// }
-
-
-// include("modulos/conectar.php");
-// $link=Conectarse();
-?>
-
 <?php include ("head.php"); ?>
     
     <body <?php 

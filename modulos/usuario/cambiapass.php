@@ -7,7 +7,6 @@
   $sq="select * from usuario where cod_usuario=".$_SESSION["s_cod"];
   $res=mysql_query($sq,$link);
   $rowus=mysql_fetch_array($res);
-  
 ?>
 
 <fieldset>

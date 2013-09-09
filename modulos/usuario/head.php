@@ -1,7 +1,5 @@
 <?php 
     include ("inc_seguridad.php");
-    include("../conectar.php");
-    $link=Conectarse();
     // $_SESSION["s_cod"]='Usuario actual'; 
     $usr=$_SESSION["s_cod"];  
     $solonom=$_SESSION["s_solonom"];
@@ -32,6 +30,9 @@
         <script src="../../js/jquery.noconflict.js" type="text/javascript"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.1/modernizr.min.js" type="text/javascript"></script> 
 
+        <script src="boxes/jquery.js" type="text/javascript"></script>
+        <script src="boxes/jquery.alerts.js" type="text/javascript"></script>
+        <link href="boxes/jquery.alerts.css" rel="stylesheet" type="text/css" media="screen" />
 
         <script type="text/javascript">
 
@@ -138,6 +139,17 @@
                 if (opc==2) {content.fadeIn('slow').load("miscompras.php");}
                 if (opc==3) {content.fadeIn('slow').load("ped_pend.php");}
                 if (opc==4) {content.fadeIn('slow').load("cambiapass.php");}
+            }
+
+            function verdetalle (cod) {
+                var dat=document.getElementsByName("det").length;
+                for (var i = 0; i < dat; i++) {
+                    var content = jQuery(document.getElementsByName("det")[i]);
+                    content.fadeOut(200);
+                };
+
+                var content = jQuery("#detalle"+cod);
+                content.fadeIn('slow').load("inc_detalleped.php?cod="+cod);
             }
 
 
@@ -283,5 +295,39 @@
 
         </script>       
         
-<!--    <script src="js/vendor/modernizr-2.6.2.min.js"></script> -->
+   <script src="../../js/vendor/modernizr-2.6.2.min.js"></script>
+
+   <script type="text/javascript">
+            
+            $(document).ready( function() {
+                
+                $("#alert_button").click( function() {
+                    jAlert('This is a custom alert box', 'Alert Dialog');
+                });
+                
+                $("#confirm_button").click( function() {
+                    jConfirm('Can you confirm this?', 'Confirmation Dialog', function(r) {
+                        jAlert('Confirmed: ' + r, 'Confirmation Results');
+                    });
+                });
+                
+                $("#prompt_button").click( function() {
+                    jPrompt('Type something:', 'Prefilled value', 'Prompt Dialog', function(r) {
+                        if( r ) alert('You entered ' + r);
+                    });
+                });
+                
+                $("#alert_button_with_html").click( function() {
+                    jAlert('You can use HTML, such as <strong>bold</strong>, <em>italics</em>, and <u>underline</u>!');
+                });
+                
+                $(".alert_style_example").click( function() {
+                    jQuery.alerts.dialogClass = jQuery(this).attr('id'); // set custom style class
+                    jAlert('This is the custom class called &ldquo;style_1&rdquo;', 'Custom Styles', function() {
+                        jQuery.alerts.dialogClass = null; // reset to default
+                    });
+                });
+            });
+            
+         </script>
     </head>

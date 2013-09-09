@@ -109,10 +109,10 @@
         <h3 class="m_title">Olvidó sus datos de registro?</h3>
         <form id="forgot_form" name="forgot_form" method="post">
           <p>
-            <input type="text" id="forgot-email" name="email" class="inputbox" placeholder="Email Address">
+            <input type="text" id="forgot-email" name="email" class="inputbox" placeholder="Correo electrónico" style="width: 300px;">
           </p>
           <p>
-            <input type="submit" id="recover" name="submit" value="SEND MY DETAILS!">
+            <input type="submit" id="recover" name="submit" value="Enviar datos">
           </p>
         </form>
         <div class="links"><a href="#" onClick="ppOpen('#login_panel', '800');">Ya recordé mi cuenta!</a></div>

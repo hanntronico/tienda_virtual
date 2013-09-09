@@ -99,7 +99,10 @@ $total+=($row[3]*$value);
 	        </select>
 
             </div></td>
-		<td><div align="right"><?php echo sprintf("%01.2f", $row[3]*$value); ?>&nbsp;&nbsp;</div></td>
+		<td>
+			<div align="right">
+				<?php echo sprintf("%01.2f", $row[3]*$value); ?>&nbsp;&nbsp;</div>
+		</td>
 		<td><div align="center"><a onClick="return confirma('<?php echo $row[1]; ?>');"  href="eli.php?idp=<?php echo $key; ?>"><img src="../../img/tacho.gif" alt="Eliminar" width="15" height="18" border="0"></a></div></td>
 	</tr>
 	<?php

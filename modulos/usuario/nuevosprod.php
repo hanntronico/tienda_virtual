@@ -19,8 +19,9 @@
 
                 </div>
                 <div id="descprod">
-           
-                <a href="#" onClick="enviar(<?php echo $rwc[0]?>); return false;"><?php echo $rwc[1]; ?> </a></div>
+                <a href="#" onClick="enviar(<?php echo $rwc[0]?>); return false;"><?php echo $rwc[1]."<br>S/. ".$rwc[3]; ?></a></div>
+<!--                 <div id="descprod">
+                <a href="#" onClick="enviar(<?php //echo $rwc[0]?>); return false;"><?php //echo $rwc[1]; ?> </a></div> -->
                 <div id="btnpro">
                   <input type="button"  value=" Comprar " onClick="enviar(<?php echo $rwc[0]?>)" class="btnprod">
                 </div>

@@ -1,9 +1,18 @@
+        <div id="iside">
+            <a href="cuenta.php">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <img src="../../img/profile.png" alt="profile.png" width="33" height="33">
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="tit_lista">Mis Datos</span>            
+        </a></div>
+
         <div id="side">
             <a href="#" onclick="verlista(); return false;">
             &nbsp;&nbsp;&nbsp;<img src="../../img/list.png" alt=""><br>
             &nbsp;&nbsp;<span class="tit_lista">Lista</span>            
         </a></div>
-          <div id="list"></div>
+        
+        <div id="list"></div>
+        
         <header id="header">
           <div id="logo">
              <img src="../../img/logo2.png" alt="logo">
@@ -12,9 +21,16 @@
           <div id="loginB">
               <div id="menu2">
                 <!-- Bienvenido a nuestra tienda virtual  -->
-                <a href="cuenta.php"><div id="cuenta">Cuenta</div></a>
-                <a href="#" onclick="vercarrito(); return false;"><div id="canasta">Canasta</div></a>
+                <!-- <a href="cuenta.php"><div id="cuenta">Cuenta</div></a> -->
+                <a href="#" onclick="vercarrito(); return false;"><div id="canasta">Mi Compra</div></a>
+                <!-- <a href="#" onclick="salir(); return false;"><div id="salir">Salir</div></a> -->
                 <a href="#" onclick="salir(); return false;"><div id="salir">Salir</div></a>
+                <input id="alert_button" type="button" value="Show Alert" />
+                <input id="confirm_button" type="button" value="Show Confirm" />
+                <input id="prompt_button" type="button" value="Show Prompt" />
+                <input id="alert_button_with_html" type="button" value="Show Alert" />
+                <input id="style_1" class="alert_style_example" type="button" value="Style 1" />
+                <!-- <input id="style_1" class="alert_style_example" type="button" value="Style 1" /> -->
 <!--              <ul>
                     <li><a href="cuenta.php">
                         <img src="../../img/profile.png" alt="" width="14" height="14">

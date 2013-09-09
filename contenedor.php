@@ -6,7 +6,7 @@ $res=mysql_query("select * from producto ORDER BY 1 limit 0,3",$link);
     // $row=mysql_fetch_array($res);
 ?>
           <section id="land">
-            <img src="img/slider.png" alt="">
+            <img src="img/slider2.png" alt="">
           </section>
           
           <?php 
@@ -18,7 +18,8 @@ $res=mysql_query("select * from producto ORDER BY 1 limit 0,3",$link);
 
           <section id="bloque01">
             <div id="nompro">
-              <div id="subnompro"><?php echo $rwc[1];?></div>
+              <div id="subnompro"><?php echo $rwc[1]?></div>
+              <div id="prec">S/. <?php echo $rwc[3]?></div>
               <a href="#"><div id="nubecompra">COMPRAR <br>AHORA</div></a>
             </div>
             <article>

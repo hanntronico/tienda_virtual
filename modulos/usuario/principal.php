@@ -12,6 +12,7 @@
 
         <section id="contenedor">
           <?php include ("contenedor.php"); ?>
+          
           <?php include ("nuevosprod.php"); ?>
         </section>
         

@@ -48,8 +48,11 @@
 							echo 'Factura';
 						}
 				?></td>
-				<td><a href="#">VER</a></td>
+				<td><a href="#" onclick="verdetalle(<?php echo $rowp[0]; ?>); return false;">VER</a></td>
 				<td>&nbsp;</td>
+			</tr>
+			<tr class="tr_detalle">
+				<td colspan="7"><div id="detalle<?php echo $rowp[0]; ?>" name="det"></div></td>
 			</tr>
 		<?php } ?>				
 		

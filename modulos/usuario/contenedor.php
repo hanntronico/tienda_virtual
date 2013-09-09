@@ -61,8 +61,6 @@
 
             </div>
 
-
-
             <div id="productos"></div>
             
             <?php } ?>
@@ -82,7 +80,8 @@
            ?>
               <section id="bloque01">
                 <div id="nompro">
-                  <div id="subnompro"><?php echo $rwc[1];?></div>
+                  <div id="subnompro"><?php echo $rwc[1]?></div>
+                  <div id="prec">S/. <?php echo $rwc[3]?></div>
                   <a href="#" onClick="enviar(<?php echo $rwc[0]?>); return false;">
                     <div id="nubecompra">COMPRAR <br>AHORA</div></a>
                 </div>

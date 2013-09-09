@@ -68,13 +68,14 @@ $obj-> CerrarConexion();
 							if ($filas4==0) {
 					//cod_usuario	login	clave	nombre	apellidos	dni	direccion	telefono	correo	cod_nivel
 
-									$str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+									$str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890123456789012345678901234567890";
 									$cad = "";
-									for($i=0;$i<8;$i++) {
+									for($i=0;$i<5;$i++) {
 									$cad .= substr($str,mt_rand(0,62),1);
 									}
 									$secpass = $cad;
-
+									// echo $secpass;
+									// exit();	
 									$sql="insert into usuario_temporal (clave, nombre, apellidos, dni, telefono, correo, cod_nivel, estado) 
 												  values ('".$secpass."', '".$nom."','".$ape."', '".$dni."', '".$telf."', '".$email."', 2, 1)";	
 
@@ -92,8 +93,14 @@ $obj-> CerrarConexion();
 $onombre=$nom." ".$ape;
 $omail=$email;
 $opass=$secpass;
-// $oasunto=$_POST["asunto"];
-// $omensaje=$_POST["mensaje"];
+
+
+				// $oasunto=$_POST["asunto"];
+				// $omensaje=$_POST["mensaje"];
+
+
+
+/***********************************************************************************/
 
 $mensaje="Mensaje desde la web<br>Nombre: "
 		.$onombre. "<br>Email: "
@@ -109,7 +116,7 @@ date_default_timezone_set('America/Lima');
 
 require_once('mail/clases/class.phpmailer.php');
 
-$mail             = new PHPMailer(); // defaults to using php "mail()"
+$mail             = new PHPMailer();
 
 $body             = file_get_contents('mail/conten.php');
 $body             = eregi_replace("[\]",'',$body);
@@ -138,7 +145,7 @@ $address = $omail;
 $mail->AddAddress($address, $onombre);
 $mail->Subject = "Ud. se ha comunicado con Mercado Virtual";
 $mail->AltBody = "Para poder ver el mensaje, por favor use un visor de correos compatible con HTML!"; // optional, comment out and test
-// $mail->MsgHTML($body);
+                    //// $mail->MsgHTML($body);
 $mail->Body=$mensaje2;
 
 if(!$mail->Send()) {
@@ -162,12 +169,12 @@ if(!$mail->Send()) {
 
 			}else{
 
-				// Tiene cuenta REGISTRADA con ese DNI
+				//Tiene cuenta REGISTRADA con ese DNI
 				header("location: index.php?deny=2");
 				exit();
 			}
 
-	}elseif ($filas>0) {
+		}elseif ($filas>0) {
 
 		// Tiene cuenta por VERIFICAR con ese DNI
 		header("location: index.php?deny=1");
