@@ -121,7 +121,7 @@ if ($numfila<>0){
 	}
 	else
 	{
-		header("location: index.php?deny=0");
+		header("location: index.php?deny=6");
 		exit;	
 	}
 exit;

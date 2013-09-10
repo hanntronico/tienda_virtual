@@ -10,7 +10,9 @@
           <input type="submit" id="login" name="submit" value="ENTRAR">
           <!-- <a href="#" class="login_facebook">login with facebook</a> -->
         </form><br>
-        <div class="links"><a href="#" onClick="ppOpen('#forgot_panel', '350');">Olvidó su usuario?</a> / <a href="#" onClick="ppOpen('#forgot_panel', '350');">Olvidó su contraseña?</a></div>
+        <div class="links">
+          <a href="#" onClick="ppOpen('#forgot_panel', '350');" id="olv">Olvidó su usuario?</a> / 
+          <a href="#" onClick="ppOpen('#forgot_panel', '350');">Olvidó su contraseña?</a></div>
       </div>
     </div><!-- end login panel -->
 
@@ -115,8 +117,58 @@
             <input type="submit" id="recover" name="submit" value="Enviar datos">
           </p>
         </form>
+
+          <?php 
+          if ($_GET["deny"]==5) {
+              echo "<div class='msn_error'>Correo no se encuenta registrado</div>";
+          } 
+
+          ?>
         <div class="links"><a href="#" onClick="ppOpen('#login_panel', '800');">Ya recordé mi cuenta!</a></div>
       </div>
     </div><!-- end register panel -->
+
+    <div id="caja_msn">
+      <div class="inner-container forgot-panel">
+        <!-- <h3 class="m_title">MENSAJE</h3> -->
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th><h3 class="m_title">MENSAJE</h3></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr align="center">
+              <td>Su cuenta de usuario o password <br> son incorrectos.</td>
+            </tr>
+            <tr><td>&nbsp;</td> </tr>
+            <tr align="center"><td>
+              <input type="submit" id="aceptar" value=" Aceptar " onclick="javascript: location.href='index.php';"></td> </tr>
+          </tbody>
+        </table>
+
+<!--         <p align="center">Su cuenta de usuario o password están equivocados.</p>
+        <p align="center">
+            <input type="submit" id="aceptar" value=" Aceptar " onclick="javascript: location.href='index.php';">
+        </p> -->
+<!--         <form id="forgot_form" name="forgot_form" method="post" action="rest_pass.php">
+          <p>
+            <input type="text" id="forgot-email" name="email" class="inputbox" placeholder="Correo electrónico" style="width: 300px;">
+          </p>
+          <p>
+            <input type="submit" id="recover" name="submit" value="Enviar datos">
+          </p>
+        </form> -->
+
+          <?php 
+          // if ($_GET["deny"]==5) {
+          //     echo "<div class='msn_error'>Correo no se encuenta registrado</div>";
+          //} 
+
+          ?>
+<!--         <div class="links"><a href="#" onClick="ppOpen('#login_panel', '800');">Ya recordé mi cuenta!</a></div> -->
+      </div>
+    </div>
+
   </div><!-- end login register stuff -->
 

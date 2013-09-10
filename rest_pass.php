@@ -119,7 +119,7 @@ $obj = new clsConexion();
 					if(!$mail->Send()) {
 					  echo "Mailer Error: " . $mail->ErrorInfo;
 					} else {
-					  header("location: aviso.php");
+					  header("location: aviso2.php");
 					}
 
 

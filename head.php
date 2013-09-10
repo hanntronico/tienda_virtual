@@ -30,6 +30,17 @@
                 if (element) element.click();
             }
 
+            function carga_forgot() {
+                var element = document.getElementById("forgot");
+                if (element) element.click();
+                // alert("hann");
+            }
+
+            function carga_msn() {
+                var element = document.getElementById("msn");
+                if (element) element.click();
+            }
+
             function validasolonumeros() {
              if ((event.keyCode < 48) || (event.keyCode > 57)) 
               event.returnValue = false;
