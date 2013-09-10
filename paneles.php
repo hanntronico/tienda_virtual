@@ -107,7 +107,7 @@
     <div id="forgot_panel">
       <div class="inner-container forgot-panel">
         <h3 class="m_title">Olvidó sus datos de registro?</h3>
-        <form id="forgot_form" name="forgot_form" method="post">
+        <form id="forgot_form" name="forgot_form" method="post" action="rest_pass.php">
           <p>
             <input type="text" id="forgot-email" name="email" class="inputbox" placeholder="Correo electrónico" style="width: 300px;">
           </p>

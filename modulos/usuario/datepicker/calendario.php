@@ -12,9 +12,10 @@ function calendar_html(){
 	//$fecha_fin=date('d-m-Y',time());
 	$mes=date('m',time());
 	$anio=date('Y',time());
-	?>
-	<table style="width:200px;text-align:center;border:1px solid #808080;border-bottom:0px;" cellpadding="0" cellspacing="0">
-	 <tr>
+?>
+
+	<table style="background:#FF0000; width:200px; text-align:center; border:1px solid #808080;border-bottom:0px;" cellpadding="0" cellspacing="0">
+	 <tr style="background:#FFFFFF;">
 	  <td colspan="4">
 	  	<select id="calendar_mes" onchange="update_calendar()">
 		 <?php
@@ -51,7 +52,7 @@ function calendar_html(){
 	  </td>
 	 </tr>
 	</table>
-	<div id="calendario_dias">
+	<div id="calendario_dias" style="background:#FFFFFF;">
 	<?php calendar($mes,$anio) ?>
 	</div>
 	<?php

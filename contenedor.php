@@ -6,7 +6,9 @@ $res=mysql_query("select * from producto ORDER BY 1 limit 0,3",$link);
     // $row=mysql_fetch_array($res);
 ?>
           <section id="land">
-            <img src="img/slider2.png" alt="">
+            
+            <?php include 'slider/slider_gp.php'; ?>
+
           </section>
           
           <?php 

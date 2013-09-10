@@ -28,11 +28,11 @@ function confirma(producto)
 
 function ver_factura() {
  	if (document.frm02.chkfac.checked) {
-      var content = jQuery("#raz_soc");
-      content.fadeIn('slow').load("factura.php");
+    	var content = jQuery("#raz_soc");
+    	content.fadeIn('slow').load("factura.php");
  	}else	{
-		  var content = jQuery("#raz_soc");
-      content.fadeOut('slow').load("factura.php");
+		var content = jQuery("#raz_soc");
+    	content.fadeOut('slow').load("factura.php");
  	}	
  		// alert(document.frm02.chkcomp[1].checked);
 
@@ -156,15 +156,18 @@ if (count($k)>0)
 <table width="100%" class="tbcar2">
 	<thead>
 		<tr>
-			<td colspan="2">Datos adicionales del pedido</td>
+			<td colspan="3">Datos adicionales del pedido</td>
 		</tr>
 	</thead>
 	<tbody>	
-		<tr> 
-			<td>Codigo del pedido:  <?php echo $id; ?></td>
-			<td>Total del pedido:  S/. <?php echo sprintf("%01.2f", $total); ?></td>
+		<tr>  
+			<!-- #FF8000 #FF9A35 #004080-->
+			<td>&nbsp;</td>
+			<td width="60%">Codigo del pedido:  <?php echo $id; ?></td>
+			<td><span style="color:#FF0000 ; font-size:18px; text-decoration:underline;">Total del pedido:  S/. <?php echo sprintf("%01.2f", $total); ?></span></td>
 		</tr>
 		<tr>
+			<td>&nbsp;</td>
 			<td colspan="2">Tipo de pago: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<input type="radio" name="chktipago" value="E" checked="checked" />
 				&nbsp;Efectivo contra entrega &nbsp;&nbsp;&nbsp;
@@ -172,14 +175,17 @@ if (count($k)>0)
 			</td>
 		</tr>
 		<tr> 
-			<td width="20%">Fecha y hora de entrega</td>
-			<td>
-				<?php require('datepicker/calendario.php'); ?>
-				<!-- Fecha de entrega: -->
-				<input type="text" name="fecha" id="fecha" value="<?php echo date('Y-m-d'); ?> "  /> 
-				<a onclick="show_calendar()" style="cursor: pointer;"><small>(calendario)</small></a>
-				<div id="calendario"><?php calendar_html() ?></div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<!-- <input type="text" name="txthora" value="<?php //echo date('h:i'); ?> " placeholder=""> -->
+			<td>&nbsp;</td>
+			<td width="20%" colspan="2">Horario de entrega
+				<?php //require('datepicker/calendario.php'); ?>
+
+				<!-- <input type="text" name="fecha" id="fecha" value="<?php //echo date('Y-m-d'); ?> "  />  -->
+				<!-- <a onclick="show_calendar()" style="cursor: pointer;"><small>(calendario)</small></a> -->
+				<!-- <div id="calendario"><?php //calendar_html() ?></div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				Fecha: 
+				<?php include 'calendario/calendario.php'; ?>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				Hora:
 				<select name="cbohora" style="width: 80px;">
 					<option value="08:00">08:00</option>
@@ -210,6 +216,7 @@ if (count($k)>0)
 		</tr> -->
 		
 		<tr>
+			<td>&nbsp;</td>
 			<td colspan="2">Nombre: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<?php $codusu=$_SESSION["s_cod"]; 
 					 // echo $codusu;
@@ -226,6 +233,7 @@ if (count($k)>0)
 		</tr>
 
 		<tr>
+			<td>&nbsp;</td>
 			<td colspan="2">Dirección: &nbsp;&nbsp;&nbsp;
 				<input type="text" name="txt2" value="<?php echo $row[6]; ?>" style="width: 400px;" disabled="disabled">
 				<input type="hidden" name="txtdir" value="<?php echo $row[6]; ?>">
@@ -233,12 +241,14 @@ if (count($k)>0)
 		</tr>
 
 		<tr>
+			<td>&nbsp;</td>
 			<td colspan="2">Teléfono: &nbsp;&nbsp;&nbsp;&nbsp;
 				<input type="text" name="txt3" value="<?php echo $row[7]; ?>" style="width: 120px;" disabled="disabled">
 			</td>
 		</tr>
 
 		<tr>
+			<td>&nbsp;</td>
 			<td colspan="2">
 					Si desea recibir FACTURA por su compra haga check aquí : &nbsp;&nbsp;&nbsp;
 					<input type="checkbox" name="chkfac" onclick="ver_factura();" value="F"> Factura

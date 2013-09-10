@@ -15,7 +15,8 @@
         <section id="contenedor">
           <?php // include ("contenedor.php"); ?>
           <section id="land">
-            <img src="../../img/slider2.png" alt="">
+            <!-- <img src="../../img/slider2.png" alt=""> -->
+            <?php include 'slider/slider_gp.php'; ?>
           </section>
           <?php include ("nuevosprod.php"); ?>
         </section>

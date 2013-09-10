@@ -37,6 +37,14 @@ header {
 	text-align: center;
 }
 
+/*#calendario {
+	background: #FFFFFF;
+	border: 2px solid #FF8000;
+	display: none;
+	position: fixed;
+	width: 252px;
+}*/
+
 
 #logo, #loginB {
 	/*background: #D6D6D6;*/
