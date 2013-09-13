@@ -29,8 +29,14 @@
          <script>window.jQuery || document.write('<script src="../../js/jquery-1.8.2.min.js">\x3C/script>')</script> 
         <script src="../../js/jquery.noconflict.js" type="text/javascript"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.1/modernizr.min.js" type="text/javascript"></script> 
+        
+        <script type="text/javascript" src="http://www.google.com/jsapi"></script> 
+        
+        <link rel="stylesheet" href="boxes2/thickbox.css" type="text/css" media="screen" />
 
-        <script src="boxes/jquery.js" type="text/javascript"></script>
+        <script src="boxes2/jquery.js" type="text/javascript"></script>
+        <script type="text/javascript" src="boxes2/thickbox.js"></script>
+
         <script src="boxes/jquery.alerts.js" type="text/javascript"></script>
         <link href="boxes/jquery.alerts.css" rel="stylesheet" type="text/css" media="screen" />
 
@@ -38,11 +44,13 @@
 
             function enviar(producto)
             {
-                if (confirm("Desea agregar el producto seleccionado a su canasta de compras?" ))
-                {
-                    location.href="addcarrito.php?id="+producto+"&sw=2";
-                }
-                return false;
+                // if (confirm("Desea agregar el producto seleccionado a su canasta de compras?" ))
+                // {
+                //     location.href="addcarrito.php?id="+producto+"&sw=2";
+                // }
+                // return false;
+            tb_show("CONFIRMAR","boxes2/add_res.php?id="+producto+"&sw=2&placeValuesBeforeTB_=savedValues&TB_iframe=true&height=120&width=300&modal=false");
+
             }
 
             function ver()
@@ -121,14 +129,20 @@
 
             function salir()
             {
-                if (confirm("Desea cerrar sesión?" ))
-                {
-                    location.href="salir.php";
-                }
-                return false;
+                // if (confirm("Desea cerrar sesión?" ))
+                // {
+                //     location.href="salir.php";
+                // }
+                // return false;
+                tb_show("SALIR","boxes2/psalir.php?&placeValuesBeforeTB_=savedValues&TB_iframe=true&height=100&width=250&modal=false");        
             }
 
             function vercarrito() {
+                var content = jQuery("#land");
+                content.fadeIn('slow').load("vercarrito.php");
+            }
+
+            function carga_compra() {
                 var content = jQuery("#land");
                 content.fadeIn('slow').load("vercarrito.php");
             }
@@ -219,6 +233,7 @@
                 var nom = document.frm_datper.txtnom.value;    
                 if (nom==""){
                   alert ("Por favor ingrese nombre");
+                  // jAlert('Por favor ingrese nombre', 'Alert Dialog');
                   // document.frm_datper.txtnom.focus();
                   location.href = "cuenta.php";
                   return false;        
@@ -268,7 +283,7 @@
             }
 
             function verlista() {
-                document.getElementById('list').style.display = "block" ;
+                document.getElementById('list').style.display = "block";
                 var content = jQuery("#list");
                 content.fadeIn('slow').load("vercarritoside.php");
             }
@@ -285,43 +300,59 @@
                 {unicode=key.keyCode;}
                 //alert(unicode); // Para saber que codigo de tecla presiono , descomentar
              
-                if (unicode == 13){
+                if (unicode >= 48 && unicode <= 90){
                     var dat=document.getElementById('txtbuscar').value;
                     // alert(dat);
-                    var content = jQuery("#productos");
-                    content.fadeIn('slow').load("list_prod_bus.php?dat="+dat);
+                    
+                    // var content = jQuery("#productos");
+                    // content.fadeIn('slow').load("list_prod_bus.php?dat="+dat);
+
+
+                    document.getElementById('bus_cont').style.display = "block";
+                    var content = jQuery("#bus_cont");
+                    content.fadeIn('slow').load("list_prod_bus2.php?dat="+dat);
+                    
+
+                    // document.getElementById('bus_cont').style.visibility = visible;
+                }
+
+                if (unicode == 8 || unicode == 46){                
+                    var dat=document.getElementById('txtbuscar').value.length;
+                    if (dat==1){
+                        document.getElementById('bus_cont').style.display = "none";
+                    }
                 }
             }           
 
         </script>       
         
-   <script src="../../js/vendor/modernizr-2.6.2.min.js"></script>
+   <!--<script src="../../js/vendor/modernizr-2.6.2.min.js"></script>-->
 
    <script type="text/javascript">
             
-            $(document).ready( function() {
+            jQuery(document).ready( function() {
                 
-                $("#alert_button").click( function() {
+                jQuery("#alert_button").click( function() {
                     jAlert('This is a custom alert box', 'Alert Dialog');
                 });
                 
-                $("#confirm_button").click( function() {
+                jQuery("#confirm_button").click( function() {
                     jConfirm('Can you confirm this?', 'Confirmation Dialog', function(r) {
                         jAlert('Confirmed: ' + r, 'Confirmation Results');
                     });
                 });
                 
-                $("#prompt_button").click( function() {
+                jQuery("#prompt_button").click( function() {
                     jPrompt('Type something:', 'Prefilled value', 'Prompt Dialog', function(r) {
                         if( r ) alert('You entered ' + r);
                     });
                 });
                 
-                $("#alert_button_with_html").click( function() {
+                jQuery("#alert_button_with_html").click( function() {
                     jAlert('You can use HTML, such as <strong>bold</strong>, <em>italics</em>, and <u>underline</u>!');
                 });
                 
-                $(".alert_style_example").click( function() {
+                jQuery(".alert_style_example").click( function() {
                     jQuery.alerts.dialogClass = jQuery(this).attr('id'); // set custom style class
                     jAlert('This is the custom class called &ldquo;style_1&rdquo;', 'Custom Styles', function() {
                         jQuery.alerts.dialogClass = null; // reset to default

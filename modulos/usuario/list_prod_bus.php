@@ -16,7 +16,7 @@
         $link=Conectarse();
         
         // if($dat==0){
-          $sq="select * from producto where descripcion like '%".$_GET["dat"]."%'";
+          $sq="select * from producto where stock <> 0 and descripcion like '%".$_GET["dat"]."%'";
           $res=mysql_query($sq,$link);
           $numreg=mysql_num_rows($res);
         // }
@@ -31,7 +31,7 @@
             <?php 
                   $res=@mysql_query("set names utf8",$link);
                   $row=@mysql_fetch_array($res);
-                  $sqlq="select * from producto where descripcion like '%".$_GET["dat"]."%'";
+                  $sqlq="select * from producto where stock <> 0 and descripcion like '%".$_GET["dat"]."%'";
                   // echo $sqlq;  
                   $res=mysql_query($sqlq, $link);
                   $rwc=mysql_fetch_array($res);
@@ -64,7 +64,7 @@
       $row=@mysql_fetch_array($res);
                   
       // if($dat==''){
-        $sq="select * from producto where descripcion like '%".$_GET["dat"]."%' order by 2 LIMIT $filini,6";
+        $sq="select * from producto where stock <> 0 and descripcion like '%".$_GET["dat"]."%' order by 2 LIMIT $filini,6";
         // echo $sq;
         // exit();
         $res=mysql_query($sq,$link);

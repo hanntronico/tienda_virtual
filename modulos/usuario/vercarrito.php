@@ -4,59 +4,30 @@ session_start();
 
 <SCRIPT LANGUAGE="JavaScript">
 <!--
-
 function imprimir() {
 	ventana=window.open("imprimir.php","","resizable=NO,scrollbars=yes,HEIGHT=600,WIDTH=600,LEFT=100,TOP=200");
 }
-
 // -->
 </SCRIPT>
 
 <!-- <link rel="stylesheet" href="../../funciones/style.css" type="text/css"> -->
 <script>
-function confirma(producto)
+
+function confirma(producto, idp)
 {
-	if (confirm("Relamente desea eliminar "+producto+" de su canasta de compras?" ))
-	{
-		return true;
-	}
-	return false;
+	// if (confirm("Relamente desea eliminar "+producto+" de su canasta de compras?" ))
+	// {
+	// 	return true;
+	// }
+	// return false;
+
+	tb_show("CONFIRMAR","boxes2/eli_res.php?nomp="+producto+"&id="+idp+"&placeValuesBeforeTB_=savedValues&TB_iframe=true&height=120&width=300&modal=false");
 
 }
-
-// function clickButton(val) {
-//     var buttons = document.getElementsByTagName('input');
-//       for(var i = 0; i < buttons.length; i++) 
-//       {
-//          if(buttons[i].type == 'button' && buttons[i].value == val) 
-//          {
-//               buttons[i].click();
-//               break; //this will exit for loop, but if you want to click every button with the value button then comment this line
-//          }
-//       }
-// }
 
 function recalcula () {
 	frm01.accion[0].click();
 }
-
-// function getButtonByValue(value) {
-//         var els = document.getElementsByTagName('select');
-
-        
-//         for (var i = 0, length = els.length; i < length; i++) {
-
-//             var el = els[i].value;
-
-//             alert(el);
-//             // if (el.type.toLowerCase() == 'button' && el.value.toLowerCase() == value.toLowerCase()) {
-//             //     return el;
-//             //     break;
-//             // }
-//         }
-//     }
-
-
 
 </script>
 
@@ -98,7 +69,6 @@ function recalcula () {
 	}
 
 ?>
-
 <form name="frm01" action="procesa.php" method="post"> 
 <table width="100%" class="tbcar">
 	<thead>
@@ -124,6 +94,7 @@ $res=@mysql_query("set names utf8",$link);
 $row=@mysql_fetch_array($res);
 $res=mysql_query("select * from producto where cod_producto=".$key."",$link);
 $row=mysql_fetch_array($res);
+$astck = $row[5];
 $total+=($row[3]*$value);
 	if ($value<>0)
 	{
@@ -142,19 +113,32 @@ $total+=($row[3]*$value);
 	        <select name="cantidad[]" style="width: 50px;" onchange="recalcula();">
 	        <!-- <select name="cantidad[]" style="width: 50px;" onchange="getButtonByValue('button').click();"> -->
 	        	<?php 
-
-	        		for ($i=1; $i <= 5 ; $i++) { 
-	        			$seleccionar="";
-						if($i==$value) $seleccionar="selected";
-	        			echo "<option value=".$i." ".$seleccionar.">".$i."</option>";
+	        		if ($astck>0) {
+		        		for ($i=1; $i <= $astck ; $i++) { 
+		        			$seleccionar="";
+							if($i==$value) $seleccionar="selected";
+		        			echo "<option value=".$i." ".$seleccionar.">".$i."</option>";
+		        		}
+	        		}else {
+	        			echo "<option value='0' selected='selected'>0</option>";
+	        			// $value=0;
+	        			// $total=0;
 	        		}
 
 	        	 ?>
+	        	 <!-- <option value='0' selected='selected'>0</option> -->
 	        </select>
 
             </div></td>
 		<td><div align="right"><?php echo sprintf("%01.2f", $row[3]*$value); ?>&nbsp;&nbsp;</div></td>
-		<td><div align="center"><a onClick="return confirma('<?php echo $row[1]; ?>');"  href="eli.php?idp=<?php echo $key; ?>"><img src="../../img/tacho.gif" alt="Eliminar" width="15" height="18" border="0"></a></div></td>
+		<td>
+			<div align="center">
+<!-- 				<a onClick="return confirma('<?php echo $row[1]; ?>');" href="eli.php?idp=<?php echo $key; ?>" >
+				<img src="../../img/tacho.gif" alt="Eliminar" width="15" height="18" border="0"></a> -->
+				<a href="#" onClick="confirma('<?php echo $row[1]; ?>', <?php echo $key; ?>); return false;">
+				<img src="../../img/tacho.gif" alt="Eliminar" width="15" height="18" border="0"></a>
+			</div>
+		</td>
 	</tr>
 	<?php
 	}
@@ -190,7 +174,7 @@ else
 	<div id="botonera" style="tex">
 		<input name="accion" type="submit" value="Recalcular" class="btnrecalc">
 		<input name="accion" type="submit" value="Seguir Comprando" class="btnblue">
-		&nbsp;&nbsp;<input name="accion" type="submit" value="Confirmar" class="btnblue">
+		&nbsp;&nbsp;<input name="accion" type="submit" value="Confirma Pedido" class="btnblue">
 		&nbsp;&nbsp;
 	</div>
 </form>

@@ -12,7 +12,7 @@
                 ?>
                 
 
-                <input type="button" value="CATEGORIAS" onClick="vertodos(<?php echo $cat; ?>);">&nbsp;&nbsp;&nbsp;
+                
                 
                 <?php //echo $_GET["cod"]; 
                   $res=@mysql_query("set names utf8",$link);
@@ -20,9 +20,17 @@
                   $sqlq = "select * from subcategorias where cod_subcat=".$_GET["cod"];  
                   $res=mysql_query($sqlq, $link);
                   $rwc=mysql_fetch_array($res);
-                  echo $rwc[1];
+                  // echo $rwc[1];
                 ?>
-               
+
+                <!-- &nbsp;&nbsp;&nbsp; -->
+                <div id="nom_cat"><?php echo $rwc[1]; ?>
+                  
+                </div>
+                <div id="btn_cat">
+<!--                   <input type="button" value="VER CATEGORIAS" onClick="javascript: location.href='principal.php'" class="btnblue">  -->
+                  <div id="lnkblue"><a href="principal.php">Ver Categorias</a></div>                 
+                </div>
               </div>
 
     
@@ -32,9 +40,9 @@
                   $row=@mysql_fetch_array($res);
                   
                   if($codcat==0){
-                    $res=mysql_query("select * from producto",$link);
+                    $res=mysql_query("select * from producto where stock <> 0",$link);
                   }elseif ($codcat>0) {
-                    $res=mysql_query("select * from producto where cod_subcat=".$codcat,$link);
+                    $res=mysql_query("select * from producto where stock <> 0 and cod_subcat=".$codcat,$link);
                   }
                   
                   

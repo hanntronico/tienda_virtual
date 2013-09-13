@@ -3,14 +3,19 @@ session_start();
 ?>
 
 <script>
-function confirma(producto)
-{
-	if (confirm("Relamente desea eliminar "+producto+" de su canasta de compras?" ))
-	{
-		return true;
-	}
-	return false;
+// function confirma(producto)
+// {
+// 	if (confirm("Relamente desea eliminar "+producto+" de su canasta de compras?" ))
+// 	{
+// 		return true;
+// 	}
+// 	return false;
 
+// }
+
+function confirma(producto, idp)
+{
+	tb_show("CONFIRMAR","boxes2/eli_res.php?nomp="+producto+"&id="+idp+"&placeValuesBeforeTB_=savedValues&TB_iframe=true&height=120&width=300&modal=false");
 }
 
 function recalcula () {
@@ -25,7 +30,7 @@ function recalcula () {
 	if (count($k)==0) 
 	{
         echo "<a href='#' onclick='hidelista(); return false;'>
-                 <span class='tit_ocultar'>Ocultar</span></a>";     
+                 <span class='tit_ocultar'>&nbsp;&nbsp;&nbsp;&nbsp;</span></a>";     
 		echo "<div style='text-align: center;'>TU CANASTA DE COMPRAS <br> ESTÁ VACÍA</div>";
 		exit();
 	}else{
@@ -35,7 +40,7 @@ function recalcula () {
 
 		if ($acum==0) {
             echo "<a href='#' onclick='hidelista(); return false;'>
-                  <span class='tit_ocultar'>Ocultar</span></a>";
+                  <span class='tit_ocultar'>&nbsp;&nbsp;&nbsp;&nbsp;</span></a>";
 			echo "<div style='text-align: center;'>
 				TU CANASTA DE COMPRAS <br> ESTÁ VACÍA</div>";
 			exit();
@@ -44,7 +49,15 @@ function recalcula () {
 
 ?>
 <a href="#" onclick="hidelista(); return false;">
-	<span class="tit_ocultar">Ocultar</span></a><br><br>
+	<span class="tit_ocultar">&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+<!-- <input name="accion" type="submit" value="Confirmar" class="btnblue"> -->
+
+<a href="principal.php?sw=2">
+	<span class="tit_pagar">$ Pagar</span></a>
+	
+
+
+	<br><br>
 <form name="frm012" action="procesa.php" method="post"> 
 <table width="100%" class="tbcar">
 	<thead>
@@ -70,6 +83,7 @@ $res=@mysql_query("set names utf8",$link);
 $row=@mysql_fetch_array($res);
 $res=mysql_query("select * from producto where cod_producto=".$key."",$link);
 $row=mysql_fetch_array($res);
+$astck = $row[5];
 $total+=($row[3]*$value);
 	if ($value<>0)
 	{
@@ -89,10 +103,16 @@ $total+=($row[3]*$value);
 	        <!-- <select name="cantidad[]" style="width: 50px;" onchange="getButtonByValue('button').click();"> -->
 	        	<?php 
 
-	        		for ($i=1; $i <= 5 ; $i++) { 
-	        			$seleccionar="";
-						if($i==$value) $seleccionar="selected";
-	        			echo "<option value=".$i." ".$seleccionar.">".$i."</option>";
+	        		if ($astck>0) {
+		        		for ($i=1; $i <= $astck ; $i++) { 
+		        			$seleccionar="";
+							if($i==$value) $seleccionar="selected";
+		        			echo "<option value=".$i." ".$seleccionar.">".$i."</option>";
+		        		}
+	        		}else {
+	        			echo "<option value='0' selected='selected'>0</option>";
+	        			// $value=0;
+	        			// $total=0;
 	        		}
 
 	        	 ?>
@@ -103,7 +123,13 @@ $total+=($row[3]*$value);
 			<div align="right">
 				<?php echo sprintf("%01.2f", $row[3]*$value); ?>&nbsp;&nbsp;</div>
 		</td>
-		<td><div align="center"><a onClick="return confirma('<?php echo $row[1]; ?>');"  href="eli.php?idp=<?php echo $key; ?>"><img src="../../img/tacho.gif" alt="Eliminar" width="15" height="18" border="0"></a></div></td>
+		<td>
+			<div align="center">
+<!-- 			<a onClick="return confirma('<?php //echo $row[1]; ?>');"  href="eli.php?idp=<?php //echo $key; ?>"><img src="../../img/tacho.gif" alt="Eliminar" width="15" height="18" border="0"></a> -->
+			<a href="#" onClick="confirma('<?php echo $row[1]; ?>', <?php echo $key; ?>); return false;">
+				<img src="../../img/tacho.gif" alt="Eliminar" width="15" height="18" border="0"></a>
+			</div>
+		</td>
 	</tr>
 	<?php
 	}

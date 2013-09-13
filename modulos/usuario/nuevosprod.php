@@ -4,7 +4,7 @@
               <?php 
                   $res=@mysql_query("set names utf8",$link);
                   $row=@mysql_fetch_array($res);
-                  $res=mysql_query("select * from producto where prom=1",$link);
+                  $res=mysql_query("select * from producto where stock <> 0 and prom=1",$link);
                   
                   while ($rwc=mysql_fetch_array($res))
                     {

@@ -1,7 +1,16 @@
 <?php
 session_start();
 $tipago=$_POST["chktipago"];
-$fec_ent=$_POST["fecha"];
+
+// $fec_ent=strftime("%Y-%m-%d", $_POST["fecha"]);
+// $fec_ent= $_POST["fecha"];
+list($dia, $mes, $anio) = split('[/.-]', $_POST["fecha"]);
+$fec_ent=$anio."-".$mes."-".$dia;
+
+$grab = $_POST["grab_dir"];
+
+
+
 $hora_ent=$_POST["cbohora"];
 $nom_ent= $_POST["txtnom"];
 $dir_ent=$_POST["txtdir"];
@@ -48,7 +57,7 @@ if (count($k)>0)
 	$rf=mysql_fetch_array($rs);
 
 
-	$fecha=strftime("%Y-%m-%d", time());
+	$fecha=strftime("%Y-%m-%d %H:%M:%S", time());
 	
 	if ($comp == "") {
 		$comp = "B";
@@ -69,6 +78,8 @@ if (count($k)>0)
 				  .$dir_ent."','"
 				  .$comp."','"
 				  .$rz_ent."', ".$ruc_ent.","."1)";
+
+// insert into pedidos(cod_usuario, fecpedido, tipo_pago, fec_entrega, hora_entrega, nom_entrega, direcc_entrega, comprob, rs_clie, ruc_clie, estado) values ('12','2013-09-11','E','11/9/2013','08:00','Lourdes Sofía Torres Gonzales','','B','', 0,1)
 
 	// echo $sql1;
 	// echo "<br>";
@@ -93,7 +104,7 @@ if (count($k)>0)
 			// $fecha=strftime("%Y-%m-%d", time());  
 			// cod_pedido	cod_producto	precio 	cantidad	subtotal	dscto  
 
-// cod_producto	descripcion	cod_tipo	precio	imagen	stock	cod_marca	prom
+// cod_producto, descripcion, cod_tipo, precio, imagen, stock, cod_marca, prom
 			
 			$sql="insert into det_pedidos() values ('".$idpedido."', '"
 												  .$row[0]."', '"
@@ -105,8 +116,9 @@ if (count($k)>0)
 				// echo $sql;
 				// echo "<br>";
 				// exit();
-				
 				$rs=mysql_query($sql,$link) or die ("Error :$sql");
+				
+				
 
 
 	// cod_usuario	login	clave	nombre	apellidos	dni	direccion	telefono	correo	cod_nivel				
@@ -124,7 +136,29 @@ if (count($k)>0)
 
 
 		}
+
+		$idprod = $row[0]; 
+		$stck = $row[5];
+		$cant = $value;
+
+		// echo $idprod." - ".$stck." - ".$cant;
+
+
+		$sql2="UPDATE producto SET stock = ".($stck-$cant).
+				      " WHERE cod_producto =".$idprod;	
+		// echo $sql2."<br>";
+		// exit();      
+		$rs3=mysql_query($sql2,$link) or die ("Error :$sql2");
 	}
+}
+
+// exit();
+
+if ($grab=="S") {
+$sql4="UPDATE usuario SET direccion = '".$dir_ent."' WHERE cod_usuario =".$_SESSION["s_cod"]." LIMIT 1";
+// echo $sql;
+// exit();
+$rs4=mysql_query($sql4,$link) or die ("Error :$sql");
 }
 
 

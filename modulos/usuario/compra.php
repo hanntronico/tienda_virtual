@@ -1,9 +1,6 @@
 <?php include ("head.php"); ?>
     
-    <body <?php 
-      if ($_GET["deny"]==1 || $_GET["deny"]==2 || $_GET["deny"]==3 || $_GET["deny"]==4) 
-          {echo "onload='carga_registro();'";} ?> >
-        
+    <body onload="carga_compra();">
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
@@ -13,12 +10,8 @@
           <?php include ("nav.php"); ?>
 
         <section id="contenedor">
-          <?php // include ("contenedor.php"); ?>
-          <section id="land">
-            <!-- <img src="../../img/slider2.png" alt=""> -->
-            <?php include 'slider/slider_gp.php'; ?>
-          </section>
-
+          <section id="land"></section>
+          
           <?php 
 
           $res=@mysql_query("set names utf8",$link);
@@ -43,6 +36,7 @@
 
           <?php } ?>
 
+          
           <?php include ("nuevosprod.php"); ?>
         </section>
         

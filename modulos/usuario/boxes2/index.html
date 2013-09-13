@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<script type="text/javascript" 
+        src="http://www.google.com/jsapi"></script> 
+<script type="text/javascript">
+  google.load("jquery", "1.4.2");
+  google.setOnLoadCallback(function() {
+  });
+</script>
+<script type="text/javascript" src="thickbox.js"></script>
+<script type="text/javascript">
+
+function salir()
+{
+	tb_show("Cerrar Sesion","psalir.php?placeValuesBeforeTB_=savedValues&TB_iframe=true&height=100&width=300&modal=true");
+}
+
+</script>
+<link rel="stylesheet" href="thickbox.css" type="text/css" media="screen" />
+</head>
+
+<body>
+<A href="#"  onClick="javascript:salir(); return false;">Salir</A>
+</body>
+</html>

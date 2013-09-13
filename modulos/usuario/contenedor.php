@@ -38,7 +38,8 @@
 
             <div id="control">
               Categorías :<br>
-              <select name="cbocateg" id="cbocateg" onchange="ver_cat();" multiple="multiple" class="selcateg">
+              <!-- <select name="cbocateg" id="cbocateg" onchange="ver_cat();" multiple="multiple" class="selcateg"> -->
+              <select name="cbocateg" id="cbocateg" onclick="ver_cat();" multiple="multiple" class="selcateg">
                 <option value="0">Todas...</option>
                 <?php 
                     
@@ -91,24 +92,3 @@
               </section>
 
           <?php  } ?>
-
-<!--           <section id="bloque02">
-            <div id="nompro">
-              <div id="subnompro">LECHE <br> GLORIA</div>
-              <div id="nubecompra">nube</div>
-            </div>
-            <article>
-                <img src="../../img/1.png" alt="">
-            </article>
-          </section>
-
-          <section id="bloque03">
-            <div id="nompro">
-              <div id="subnompro">LECHE <br> GLORIA</div>
-              <div id="nubecompra">nube</div>
-            </div>
-            <article>
-                <img src="../../img/1.png" alt="">
-            </article>
-
-          </section>             -->

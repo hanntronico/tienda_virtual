@@ -54,7 +54,6 @@ function ver_factura() {
 
 } 
 
-
 function recalcula () {
 	frm01.accion[0].click();
 }
@@ -89,6 +88,43 @@ function valid_form() {
 			return false;
 	}
 
+
+	var f = new Date();
+	var fec_ped = f.getFullYear() + "-" + (f.getMonth() +1) + "-" +  f.getDate();
+	
+	var str=document.frm02.fecha.value;
+    var n=str.split("/",3);
+	var fec_ent = n[2]+"-"+n[1]+"-"+n[0];
+
+	var ent = Date.parse(fec_ent.toString());
+	var ped = Date.parse(fec_ped.toString());
+
+	if(ent < ped){
+ 		alert("Por favor ingrese una fecha válida");
+		document.frm02.fecha.focus();
+		return false;
+	}
+
+	// var hora_ped = f.getHours();
+	// alert(hora_ped);
+	// alert(document.frm02.cbohora.value.toString().substring(0,2));
+
+	if(ent == ped){
+		var hora_act = f.getHours();
+		
+		if (parseInt(hora_act)<=8) {
+			var hora = 8;
+			document.frm02.cbohora.value = (hora+2).toString()+":00";
+		}else if (parseInt(hora_act)<=18) {
+			// var strhora = document.frm02.cbohora.value.toString().substring(0,2);
+			// alert(hora_act.toString());
+			var hora = parseInt(hora_act);
+			document.frm02.cbohora.value = (hora+2).toString()+":00";
+		// alert((hora+2).toString());
+
+		}
+	}
+		
 	return true;
 }
 
@@ -226,6 +262,7 @@ if (count($k)>0)
 					 $res=mysql_query("select * from usuario where cod_usuario = ".$codusu,$link);
 			 		 // echo "select * from usuario where cod_usuario = ".$codusu;
 			 		 $row=mysql_fetch_array($res);
+			 		 
 				?>
 				<input type="text" name="txt1" value="<?php echo $row[3].' '.$row[4]; ?>" style="width: 400px;" disabled="disabled">
 				<input type="hidden" name="txtnom" value="<?php echo $row[3].' '.$row[4]; ?>">
@@ -235,8 +272,26 @@ if (count($k)>0)
 		<tr>
 			<td>&nbsp;</td>
 			<td colspan="2">Dirección: &nbsp;&nbsp;&nbsp;
+				
+				<?php if ($row[6]!="") { ?>
+
 				<input type="text" name="txt2" value="<?php echo $row[6]; ?>" style="width: 400px;" disabled="disabled">
 				<input type="hidden" name="txtdir" value="<?php echo $row[6]; ?>">
+
+				<?php } else { ?>
+					
+					<input type="text" name="txtdir" value="<?php echo $row[6]; ?>" style="width: 400px;">&nbsp;<span class="tit_grabar">*</span>
+					&nbsp;&nbsp;&nbsp;
+					<span class="tit_grabar">Grabar esta dirección?&nbsp;&nbsp;&nbsp;
+					<input type="radio" name="grab_dir" value="S" checked="checked"> Sí &nbsp;
+					<input type="radio" name="grab_dir" value="N"> No</span>
+					<br>
+					<span class="tit_grabar">Si desea grabar otra dirección en sus datos 
+						<a href="cuenta.php">entrar aquí</a></span>
+
+				<?php } ?>
+
+			
 			</td>
 		</tr>
 
@@ -264,8 +319,11 @@ if (count($k)>0)
 <div id="raz_soc"></div>
 
 <br>
-	<div id="botonera" style="tex">
+	<div id="botonera">
 		<!-- <input name="accion" type="submit" value="Recalcular" class="btnrecalc"> -->
+		<a href="principal.php">¿Olvidaste algo? todavía estas a tiempo de regresar, 
+			<span style="text-decoration: underline;">pulsa aquí</span></a>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<input name="accion" type="submit" value="Finalizar" class="btnblue">
 	</div>
 </form>

@@ -11,11 +11,12 @@
             <div id="buscar">
               <!-- <form action="index_submit" method="get" accept-charset="utf-8"> -->
               <!-- <form name="frmbus" accept-charset="utf-8"> -->
-                <input type="text" name="txtbuscar" id="txtbuscar" value="" placeholder="Ingrese lo que desea buscar" onkeypress="checkKey(event,'txtbuscar');" >
+                <input type="text" name="txtbuscar" id="txtbuscar" value="" placeholder="Ingrese lo que desea buscar" onkeydown="checkKey(event,'txtbuscar');" autocomplete="off" >
 
+                
               <!-- <input type="text" name="txtbusqueda" id="txtbusqueda">  -->
               <!-- <input type="button" value="Aceptar" onclick="verlist_bus();"> -->
               <!-- </form> -->
+              <div id="bus_cont"></div> 
             </div>
-
         </nav>

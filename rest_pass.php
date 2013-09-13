@@ -46,7 +46,7 @@ $obj = new clsConexion();
 
 					if ($filas3>0) {
 						
-						$sql="select * from usuario_temporal where correo ='".$email."'";
+						$sql="select * from usuario where correo ='".$email."'";
 						$obj-> abrirConexion();
 						$obj-> setcharset();
 						$rs = $obj->Query($sql);
@@ -59,10 +59,40 @@ $obj = new clsConexion();
 						$nom = $row[3];
 						$ape = $row[4];
 						$email = $row[8];
-						$opass = $row[2];
+						// $opass = $row[2];
+
+
+
+									$str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890123456789012345678901234567890";
+									$cad = "";
+									for($i=0;$i<5;$i++) {
+									$cad .= substr($str,mt_rand(0,62),1);
+									}
+									$secpass = $cad;
+									// echo $secpass;
+									// exit();	
+
+									// $sql="insert into usuario_temporal (clave, nombre, apellidos, dni, telefono, correo, cod_nivel, estado) 
+									// 			  values ('".$secpass."', '".$nom."','".$ape."', '".$dni."', '".$telf."', '".$email."', 2, 1)";
+
+									$sql="UPDATE usuario SET clave = MD5('".$secpass."') WHERE cod_usuario =".$row[0]." LIMIT 1" ;			  	
+
+									// echo $sql."<br>".$secpass;
+									// exit(); 			  	
+
+									$obj-> abrirConexion();
+									$obj-> setcharset();
+									$rs = $obj->Query($sql);
+									$obj-> CerrarConexion();
+
+
+
+
+
 
 						$onombre=$nom." ".$ape;
 						$omail=$email;
+						$opass=$secpass;
 
 
 

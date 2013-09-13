@@ -36,7 +36,8 @@
 }
 
 #popup_content.confirm {
-	background-image: url(images/important.gif);
+	/*background-image: url(images/important.gif);*/
+	background-image: url(images/info.gif);
 }
 
 #popup_content.prompt {
