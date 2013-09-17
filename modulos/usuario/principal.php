@@ -1,7 +1,15 @@
 <?php include ("head.php"); ?>
-    
-    
-    <body onload="vertodascat(0);">
+   
+    <body 
+          <?php 
+            $prod = $_GET['p'];
+            if ($prod!="") { 
+          ?>
+            onload="verlist_bus2('<?=$prod?>');"
+          <?php }else { ?>
+            onload="vertodascat(0);"
+    <?php  } ?>
+    >
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->

@@ -37,6 +37,7 @@
             ?>
 
             <div id="control">
+              
               Categorías :<br>
               <!-- <select name="cbocateg" id="cbocateg" onchange="ver_cat();" multiple="multiple" class="selcateg"> -->
               <select name="cbocateg" id="cbocateg" onclick="ver_cat();" multiple="multiple" class="selcateg">
@@ -57,8 +58,10 @@
               </select>
               
               <br><br>
-              Buscar: <br><input type="text" name="txtbusqueda" id="txtbusqueda"> <br>
-              <input type="button" value="Aceptar" onclick="verlist_bus();">
+<!--            <input type="hidden" name="txtbusqueda" id="txtbusqueda" value="<?= $prod ?>"> <br>
+
+              <input type="button" id="acep" value="Aceptar" onclick="verlist_bus();"> -->
+              
 
             </div>
 
@@ -92,3 +95,5 @@
               </section>
 
           <?php  } ?>
+          
+

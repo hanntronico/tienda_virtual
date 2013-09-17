@@ -170,5 +170,29 @@
       </div>
     </div>
 
+    <div id="caja_msn2">
+      <div class="inner-container forgot-panel">
+        <!-- <h3 class="m_title">MENSAJE</h3> -->
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th><h3 class="m_title">MENSAJE</h3></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr align="center">
+              <td>Ingrese con su usuario para comprar <br> y ver los precios<br><br> 
+              <div class="links"><a href="#" onClick="ppOpen('#login_panel', '800');">Ya tiene una cuenta?</a></div>
+              </td>
+            </tr>
+            <tr><td>&nbsp;</td> </tr>
+            <tr align="center"><td>
+              <input type="submit" id="aceptar" value=" Aceptar " onclick="javascript: location.href='index.php';"></td> </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
   </div><!-- end login register stuff -->
 

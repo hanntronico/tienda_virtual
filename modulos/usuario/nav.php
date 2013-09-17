@@ -1,11 +1,11 @@
-        <nav class="">
+        <nav>
             <!-- aquí va el nav -->
             <ul>
               <li><a href="index.php">INICIO</a></li>
-              <li><a href="#">NOSOTROS</a></li>
-              <li><a href="principal.php">MOSTRADOR</a></li>
-              <li><a href="#">DEMO</a></li>
-              <li><a href="#">SUGERENCIAS</a></li>
+              <li><a href="nosotros.php">NOSOTROS</a></li>
+              <li><a href="demo.php">DEMO</a></li>
+              <li><a href="sugerencias.php">SUGERENCIAS</a></li>
+              <li class="overshow"><a href="principal.php">CATALOGO</a></li>
             </ul>
 
             <div id="buscar">

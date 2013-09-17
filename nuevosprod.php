@@ -13,13 +13,17 @@
 
               <section id="bloqueA">
                 <div id="imgprod">
-                  <a href="#" onClick="enviar(<?php echo $rwc[0]?>); return false;">
-                    <img src="modulos/productos/<?php echo $rwc[4];?>" alt="<?php echo $rwc[4];?>">
+                  <!-- <a href="#" onClick="enviar(<?php //echo $rwc[0]?>); return false;"> -->
+                  <a href="#caja_msn2" data-rel="prettyPhoto[caja_msn2]">
+                    <img src="modulos/productos/<?php echo $rwc[4];?>">
                   </a>
                 </div>
+
                 <div id="descprod">
-           
-                <a href="#" onClick="enviar(<?php echo $rwc[0]?>); return false;"><?php echo $rwc[1]; ?> </a></div>
+                <!-- <a href="#" onClick="enviar(<?php //echo $rwc[0]?>); return false;"><?php echo $rwc[1]; ?> </a> -->
+                  <a href="#caja_msn2" data-rel="prettyPhoto[caja_msn2]"><?php echo $rwc[1]; ?> </a>
+                </div>
+                
                 <div id="btnpro">
                   <input type="button"  value=" Comprar " onClick="enviar(<?php echo $rwc[0]?>)" class="btnprod">
                 </div>

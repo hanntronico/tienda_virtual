@@ -29,6 +29,6 @@
 
 
   // cod_usuario  login clave nombre  apellidos dni direccion telefono  correo  cod_nivel 
-  header("location:cuenta.php?sw=1");
+  header("location:cuenta.php?sw=2");
 
 ?>

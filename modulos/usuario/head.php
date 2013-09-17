@@ -27,7 +27,7 @@
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
          <script>window.jQuery || document.write('<script src="../../js/jquery-1.8.2.min.js">\x3C/script>')</script> 
-        <script src="../../js/jquery.noconflict.js" type="text/javascript"></script>
+        
         <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.1/modernizr.min.js" type="text/javascript"></script> 
         
         <script type="text/javascript" src="http://www.google.com/jsapi"></script> 
@@ -39,6 +39,8 @@
 
         <script src="boxes/jquery.alerts.js" type="text/javascript"></script>
         <link href="boxes/jquery.alerts.css" rel="stylesheet" type="text/css" media="screen" />
+
+        <script src="../../js/jquery.noconflict.js" type="text/javascript"></script>
 
         <script type="text/javascript">
 
@@ -83,10 +85,31 @@
             }
 
             function verlist_bus () {
-                var dat=document.getElementById('txtbusqueda').value;
+                var dat2=document.getElementById('txtbusqueda').value;
+                var matriz = dat2.split(" ");
+                var d = "";
+
+                for(i = 0; i < matriz.length; i++) {
+                    if(i==matriz.length-1) d = d + matriz[i];
+                    else d = d + matriz[i]+'%20';
+                }
+
                 var content = jQuery("#productos");
-                content.fadeIn('slow').load("list_prod_bus.php?dat="+dat);
-            }    
+                content.fadeIn('slow').load("list_prod_bus.php?dat="+d);
+            }
+
+            function verlist_bus2(prd) {
+                var matriz = prd.split(" ");
+                var d = "";
+
+                for(i = 0; i < matriz.length; i++) {
+                    if(i==matriz.length-1) d = d + matriz[i];
+                    else d = d + matriz[i]+'%20';
+                }
+
+                var content = jQuery("#productos");
+                content.fadeIn('slow').load("list_prod_bus.php?dat="+d);
+            }
 
             function ver_scat (id) {
                 var content = jQuery("#productos");
@@ -136,6 +159,12 @@
                 // return false;
                 tb_show("SALIR","boxes2/psalir.php?&placeValuesBeforeTB_=savedValues&TB_iframe=true&height=100&width=250&modal=false");        
             }
+
+            function show_msn()
+            {
+                tb_show("SALIR","boxes2/psalir.php?&placeValuesBeforeTB_=savedValues&TB_iframe=true&height=100&width=250&modal=false");     
+            }            
+
 
             function vercarrito() {
                 var content = jQuery("#land");
@@ -299,7 +328,13 @@
                 else
                 {unicode=key.keyCode;}
                 //alert(unicode); // Para saber que codigo de tecla presiono , descomentar
-             
+                
+                if (unicode == 13) {
+                    var dat=document.getElementById('txtbuscar').value;
+                    // alert(dat);
+                    document.location.href="principal.php?p="+dat;
+                };
+
                 if (unicode >= 48 && unicode <= 90){
                     var dat=document.getElementById('txtbuscar').value;
                     // alert(dat);
@@ -322,7 +357,19 @@
                         document.getElementById('bus_cont').style.display = "none";
                     }
                 }
-            }           
+            }     
+
+            function cerrar(){
+              // var div = document.getElementById('msn_box_ok');
+              // div.style.display='none';
+              var content = jQuery("#msn_box_ok");
+              content.fadeOut('slow');
+              // setTimeout("document.location.href='cuenta.php'",500);
+            }
+
+            function accion(){
+              setTimeout("cerrar()",3000);
+            }      
 
         </script>       
         

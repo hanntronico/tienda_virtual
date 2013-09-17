@@ -47,10 +47,10 @@
 
               <!-- <a href="#register_panel" data-rel="prettyPhoto[register_panel]">Bienvenid@</a><br> -->
                 <!-- <h6><a href="#login_panel" data-rel="prettyPhoto[login_panel]"></a></h6> -->
-                <div id="solo_nom"><a href="#">Bienvenido(a):&nbsp;
-                <?php echo $solonom; ?></a></div>
+                <div id="solo_nom"><a href="#"><span class="f_compra">Bienvenido(a):&nbsp;
+                <?php echo $solonom; ?></span></a></div>
                 <!-- <a href="#" onclick="vercarrito(); return false;">Compra: S/.  -->
-                <a href="compra.php">Compra: S/. 
+                <a href="compra.php"><span class="f_compra">Compra: S/. 
                 <?php 
 
                 $k=$_SESSION["s_prod"];
@@ -76,6 +76,7 @@
                   }
 
                  ?>
+                 </span>
                 </a>
 
 <!--            <?php  

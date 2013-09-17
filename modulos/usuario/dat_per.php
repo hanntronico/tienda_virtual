@@ -9,6 +9,7 @@
   $rowus=mysql_fetch_array($res);
   
 ?>
+
 <fieldset>
 <form name="frm_datper" action="upd_usu.php" method="post" accept-charset="utf-8" onsubmit="return validaform();">
 <!-- cod_usuario	login	clave	nombre	apellidos	dni	direccion	telefono	correo	cod_nivel -->

@@ -1,5 +1,6 @@
     <div id="opciones">
         <?php 
+        // echo trim($_GET["dat"]);
         $dat=$_GET["dat"];
         $pag=$_GET["pag"];  
 

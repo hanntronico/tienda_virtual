@@ -96,5 +96,17 @@
 
             }
 
+            function cerrar(){
+              // var div = document.getElementById('msn_box_ok');
+              // div.style.display='none';
+              var content = jQuery("#msn_box_ok");
+              content.fadeOut('slow');
+              // setTimeout("document.location.href='cuenta.php'",500);
+            }
+
+            function accion(){
+              setTimeout("cerrar()",3000);
+            }
+
         </script>
     </head>

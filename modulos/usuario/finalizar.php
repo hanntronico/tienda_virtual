@@ -167,56 +167,56 @@ $omail=$rf[8];
 // $opass=$secpass;
 
 
-// $mensaje="Pedido ".$idpedido." realizado"."<br>".
-// 		"Cliente :".$rf[0]."<br>".
-// 		"Email: ".$omail."<br>".
-// 		"Fecha de pedido: ".$fecha;
+$mensaje="Pedido ".$idpedido." realizado"."<br>".
+		"Cliente :".$rf[0]."<br>".
+		"Email: ".$omail."<br>".
+		"Fecha de pedido: ".$fecha;
 
-// $mensaje2="<hr>Saludos ".$onombre.","."<br><br>".
-// 		  "Gracias por haber hecho tu compra en MERCADO VIRTUAL!"."<br>".
-// 		  "Tu Pedido Nº:".$idpedido." esta siendo procesada y será atendida a la brevedad."."<br>".
-// 		  "Para ver el detalle de su pedido entre a http://shop.grupochiappe.com/ 
-// 		  y acceda a su cuenta. <hr>";
-
-
-// require_once('../../mail/clases/class.phpmailer.php');
-
-// $mail             = new PHPMailer(); 
-// $body             = file_get_contents('../../mail/conten.php');
-// $body             = eregi_replace("[\]",'',$body);
+$mensaje2="<hr>Saludos ".$onombre.","."<br><br>".
+		  "Gracias por haber hecho tu compra en MERCADO VIRTUAL!"."<br>".
+		  "Tu Pedido Nº:".$idpedido." esta siendo procesada y será atendida a la brevedad."."<br>".
+		  "Para ver el detalle de su pedido entre a http://shop.grupochiappe.com/ 
+		  y acceda a su cuenta. <hr>";
 
 
-// $mail->AddReplyTo("no-reply@shop.grupochiappe.com","Mercado Virtual");
-// $mail->SetFrom('no-reply@shop.grupochiappe.com', 'Mercado Virtual');
-// $mail->AddReplyTo("no-reply@shop.grupochiappe.com","Mercado Virtual");
-// $address = "no-reply@shop.grupochiappe.com";
-// $mail->AddAddress($address, 'Webmaster');
-// $mail->Subject    = "Mercado Virtual Mensaje desde la Web";
-// $mail->AltBody    = "Para poder ver el mensaje, por favor use un visor de correos compatible con HTML!";
-// $mail->Body=$mensaje;
-// $mail->Send();
+require_once('../../mail/clases/class.phpmailer.php');
 
-// $mail->ClearAttachments();
-// $mail->ClearAddresses();
-// $mail->ClearReplyTos();
+$mail             = new PHPMailer(); 
+$body             = file_get_contents('../../mail/conten.php');
+$body             = eregi_replace("[\]",'',$body);
 
 
+$mail->AddReplyTo("no-reply@shop.grupochiappe.com","Mercado Virtual");
+$mail->SetFrom('no-reply@shop.grupochiappe.com', 'Mercado Virtual');
+$mail->AddReplyTo("no-reply@shop.grupochiappe.com","Mercado Virtual");
+$address = "no-reply@shop.grupochiappe.com";
+$mail->AddAddress($address, 'Webmaster');
+$mail->Subject    = "Mercado Virtual Mensaje desde la Web";
+$mail->AltBody    = "Para poder ver el mensaje, por favor use un visor de correos compatible con HTML!";
+$mail->Body=$mensaje;
+$mail->Send();
 
-// $mail->AddReplyTo("no-reply@shop.grupochiappe.com","Mercado Virtual");
-// $mail->SetFrom('no-reply@shop.grupochiappe.com', 'Mercado Virtual');
-// $mail->AddReplyTo("no-reply@shop.grupochiappe.com","Mercado Virtual");
-// $address = $omail;
-// $mail->AddAddress($address, $onombre);
-// $mail->Subject = "Ud. se ha comunicado con Mercado Virtual";
-// $mail->AltBody = "Para poder ver el mensaje, por favor use un visor de correos compatible con HTML!";
-// $mail->Body=$mensaje2;
+$mail->ClearAttachments();
+$mail->ClearAddresses();
+$mail->ClearReplyTos();
 
-// if(!$mail->Send()) {
-//   echo "Mailer Error: " . $mail->ErrorInfo;
-// } 
-// // else {
-// //   header("location: aviso.php");
-// // }
+
+
+$mail->AddReplyTo("no-reply@shop.grupochiappe.com","Mercado Virtual");
+$mail->SetFrom('no-reply@shop.grupochiappe.com', 'Mercado Virtual');
+$mail->AddReplyTo("no-reply@shop.grupochiappe.com","Mercado Virtual");
+$address = $omail;
+$mail->AddAddress($address, $onombre);
+$mail->Subject = "Ud. se ha comunicado con Mercado Virtual";
+$mail->AltBody = "Para poder ver el mensaje, por favor use un visor de correos compatible con HTML!";
+$mail->Body=$mensaje2;
+
+if(!$mail->Send()) {
+  echo "Mailer Error: " . $mail->ErrorInfo;
+} 
+// else {
+//   header("location: aviso.php");
+// }
 
 unset($_SESSION["s_prod"]);
 header("location: finalizado.php");

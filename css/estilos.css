@@ -1,3 +1,15 @@
+@font-face {
+    font-family: 'alex_brushregular';
+    src: url('../fonts/alexbrush-regular-webfont.eot');
+    src: url('../fonts/alexbrush-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/alexbrush-regular-webfont.woff') format('woff'),
+         url('../fonts/alexbrush-regular-webfont.ttf') format('truetype'),
+         url('../fonts/alexbrush-regular-webfont.svg#alex_brushregular') format('svg');
+    font-weight: bolder;
+    font-style: normal;
+
+}
+
 * {
 	margin:0;
 	padding: 0;
@@ -101,12 +113,25 @@ header {
 	/*text-align: right;*/
 }
 
+#menu2 a:link,
+#menu2 a:visited,
+#menu2 a:active {
+	color: #00356A;
+}
+
 #menu {
+	/*background: #A8A8FF;*/
+	color: #005177;
+	font-family: 'alex_brushregular';
+	font-size: 33px;
+	font-weight: bolder;
 	height: 30px;
-	margin: 1.2em auto;
-	padding: 2px;
-	padding-top: 4px;
-	padding-left: 8px;
+	/*margin: 1.2em auto;*/
+	/*margin: -20px auto;*/
+	padding: 2px 6px;
+	margin-left: -10px;
+	max-width:500px; 
+	min-width:310px;
 }
 
 #regis {
@@ -170,8 +195,61 @@ header {
 	font-size: 13px;
 }
 
+
+.f_compra {
+	color: #FF8000;
+}
+
+
+#enl_reg, #enl_log {
+	background: #C0C0C0;
+	border-bottom: 3px solid #00699B;
+	border-radius: 8px;
+	-webkit-border-radius: 8px; 
+	-moz-border-radius: 8px;
+	/*color: #FFFFFF;*/
+	display: inline-block;
+	font-family: tahoma;
+	font-size: 15px;
+	margin: 14px auto;
+	padding: 5px 10px;
+	text-align: right;
+	vertical-align: top;
+	width: 37%;
+}
+
+#enl_reg a:link, #enl_log a:link,
+#enl_reg a:visited, #enl_log a:visited,
+#enl_reg a:active, #enl_log a:active {
+	color: #FFFFFF;
+} 
+
 #enl_reg {
-	font-size: 20px;
+	background: #C0C0C0 url("../img/sign-up-icon.png") no-repeat 4% 50%;
+}
+
+#enl_reg:hover {
+	background: #D7D7D7 url("../img/sign-up-icon.png") no-repeat 4% 50%;
+	border-bottom: 3px solid #868686;
+	color: #868686;
+}
+
+#enl_log {
+	background: #C0C0C0 url("../img/sign-in-icon.png") no-repeat 4% 50%;
+	width: 28%;
+}
+
+#enl_log:hover {
+	background: #D7D7D7 url("../img/sign-in-icon.png") no-repeat 4% 50%;
+	border-bottom: 3px solid #868686;
+	color: #868686;
+}
+
+#regis a:link,
+#regis a:visited,
+#regis a:active {
+	color: #00699B;
+	text-decoration: none;
 }
 
 #cuenta, #canasta, #salir {
@@ -180,7 +258,6 @@ header {
 	/*background: #000000;*/
 	padding: 6px;
 	/*margin-right: 15px;*/
-
 } 
 
 #cuenta {
@@ -198,14 +275,6 @@ header {
 	background: url("../img/exit.png") 0 0 no-repeat;
 	padding-left: 28px;
 	margin-right: 0px;
-}
-
-
-
-
-#regis a {
-	color: #FF8000;
-	text-decoration: none;
 }
 
 #menu ul li {
@@ -277,6 +346,19 @@ nav ul li a {
 	margin: 10px;
 }
 
+nav ul .overshow {
+	background: #FF972F;
+	/*background: #FF0000;*/
+	border-radius: 8px;
+	-webkit-border-radius: 8px; 
+	-moz-border-radius: 8px;
+}
+
+nav ul .overshow a {
+	/*color: #FFFFFF;*/
+	color: #1E617D;
+}
+
 section#land{
 	/*background: #C0C0C0;*/
 	background: transparent;
@@ -310,6 +392,21 @@ section#bloque01, section#bloque02, section#bloque03 {
 	vertical-align: top;
 	/*width: 19.65em;*/
 	width: 33%
+}
+
+#msn_box_ok {
+	background: #AAFFAA url("../img/success_icon.png") no-repeat 2% 50%; 
+	border: 2px solid #008040;
+	border-radius: 8px;
+	-webkit-border-radius: 8px; 
+	-moz-border-radius: 8px;
+	color: #008040;
+	font-family: tahoma;
+	font-size: 20px;
+	margin: 0.5em auto;
+	max-width: 960px;
+	padding: 15px 70px;
+	text-align: left;
 }
 
 #nompro, article {
