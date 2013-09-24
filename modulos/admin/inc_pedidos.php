@@ -11,7 +11,7 @@
         <div id="contentwrapper" class="contentwrapper">
         
             <div id="productos" class="subcontent">
-                <iframe src="producto.php" width="100%" height="900px"></iframe>      
+                <iframe src="pedidos.php" width="100%" height="400px"></iframe>      
             </div>
               
 <!--        <div id="activities" class="subcontent" style="display: none;">

@@ -2290,7 +2290,7 @@ blockquote.bq2 {
 	.calTitle { display: none; }
 	
 	/* TABLES */
-	.stdtable tbody tr td { padding: 5px; }
+	.stdtable tbody tr td { padding: 5px;} 
 	.dataTables_info { display: none; }
 	#table2 td:last-child, #table2 th:last-child,
 	#table2 td:nth-child(2), #table2 th:nth-child(2) { display: none; } /* an example of removing columns in a table in a responsive */

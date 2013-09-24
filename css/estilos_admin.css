@@ -1,0 +1,29 @@
+#fra_crud {
+	padding:5px 25px;
+}
+
+.form_crud {
+	/*background: #00FF00;*/
+	border: 1px solid #FF9702; 
+	width: 100%;
+}
+
+.form_crud thead {
+	background: #FF9702;
+	color: #FFFFFF;
+	font-size: 14px; 
+}
+
+#frm_sel{
+	min-width: 5%;
+}
+
+#frm_text{
+	width: 240px;
+}
+
+
+
+/*.form_crud tbody td {
+	border-bottom: 1px solid #FF9702; 
+}*/

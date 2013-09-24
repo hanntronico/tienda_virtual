@@ -35,7 +35,7 @@ function validaFormProducto(frm){
 	var campo = frm.codcat.value;
 	if(campo=="")
 	{
-        alert("Por Favor, Ingrese categoria.");
+        alert("Por Favor, Ingrese Subcategoria.");
 		frm.codcat.focus(); 
 		return (false);
 	}

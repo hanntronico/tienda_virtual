@@ -2,7 +2,8 @@
     	<ul>
             <li><a href="#formsub" class="editor">Mantenimiento</a> <span class="arrow"></span>
                 <ul id="formsub">
-                   		<li><a href="#" onclick="carga_form(1); return false;">Productos</a></li>
+                        <!-- <li><a href="#" onclick="carga_form(1); return false;">Productos</a></li> -->
+                   		<li><a href="#" onclick="cargare('productos.php'); return false;">Productos</a></li>
                         <li><a href="#" onclick="carga_form(2); return false;">Subcategorías</a></li>
                         <li><a href="#" onclick="carga_form(3); return false;">Categorías</a></li>
                 </ul>

@@ -2,7 +2,7 @@
 	include("funciones/function.php");
 	include("conectar.php");
 	$link=Conectarse();
-	$loc="location:".$_POST["pag"].".php";
+	$loc="location: ".$_POST["pag"].".php";
 
 	switch ($_POST["pag"]) {
 		
@@ -37,9 +37,9 @@
 				
 /**********************************************************************************************************************************************/
 
-case 'producto':
-	
-			if($_POST["sw"]==1){
+case 'productos':
+
+	if($_POST["sw"]==1){
 			
 	$rs=mysql_query("SELECT * FROM producto WHERE cod_producto='".$_POST["id"]."'",$link);
 	$numfilas=mysql_num_rows($rs);
@@ -305,5 +305,6 @@ case 'usuario_temporal':
 			break;
 									
 	}
-	header($loc)
+	// header($loc)
+	header('location: main_admin.php')
 ?>

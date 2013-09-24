@@ -15,25 +15,32 @@
 	include("funciones/function.php");
 	include("conectar.php");
 	$link=Conectarse();
-	Title("SUBCATEGORIAS");
-	$pag = 'subcategoria';
+	Title("PEDIDOS");
+	$pag = 'pedidos';
 	if($_GET["sw"]==1){ 		// NUEVO
-		$id=autogenerado("subcategorias","cod_subcat",6); 
+		$id=autogenerado("pedidos","cod_pedido",6); 
 		$ing = 0;
 		$ing2 = 0;
 	}elseif($_GET["sw"]==2){ 	// EDITAR
 		$rs=@mysql_query("set names utf8",$link);
 		$fila=@mysql_fetch_array($res);
-		$sql="SELECT * FROM subcategorias WHERE cod_subcat='".$_GET["id"]."'";
+		$sql="SELECT cod_pedido AS 'COD', cod_usuario, fecpedido, tipo_pago, fec_entrega, hora_entrega, nom_entrega, direcc_entrega, comprob, rs_clie, ruc_clie, estado FROM pedidos WHERE cod_pedido='".$_GET["id"]."'";
 		$rs=mysql_query($sql,$link);
 		$fila =mysql_fetch_object($rs);
 
-// cod_subcat, subcat, desc_subcat, img_subcat, cod_tipo		   
-		$id  = $fila->cod_subcat;
-		$sc = $fila->subcat;
-		$des = $fila->desc_subcat;		
-		$img = $fila->img_subcat;
-		$cat = $fila->cod_tipo;
+// cod_pedido	cod_usuario	fecpedido	tipo_pago	fec_entrega	hora_entrega	nom_entrega	direcc_entrega	comprob	rs_clie	ruc_clie	estado		   
+		$id  = $fila->cod_pedido;
+		$idusu = $fila->cod_usuario;
+		$fped = $fila->fecpedido;		
+		$tp = $fila->tipo_pago;
+		$fent = $fila->fec_entrega;
+		$hent = $fila->hora_entrega;
+		$nent = $fila->nom_entrega;
+		$dent = $fila->direcc_entrega;
+		$comp = $fila->comprob;
+		$rscli = $fila->rs_clie;
+		$ruc = $fila->ruc_clie;
+		$est = $fila->estado;
 		
 		
 		mysql_free_result($rs);
@@ -41,16 +48,10 @@
 		$rs=@mysql_query("set names utf8",$link);
 		$fila=@mysql_fetch_array($res);
 		
-		$sql="select cod_subcat as COD, 
-		             subcat as Subcat, 
-		             desc_subcat as Descripcion, 
-		             concat('<img src=../productos/subcategorias/',img_subcat,' width=50 height=50>') as Img, 
-		             categoria.tipo 
-			 from subcategorias, categoria 
-			 where subcategorias.cod_tipo = categoria.cod_tipo";   
+		$sql="SELECT cod_pedido as 'COD', cod_usuario as 'USUARIO', fecpedido as 'FEC_PEDIDO', tipo_pago, fec_entrega, hora_entrega, nom_entrega, direcc_entrega as 'DIRECCION', comprob, rs_clie, ruc_clie, estado FROM pedidos";   
 		$tabla=$pag;
 		echo $msg_error; 
-		paginar($sql,$tabla,1);
+		paginar2($sql,$tabla,1);
 		//CloseConexion();	
 		echo "</body></html>";
 		exit;

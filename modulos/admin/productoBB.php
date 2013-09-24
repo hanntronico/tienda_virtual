@@ -127,7 +127,7 @@
          
 		  <tr>
 		    <td>Imagen:</td>
-		    <td>		      <input name="imag" type="file" class="Text" id="imag" size="40"></td>
+		    <td><input name="imag" type="file" class="Text" id="imag" size="40"></td>
           </tr>
 		  
           		  <?php 

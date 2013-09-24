@@ -22,8 +22,7 @@
                <br><br><br><br>
             </div>
 
-      </div>
-
+      </div><br>
     </div>
 	</div>
 

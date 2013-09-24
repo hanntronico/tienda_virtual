@@ -49,6 +49,7 @@ function CCA(CB){
 	else
 		frmList.allbox.checked=false;
 }
+
 function hL(E){
 	while (E.tagName!="TR"){
 		E=E.parentNode;
@@ -62,6 +63,7 @@ function dL(E){
 	}
 	E.className = "";
 }
+
 function vChk(frm){ 
 	var sw=0;
 	for(var i=0;i<frm.length;i++){
