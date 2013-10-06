@@ -37,7 +37,7 @@
 <?php
   include("conectar.php");
   $link=Conectarse();
-  $pag = "categorias";
+  $pag = "subcategorias";
 
   $pag_org = parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH);
   //verificamos si en la ruta nos han indicado el directorio en el que se encuentra
@@ -48,27 +48,28 @@
  
   $pag_sext=preg_replace('/\.php$/', '' ,$pag_org);
 
-// cod_tipo, tipo, descripcion, imgcat
+// cod_subcat, subcat, desc_subcat, img_subcat, cod_tipo
   
 
   if($_GET["sw"]==1){     // NUEVO
-    $id=autogenerado("categoria","cod_tipo",6); 
+    $id=autogenerado("subcategorias","cod_subcat",6); 
     // $ing = 0;
     // $ing2 = 0;
 
   }elseif($_GET["sw"]==2){  // EDITAR
 
     $rs=@mysql_query("set names utf8",$link);
-    $fila=@mysql_fetch_array($res);
-    $sql="SELECT * FROM categoria WHERE cod_tipo='".$_GET["id"]."'";
+    $fila=@mysql_fetch_array($rs);
+    $sql="SELECT * FROM subcategorias WHERE cod_subcat='".$_GET["id"]."'";
     $rs=mysql_query($sql,$link);
     $fila =mysql_fetch_object($rs);
 
-// cod_tipo, tipo, descripcion, imgcat       
-    $id  = $fila->cod_tipo;
-    $tip = $fila->tipo;
-    $des = $fila->descripcion;    
-    $img = $fila->imgcat;
+// cod_subcat, subcat, desc_subcat, img_subcat, cod_tipo       
+    $id  = $fila->cod_subcat;
+    $sc = $fila->subcat;
+    $des = $fila->desc_subcat;    
+    $img = $fila->img_subcat;
+    $cat = $fila->cod_tipo;
   
     mysql_free_result($rs);
 
@@ -77,7 +78,7 @@
   ?>
 
     <div id="fra_crud">
-      <?php if ($_GET["msn"]=='c1') { ?>
+      <?php if ($_GET["msn"]=='s1') { ?>
         <script type="text/javascript">setTimeout("cerrar()",6000);</script>
         <div class="notibar msgsuccess">
           <a class="close" id="equis"></a>
@@ -85,7 +86,7 @@
         </div>
       <?php }  ?> 
         
-      <?php if ($_GET["msn"]=='ec1') { ?>
+      <?php if ($_GET["msn"]=='es1') { ?>
         <script type="text/javascript">setTimeout("cerrar()",6000);</script>
         <div class="notibar msgsuccess">
           <a class="close" id="equis"></a>
@@ -93,7 +94,7 @@
         </div>
       <?php }  ?>
 
-      <?php if ($_GET["msn"]=='ec2') { ?>
+      <?php if ($_GET["msn"]=='e2') { ?>
         <script type="text/javascript">setTimeout("cerrar()",6000);</script>
         <div class="notibar msgalert">
           <a class="close" id="equis"></a>
@@ -117,11 +118,12 @@
           $rs=@mysql_query("set names utf8",$link);
           $fila=@mysql_fetch_array($res);
             
-// cod_tipo, tipo, descripcion, imgcat 
+// cod_subcat, subcat, desc_subcat, img_subcat, cod_tipo
           
-          $sql="select cod_tipo,  
-                concat('<img src=../productos/categorias/',imgcat,' width=50 height=50>') as Img, tipo, descripcion
-                from categoria"; 
+          $sql="select cod_subcat,  
+                concat('<img src=../productos/subcategorias/',img_subcat,' width=50 height=50>') as Img,  subcat, desc_subcat, categoria.tipo
+                from subcategorias, categoria 
+                where subcategorias.cod_tipo = categoria.cod_tipo"; 
 
           $res=@mysql_query($sql,$link);
         ?>
@@ -146,8 +148,9 @@
                 <input type="checkbox" name="allbox" onClick="CA();" title="Seleccionar o anular la selección de todos los registros" /></th>
               <th class="head1">COD</th>
               <th class="head1">Imagen</th>
-              <th class="head1">Categoría</th>
+              <th class="head1">Subcategoría</th>
               <th class="head1">Descripción</th>
+              <th class="head1">Categoria</th>
               <th class="head1">EDITAR</th>
             </tr>
           </thead>
@@ -177,6 +180,7 @@
                 <td align="center"><?php echo $row1[1]; ?></td>
                 <td><?php echo $row1[2]; ?></td>
                 <td class="center"><?php echo $row1[3]; ?></td>
+                <td><?php echo $row1[4]; ?></td>
                 <td class="center">
                   <a href="#" onclick="G('<?=$pag_org?>?id=<?=$row1[0]?>&sw=2');">
                     <img src="images/icons/editor.png" alt="">&nbsp;Editar</a>  </td>
@@ -229,9 +233,9 @@
               </p> 
 
               <p>
-                <label>Nombre de categoría : </label>
+                <label>Nombre : </label>
                 <span class="field">
-                  <input type="text" name="tipo" id="tipo" value="<?=$tip?>" size="30" class="smallinput">
+                  <input type="text" name="nomc" id="nomc" value="<?=$sc?>" size="30" class="smallinput">
                 </span>
               </p>
                           
@@ -240,6 +244,14 @@
                 <span class="field">
                   <input type="text" name="des" id="des" value="<?=$des?>" size="50">
                 <!-- <? //llenarcombo('subcategorias','cod_subcat, subcat',' ORDER BY 2', $scat, '','codcat'); ?> -->
+                </span>
+              </p>
+
+              <p>
+                <label>Categoría :</label>
+                <span class="field">
+                  <!-- cod_tipo  tipo  descripcion imgcat -->
+                  <? llenarcombo('categoria','cod_tipo, tipo',' ORDER BY 2', $cat, '','codcat'); ?>
                 </span>
               </p>
 
@@ -257,7 +269,7 @@
                     echo "<p>
                           <label>Vista Previa :</label>
                           <span class='field'>&nbsp;&nbsp;
-                            <img src='../productos/categorias/$img' width='50' height='50'>
+                            <img src='../productos/subcategorias/$img' width='50' height='50'>
                             <input type='hidden' name='imgDef' value='".$img."'>
                           </span>
                           </p>";

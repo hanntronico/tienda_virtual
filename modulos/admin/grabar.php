@@ -46,29 +46,30 @@ case 'productos':
 			
 			//move_uploaded_file($_FILES[imag][tmp_name],"Productos/img".$_POST["id"].".jpg");
 
-			   $temporal=$_FILES['imag']['tmp_name'];
-			   $nombre=$_FILES['imag']['name'];
+			$temporal=$_FILES['imag']['tmp_name'];
+			$nombre=$_FILES['imag']['name'];
 			
-			   move_uploaded_file($temporal,"../productos/".$nombre);
+			move_uploaded_file($temporal,"../productos/".$nombre);
 			   
 			if ($nombre=="")
 			  {   
 			   $nombre ="no_image.png";
 			  }
 
-/*			move_uploaded_file($_FILES[imag][tmp_name],"../../imagenes/Productos/img".$_POST["id"]);*/
-// cod_producto, descripcion, cod_subcat, precio, imagen, stock, cod_marca, prom			
+			/*			move_uploaded_file($_FILES[imag][tmp_name],"../../imagenes/Productos/img".$_POST["id"]);*/
+			// cod_producto, descripcion, cod_subcat, precio, imagen, stock, cod_marca, prom			
 	
-	$rs=@mysql_query("set names utf8",$link);
-	$fila=@mysql_fetch_array($res);
+			$rs=@mysql_query("set names utf8",$link);
+			$fila=@mysql_fetch_array($res);
 
-	mysql_query("INSERT INTO producto (descripcion, cod_subcat, precio, imagen, stock, cod_marca) 
-				 VALUES('".$_POST["des"]."','" 
-						  .$_POST["codcat"]."','"
-						  .$_POST["pre"]."','"
-						  .$nombre."','"
-						  .$_POST["stock"]."','"
-						  .$_POST["codmarca"]."')",$link);
+			mysql_query("INSERT INTO producto (descripcion, cod_subcat, precio, imagen, stock, cod_marca) 
+						 VALUES('".$_POST["des"]."','" 
+								  .$_POST["codcat"]."','"
+								  .$_POST["pre"]."','"
+								  .$nombre."','"
+								  .$_POST["stock"]."','"
+								  .$_POST["codmarca"]."')",$link);
+			$msn='p1';
 	
 			}	
 			elseif($_POST["sw"]==2){
@@ -86,17 +87,17 @@ case 'productos':
 			
 			   move_uploaded_file($temporal,"../productos/".$nombre);
 	
-	$rs=@mysql_query("set names utf8",$link);
-	$fila=@mysql_fetch_array($res);
-	
-	mysql_query("UPDATE producto SET descripcion='".$_POST["des"].
-								 "', cod_subcat='".$_POST["codcat"].
-								 "', precio='".$_POST["pre"].
-								 "', imagen='".$ruta.
-								 "', stock='".$_POST["stock"].
-								 "', cod_marca='".$_POST["codmarca"].
-								 "' WHERE cod_producto=".$_POST["id"],$link);
-	
+				$rs=@mysql_query("set names utf8",$link);
+				$fila=@mysql_fetch_array($res);
+				
+				mysql_query("UPDATE producto SET descripcion='".$_POST["des"].
+											 "', cod_subcat='".$_POST["codcat"].
+											 "', precio='".$_POST["pre"].
+											 "', imagen='".$ruta.
+											 "', stock='".$_POST["stock"].
+											 "', cod_marca='".$_POST["codmarca"].
+											 "' WHERE cod_producto=".$_POST["id"],$link);
+				$msn='p1';
 	
 	//move_uploaded_file($_FILES[imag][tmp_name],"../../imagenes/Productos/img".$_POST["id"].".jpg");
 	
@@ -110,6 +111,7 @@ case 'productos':
 						
 					}
 				}
+				$msn='e1';
 			}
 			break;
 
@@ -149,7 +151,7 @@ case 'marca':
 
 /************************************************************************************************************************************************/
 
-case 'subcategoria':
+case 'subcategorias':
 			if($_POST["sw"]==1){
 			
 			$rs=mysql_query("SELECT * FROM subcategorias WHERE subcat='".$_POST["nomc"]."'",$link);
@@ -173,12 +175,14 @@ case 'subcategoria':
 				$fila=@mysql_fetch_array($res);
 
 				mysql_query("INSERT INTO subcategorias (subcat, desc_subcat, img_subcat, cod_tipo) 
-							VALUES('".$_POST["nomc"]."','".$_POST["des"]."','".$nombre."','".$_POST["codcat"]."')",$link);				
+							VALUES('".$_POST["nomc"]."','".$_POST["des"]."','".$nombre."','".$_POST["codcat"]."')",$link);	
+				$msn='s1';			
 				}
 			else
 			{ 
 			
-			$msg_error="Login ya existe, intente otro...";
+			// $msg_error="Login ya existe, intente otro...";
+			$msn="e2";
 			
 			 }
 			}elseif($_POST["sw"]==2){
@@ -204,12 +208,14 @@ case 'subcategoria':
 								 "', img_subcat='".$ruta.
 								 "', cod_tipo='".$_POST["codcat"].
 								 "' WHERE cod_subcat=".$_POST["id"],$link);
+				$msn='s1';
 
 			}else{
 				$numreg=count($_POST["check"]);
 				for ($i=0;$i<=$numreg-1;$i++){
 				mysql_query("DELETE FROM subcategorias WHERE cod_subcat='".$_POST["check"][$i]."'",$link);
 				}
+				$msn='es1';
 			}
 			break;
 
@@ -220,7 +226,7 @@ case 'subcategoria':
 case 'categoria':
 			if($_POST["sw"]==1){
 			
-			$rs=mysql_query("SELECT * FROM categoria WHERE subcat='".$_POST["nomc"]."'",$link);
+			$rs=mysql_query("SELECT * FROM categoria WHERE tipo='".$_POST["tipo"]."'",$link);
 			$numfilas=@mysql_num_rows($rs);
 			
 
@@ -241,12 +247,14 @@ case 'categoria':
 				$fila=@mysql_fetch_array($res);
 
 				mysql_query("INSERT INTO categoria (tipo, descripcion, imgcat) 
-							VALUES('".$_POST["tipo"]."','".$_POST["des"]."','".$nombre."')",$link);				
+							VALUES('".$_POST["tipo"]."','".$_POST["des"]."','".$nombre."')",$link);	
+				$msn='c1';						
 				}
 			else
 			{ 
 			
-			$msg_error="Login ya existe, intente otro...";
+			// $msg_error="Login ya existe, intente otro...";
+			$msn="ec2";	
 			
 			 }
 			}elseif($_POST["sw"]==2){
@@ -266,17 +274,18 @@ case 'categoria':
 				$rs=@mysql_query("set names utf8",$link);
 				$fila=@mysql_fetch_array($res);
 	
-
 				mysql_query("UPDATE categoria SET tipo='".$_POST["tipo"].
 								 "', descripcion='".$_POST["des"].
 								 "', imgcat='".$ruta.
 								 "' WHERE cod_tipo=".$_POST["id"],$link);
+				$msn='c1';
 
 			}else{
 				$numreg=count($_POST["check"]);
 				for ($i=0;$i<=$numreg-1;$i++){
 				mysql_query("DELETE FROM categoria WHERE cod_tipo='".$_POST["check"][$i]."'",$link);
 				}
+				$msn='ec1';
 			}
 			break;
 	
@@ -305,6 +314,6 @@ case 'usuario_temporal':
 			break;
 									
 	}
-	// header($loc)
-	header('location: main_admin.php')
+	// header($loc) 
+	header('location: main_admin.php'.'?msn='.$msn)
 ?>

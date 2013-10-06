@@ -15,25 +15,24 @@
 	include("funciones/function.php");
 	include("conectar.php");
 	$link=Conectarse();
-	Title("SUBCATEGORIAS");
-	$pag = 'subcategoria';
+	Title("CATEGORIAS");
+	$pag = 'categoria';
 	if($_GET["sw"]==1){ 		// NUEVO
-		$id=autogenerado("subcategorias","cod_subcat",6); 
+		$id=autogenerado("categoria","cod_tipo",6); 
 		$ing = 0;
 		$ing2 = 0;
 	}elseif($_GET["sw"]==2){ 	// EDITAR
 		$rs=@mysql_query("set names utf8",$link);
 		$fila=@mysql_fetch_array($res);
-		$sql="SELECT * FROM subcategorias WHERE cod_subcat='".$_GET["id"]."'";
+		$sql="SELECT * FROM categoria WHERE cod_tipo='".$_GET["id"]."'";
 		$rs=mysql_query($sql,$link);
 		$fila =mysql_fetch_object($rs);
 
-// cod_subcat, subcat, desc_subcat, img_subcat, cod_tipo		   
-		$id  = $fila->cod_subcat;
-		$sc = $fila->subcat;
-		$des = $fila->desc_subcat;		
-		$img = $fila->img_subcat;
-		$cat = $fila->cod_tipo;
+// cod_tipo, tipo, descripcion, imgcat		   
+		$id  = $fila->cod_tipo;
+		$tip = $fila->tipo;
+		$des = $fila->descripcion;		
+		$img = $fila->imgcat;
 		
 		
 		mysql_free_result($rs);
@@ -41,13 +40,12 @@
 		$rs=@mysql_query("set names utf8",$link);
 		$fila=@mysql_fetch_array($res);
 		
-		$sql="select cod_subcat as COD, 
-		             subcat as Subcat, 
-		             desc_subcat as Descripcion, 
-		             concat('<img src=../productos/subcategorias/',img_subcat,' width=50 height=50>') as Img, 
-		             categoria.tipo 
-			 from subcategorias, categoria 
-			 where subcategorias.cod_tipo = categoria.cod_tipo";   
+		$sql="select cod_tipo as COD, 
+					 tipo as Tipo, 
+		             descripcion as Descripcion, 
+		             concat('<img src=../productos/categorias/',imgcat,' width=50 height=50>') 
+		             as Imagen
+		      from categoria";   
 		$tabla=$pag;
 		echo $msg_error; 
 		paginar($sql,$tabla,1);
@@ -87,8 +85,8 @@
 		  </tr>
 									  
 		  <tr> 
-			<td>Nombre :</td>
-			<td><input name="nomc" type="text" class="Text" id="nomc" value="<?=$sc?>" size="30"></td>
+			<td>Tipo :</td>
+			<td><input name="tipo" type="text" class="Text" id="tipo" value="<?=$tip?>" size="30"></td>
 		  </tr>
           
 		  <tr> 
@@ -96,13 +94,6 @@
 			<td><input name="des" type="text" class="Text" id="des" value="<?=$des?>" size="50"></td>
 		  </tr>
         
-          <tr>
-		    <td><div align="left">Categoria :</div></td>
-		    <td><div align="left">
-              <? llenarcombo('categoria','cod_tipo, tipo',' ORDER BY 2', $cat, '','codcat'); ?>
-            </div></td>
-	      </tr>
-         
 		  <tr>
 		    <td>Imagen:</td>
 		    <td>		      <input name="imag" type="file" class="Text" id="imag" size="40"></td>
@@ -118,7 +109,7 @@
 					echo "<tr>
 						    <td align='left'>Vista Previa :</td>
 	        				<td align='left'>"."&nbsp;&nbsp; 
-	        					<img src='../productos/subcategorias/$img' width='50' height='50'></td>
+	        					<img src='../productos/categorias/$img' width='50' height='50'></td>
                             <input type='hidden' name='imgDef' value='".$img."'>
 						  </tr>";
 				}

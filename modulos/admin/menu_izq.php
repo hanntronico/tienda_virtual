@@ -4,8 +4,12 @@
                 <ul id="formsub">
                         <!-- <li><a href="#" onclick="carga_form(1); return false;">Productos</a></li> -->
                    		<li><a href="#" onclick="cargare('productos.php'); return false;">Productos</a></li>
-                        <li><a href="#" onclick="carga_form(2); return false;">Subcategorías</a></li>
-                        <li><a href="#" onclick="carga_form(3); return false;">Categorías</a></li>
+                        <!-- <li><a href="#" onclick="carga_form(2); return false;">Subcategorías</a></li> -->
+                        <li><a href="#" onclick="cargare('subcategorias.php'); return false;">Subcategorias</a></li>
+                        <!-- <li><a href="#" onclick="carga_form(3); return false;">Subcategorías</a></li> -->
+                        <li><a href="#" onclick="cargare('categoria.php'); return false;">Categorías</a></li>
+                        <!-- <li><a href="#" onclick="carga_form(4); return false;">Marcas</a></li> -->
+                        <li><a href="#" onclick="cargare('marcas.php'); return false;">Marcas</a></li>
                 </ul>
             </li>
             <!-- <li><a href="filemanager.html" class="gallery">Operaciones</a></li> -->

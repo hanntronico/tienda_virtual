@@ -1,6 +1,36 @@
-<?php include 'head.php'; 
-      include 'funciones.php'; 
-?>
+<script type="text/javascript" src="js/plugins/jquery-1.7.min.js"></script>
+<script type="text/javascript" src="js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/javascript" src="js/plugins/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="js/plugins/jquery.uniform.min.js"></script>
+<script type="text/javascript" src="js/plugins/jquery.validate.min.js"></script>
+<script type="text/javascript" src="js/plugins/jquery.tagsinput.min.js"></script>
+<script type="text/javascript" src="js/plugins/jquery.flot.min.js"></script>
+<script type="text/javascript" src="js/plugins/jquery.flot.resize.min.js"></script>
+<script type="text/javascript" src="js/plugins/jquery.slimscroll.js"></script>
+<script type="text/javascript" src="js/plugins/charCount.js"></script>
+<script type="text/javascript" src="js/plugins/ui.spinner.min.js"></script>
+<script type="text/javascript" src="js/plugins/chosen.jquery.min.js"></script>
+<script type="text/javascript" src="js/custom/forms.js"></script>
+<script type="text/javascript" src="js/custom/tables.js"></script>
+<script type="text/javascript" src="js/custom/dashboard.js"></script>
+
+<script type="text/javascript">
+  jQuery('.notibar .close').click(function(){
+    jQuery(this).parent().fadeOut(function(){
+      jQuery(this).remove();
+    });
+  });
+
+  function cerrar() {
+    document.getElementById('equis').click();
+  }
+  
+</script>
+
+<?php include 'funciones.php'; ?>
+
+
 
 <body>
 
@@ -50,6 +80,22 @@
   ?>
 
     <div id="fra_crud">
+      <?php if ($_GET["msn"]=='p1') { ?>
+        <script type="text/javascript">setTimeout("cerrar()",6000);</script>
+        <div class="notibar msgsuccess">
+          <a class="close" id="equis"></a>
+          <p>Su registro ha sido grabado con exito!!!</p>;
+        </div>
+      <?php }  ?> 
+        
+      <?php if ($_GET["msn"]=='e1') { ?>
+        <script type="text/javascript">setTimeout("cerrar()",6000);</script>
+        <div class="notibar msgsuccess">
+          <a class="close" id="equis"></a>
+          <p>Su registro ha sido eliminado con exito!!!</p>;
+        </div>
+      <?php }  ?>
+
         <div class="contenttitle2">
           <h3><?php echo strtoupper($pag); ?></h3>
         </div><!--contenttitle-->
@@ -58,6 +104,7 @@
          <button class="stdbtn btn_orange" onclick="G('<?=$pag_org?>?sw=1');" > 
           &nbsp;&nbsp;&nbsp;Nuevo&nbsp;&nbsp;&nbsp;</button>
           <input type="button" name="Button2" value=" Eliminar " onclick="Subm()" class="stdbtn btn_orange">
+          
         </div> <br> 
 
         <?php 
@@ -148,7 +195,7 @@
       </form>
             
     </div>
-   
+
 
 <?php  
     echo "</body>\n";
@@ -156,9 +203,6 @@
     exit();
    } 
  ?>
-
-
-
 
 <div id="fra_crud">
   <br>

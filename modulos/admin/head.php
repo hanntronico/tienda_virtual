@@ -36,7 +36,7 @@
 <script type="text/javascript" src="js/custom/general.js"></script>
 <script type="text/javascript" src="js/custom/forms.js"></script>
 <script type="text/javascript" src="js/custom/tables.js"></script>
-<script type="text/javascript" src="js/custom/dashboard.js"></script>
+<script type="text/javascript" src="js/custom/dashboard.js"></script>	
 
 <script language="JavaScript" src="funciones/validaciones.js"></script>
 
@@ -50,6 +50,13 @@
 <!--[if lt IE 9]>
 	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 <![endif]-->
+
+<script language="javascript" type="text/javascript">
+  function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+  }
+</script>
+
 <script type="text/javascript">
 	function carga_form (num) {
 		
@@ -71,7 +78,6 @@
 		}
 		
 	}
-
 
 	function cargare(UR) {
 		var content = jQuery("#conte");
