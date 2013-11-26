@@ -40,9 +40,9 @@
                   $row=@mysql_fetch_array($res);
                   
                   if($codcat==0){
-                    $res=mysql_query("select * from producto where stock <> 0",$link);
+                    $res=mysql_query("select * from producto where stock <> 0 and estado >= 1",$link);
                   }elseif ($codcat>0) {
-                    $res=mysql_query("select * from producto where stock <> 0 and cod_subcat=".$codcat,$link);
+                    $res=mysql_query("select * from producto where stock <> 0 and estado >= 1 and cod_subcat=".$codcat,$link);
                   }
                   
                   

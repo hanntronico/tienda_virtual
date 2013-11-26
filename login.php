@@ -103,7 +103,15 @@ if ($numfila<>0){
 			header("location: modulos/admin/main_admin.php");
 			exit;
 		}
+
 		if ($row["cod_nivel"]==2)
+		{
+			header("location: modulos/admin/main_admin.php");
+			exit;
+		}
+		
+
+		if ($row["cod_nivel"]==3)
 		{
 			// $id=$row[0];
 			// $res2=mysql_query("select * from admin where adm_codigo='$id'",$link);

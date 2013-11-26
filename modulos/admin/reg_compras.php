@@ -99,15 +99,40 @@
       // alert(id);
       // alert(elementos[0].value);
       var content = jQuery("#dep");
-      content.fadeIn('slow').load("toy.php?ord="+id+"&dt="+elementos[0].value);
+      content.fadeIn('slow').load("ing_precio.php?ord="+id+"&dt="+elementos[0].value);
 
       var content = jQuery("#list_prod");
       var nid = id.substring(1)
       content.fadeIn('slow').load("agreg_prod.php?id="+nid+"&sw=2");
-
     };
-
   }
+
+    function checkKey3 (key, id) {
+   
+    var unicode;
+    if (key.charCode)
+    {unicode=key.charCode;}
+    else
+    {unicode=key.keyCode;}
+    //alert(unicode); // Para saber que codigo de tecla presiono , descomentar
+                
+    if (unicode == 13) {
+      jQuery("form[name='frm_regcompra']" ).submit(function( event ) {
+        event.preventDefault();
+      });
+
+      var elementos = document.getElementsByName(id);
+      // alert(id);
+      // alert(elementos[0].value);
+      var content = jQuery("#dep");
+      content.fadeIn('slow').load("ing_cant.php?ord="+id+"&dt="+elementos[0].value);
+
+      var content = jQuery("#list_prod");
+      var nid = id.substring(1)
+      content.fadeIn('slow').load("agreg_prod.php?id="+nid+"&sw=2");
+    };
+  }
+
 
   function salirp(UR) {
     var content = jQuery("#conte");

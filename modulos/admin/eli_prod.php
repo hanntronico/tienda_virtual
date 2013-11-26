@@ -4,10 +4,16 @@ include("conectar.php");
 $link=Conectarse();
 
 //echo $_GET['sw'];
+// echo $_GET['id'];
 
 if ($_GET['sw']==1){
-	$_SESSION["ls_prod"][$_GET["id"]]=$_SESSION["ls_prod"][$_GET["id"]] + 1;
+	// $_SESSION["ls_prod"][$_GET["id"]]=$_SESSION["ls_prod"][$_GET["id"]] + 1;
+  unset($_SESSION["ls_prod"][$_GET["id"]]);
+  unset($_SESSION["prec_prod"][$_GET["id"]]);
+
 }
+
+// echo var_dump($_SESSION["prec_prod"]);
 
 // $origen=$_SERVER['HTTP_REFERER'];
 // header("location: compra.php");
@@ -15,7 +21,12 @@ if ($_GET['sw']==1){
 // echo $_GET["id"];
 ?>
 
+<?php 
+  $k=$_SESSION["ls_prod"];
+    if (count($k)>0)
+      {
 
+ ?>
 <table cellpadding="0" cellspacing="0" border="0" class="stdtable" id="listprod">
     <colgroup>
       <col class="con1" style="width: 5%"/>
@@ -33,16 +44,13 @@ if ($_GET['sw']==1){
             <th class="head1">Precio_unit</th>
             <th class="head1">Cant.</th>
             <th class="head1">Subtotal</th>
-            <th class="head1">ACC</th>
+            <th class="head1">DEL</th>
         </tr>
     </thead>
 
     <tbody>
 <!-- cantidad, prec_unit, dscto, subtotal -->
     	<?php 
-		   	$k=$_SESSION["ls_prod"];
-				if (count($k)>0)
-				{
 					foreach( $k as $key => $value ) 
 					{
 						$rs=@mysql_query("set names utf8",$link);
@@ -50,16 +58,18 @@ if ($_GET['sw']==1){
 						$res=mysql_query("select * from producto where cod_producto=".$key."",$link);
 						$row=mysql_fetch_array($res);
 
-    	 ?>
+    	?>
           <tr class="gradeX">
             <td align="center"><?php echo $row[0]; ?></td>
             <td><?php echo $row[1]; ?></td>
             <td align="right"><?php //echo $row[3]; ?>
           	 	<input type="text" name="t<?=$row[0]?>" value="<?=sprintf("%01.2f", $_SESSION["prec_prod"][$row[0]])?>" style="text-align:right;" onkeydown="checkKey2(event,'t<?=$row[0]?>');">
             </td>
+
             <td align="center"><?php //echo $value; ?>
               <input type="text" name="c<?=$row[0]?>" value="<?=$_SESSION["ls_prod"][$row[0]]?>" style="text-align:center;" onkeydown="checkKey3(event,'c<?=$row[0]?>');">
             </td>
+            
             <td align="right">
             	<?php echo sprintf("%01.2f", ($_SESSION["prec_prod"][$row[0]]*$value)); ?>
             </td>
@@ -70,8 +80,7 @@ if ($_GET['sw']==1){
             </td>
           </tr>
         <?php  
-        		}
-			}
+        	   }
         ?>      
         <tr>
         	<td colspan="6">
@@ -80,6 +89,9 @@ if ($_GET['sw']==1){
    					<a href="#" class="btn btn2 btn_orange btn_bell" onclick="ccc();return false;"><span>VALIDAR</span></a>
    					<input type="hidden" name="addedp" value="<?=count($_SESSION["prec_prod"])?>" style="width:30%;">
         	</td>
-        </tr>	
+        </tr>
+    <?php 
+      }
+    ?>
     </tbody>
 </table>

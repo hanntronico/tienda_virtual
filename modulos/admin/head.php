@@ -181,6 +181,44 @@
 		}
 	}
 
+	function Disable(act,first,dosub,e) {
+		if (act=='delete'){
+			if (!e)	var e=window.event;
+			e.cancelBubble=true;
+		}
+		if (act=='notbulkmail'){
+			frm.action="/cgi-bin/notbulk";
+		}else if (act=='report'){
+			frm.action="/cgi-bin/kill";
+			frm.ReportLevel.value="1";
+		}
+
+		num=vChk(frmList);
+		// alert(num);
+		if (num!=false){
+			// frmList.submit();
+			for(var i=0;i<frmList.length;i++){
+				if(frmList.elements[i].checked){
+					var chkid = frmList.elements[i].value;
+					// alert(chkid);
+					document.location.href='disabler.php?id='+chkid;
+				}		
+		 	}
+		}
+
+	// 	//num=((first) ? slct1st(frm) : numChecked(frm));
+	// 	num=vChk(frmList);
+	// //	alert (num);
+	// 	if (num!=false){
+	// 	//if (num>0){
+	// 		//frm._HMaction.value=act;
+	// 		//if (dosub)
+	// 		frmList.submit();
+	// 	//}else{
+	// 		//Err("150995652");
+	// 	}
+	}
+
 	function Subm(act,first,dosub,e){
 		if (act=='delete'){
 			if (!e)	var e=window.event;
@@ -249,6 +287,13 @@
 		var content = jQuery("#list_prod");
 		content.fadeIn('slow').load("agreg_prod.php?id="+c1+"&sw=1");
 	}
+
+	function eliprod(c1) {
+		// document.location.href='agreg_prod.php?id='+c1;
+		var content = jQuery("#list_prod");
+		content.fadeIn('slow').load("eli_prod.php?id="+c1+"&sw=1");
+	}
+
 
 </script>
 </head>

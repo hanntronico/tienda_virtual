@@ -12,6 +12,10 @@ if ($_GET['msn']=='e1') {
     $strcarga = "cargare('productos.php?msn=e1')";
 }
 
+if ($_GET['msn']=='d1') { 
+    $strcarga = "cargare('productos.php?msn=d1')";
+}
+
 if ($_GET['msn']=='s1') { 
     $strcarga = "cargare('subcategorias.php?msn=s1')";
 }

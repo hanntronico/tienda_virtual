@@ -3,6 +3,7 @@
   include("conectar.php");
   $link=Conectarse();
   // echo $_GET["dat"];
+  // exit();
 
   if ($_GET["dat"]=="") {
     $datbus="**";
@@ -44,7 +45,7 @@
                  or (subcategorias.subcat like '%".$datbus."%') 
                  or (producto.cod_producto like '%".$datbus."%'))";
 
-  // echo $sql; 
+  // echo $sql; exit();
   $res=@mysql_query($sql,$link);
   // $row1=@mysql_fetch_array($res);
 
@@ -58,8 +59,8 @@
 <table cellpadding="0" cellspacing="0" border="0" class="stdtable" id="listprod">
           <colgroup>
             <col class="con1" style="width: 5%"/>
-            <col class="con0" style="width: 25%" />
-            <col class="con1" style="width: 8%" />
+            <col class="con0" style="width: 40%" />
+            <col class="con1" style="width: 10%" />
             <col class="con0" style="width: 15%" />
             <col class="con0" style="width: 15%" />
             <!-- <col class="con1" style="width: 6%" /> -->

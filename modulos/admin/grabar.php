@@ -118,6 +118,95 @@ case 'productos':
 
 /************************************************************************************************************************************************/
 
+
+case 'proveedores':
+
+	if($_POST["sw"]==1){
+			
+	$rs=mysql_query("SELECT * FROM proveedor WHERE cod_proveedor='".$_POST["id"]."'",$link);
+	$numfilas=mysql_num_rows($rs);
+
+// cod_proveedor, razon_social, ruc, direccion, distrito, agent_percep 
+			
+			//move_uploaded_file($_FILES[imag][tmp_name],"Productos/img".$_POST["id"].".jpg");
+
+			// $temporal=$_FILES['imag']['tmp_name'];
+			// $nombre=$_FILES['imag']['name'];
+			
+			move_uploaded_file($temporal,"../productos/".$nombre);
+			   
+			// if ($nombre=="")
+			//   {   
+			//    $nombre ="no_image.png";
+			//   }
+		
+			$rs=@mysql_query("set names utf8",$link);
+			$fila=@mysql_fetch_array($rs);
+
+			if ($_POST["agp"]=="on") {
+				$sagp = 1;
+			}else {$sagp = 0;}
+
+			mysql_query("INSERT INTO proveedor (razon_social, ruc, direccion, distrito, agent_percep) VALUES('".$_POST["rzs"]."','" 
+							      	   .$_POST["ruc"]."','"
+								       .$_POST["dir"]."','"
+								  	   .$_POST["dist"]."',"
+								  	   .$sagp.")",$link);
+
+			$msn='pr1';
+	
+			}	
+			elseif($_POST["sw"]==2){
+
+
+			 //   $temporal=$_FILES['imag']['tmp_name'];
+			 //   $nombre=$_FILES['imag']['name'];
+			   
+			 //   $ruta=$nombre;
+			   
+			 //   if ($nombre =="")
+				// {
+				//  $ruta=$_POST["imgDef"];
+				// }
+			
+			   // move_uploaded_file($temporal,"../productos/".$nombre);
+	
+				$rs=@mysql_query("set names utf8",$link);
+				$fila=@mysql_fetch_array($rs);
+				
+				if ($_POST["agp"]=="on") {
+					$sagp = 1;
+				}else {$sagp = 0;}
+
+				mysql_query("UPDATE proveedor SET razon_social='".$_POST["rzs"].
+											 "', ruc='".$_POST["ruc"].
+											 "', direccion='".$_POST["dir"].
+											 "', distrito='".$_POST["dist"].
+											 "', agent_percep=".$sagp.
+											 " WHERE cod_proveedor=".$_POST["id"],$link);
+				$msn='pr1';
+	
+	//move_uploaded_file($_FILES[imag][tmp_name],"../../imagenes/Productos/img".$_POST["id"].".jpg");
+	
+			}else{
+				$numreg=count($_POST["check"]);
+				for ($i=0;$i<=$numreg-1;$i++){
+								
+					if($numfilas==0 && $numfilas1==0 ){
+						mysql_query("DELETE FROM proveedor WHERE cod_proveedor='".$_POST["check"][$i]."'",$link);
+
+						
+					}
+				}
+				$msn='epr1';
+			}
+			break;
+
+
+/************************************************************************************************************************************************/
+
+
+
 case 'marca':
 			if($_POST["sw"]==1){
 			

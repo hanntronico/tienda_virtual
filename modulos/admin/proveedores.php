@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <script type="text/javascript" src="js/plugins/jquery-1.7.min.js"></script>
 <script type="text/javascript" src="js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
 <script type="text/javascript" src="js/plugins/jquery.cookie.js"></script>
@@ -38,7 +37,7 @@
 <?php
   include("conectar.php");
   $link=Conectarse();
-  $pag = "productos";
+  $pag = "proveedores";
 
   $pag_org = parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH);
   //verificamos si en la ruta nos han indicado el directorio en el que se encuentra
@@ -49,10 +48,10 @@
  
   $pag_sext=preg_replace('/\.php$/', '' ,$pag_org);
 
-  
+  // cod_proveedor razon_social  ruc direccion distrito  agent_percep
 
   if($_GET["sw"]==1){     // NUEVO
-    $id=autogenerado("producto","cod_producto",6); 
+    $id=autogenerado("proveedor","cod_proveedor",6); 
     // $ing = 0;
     // $ing2 = 0;
 
@@ -60,19 +59,17 @@
 
     $rs=@mysql_query("set names utf8",$link);
     $fila=@mysql_fetch_array($res);
-    $sql="SELECT * FROM producto WHERE cod_producto='".$_GET["id"]."'"; 
+    $sql="SELECT * FROM proveedor WHERE cod_proveedor='".$_GET["id"]."'"; 
     $res=@mysql_query($sql,$link);
     $fila =mysql_fetch_object($res);
 
-// cod_producto, descripcion, cod_subcat, precio, imagen, stock, cod_marca, estado       
-    $id  = $fila->cod_producto;
-    $des = $fila->descripcion;    
-    $scat = $fila->cod_subcat;
-    $pre = $fila->precio;
-    $img = $fila->imagen;
-    $sto = $fila->stock;
-    $marc = $fila->cod_marca;
-    $est = $fila->estado;
+// cod_proveedor razon_social  ruc direccion distrito  agent_percep       
+    $id  = $fila->cod_proveedor;
+    $rzs = $fila->razon_social;    
+    $ruc = $fila->ruc;
+    $dir = $fila->direccion;
+    $dist = $fila->distrito;
+    $agp = $fila->agent_percep;
    
     mysql_free_result($res);
 
@@ -97,14 +94,6 @@
         </div>
       <?php }  ?>
 
-      <?php if ($_GET["msn"]=='d1') { ?>
-        <script type="text/javascript">setTimeout("cerrar()",6000);</script>
-        <div class="notibar msgsuccess">
-          <a class="close" id="equis"></a>
-          <p>Su registro ha sido deshabilitado con exito!!!</p>;
-        </div>
-      <?php }  ?>
-
     <div class="contenttitle2">
       <h3><?php echo strtoupper($pag); ?></h3>
     </div><!--contenttitle-->
@@ -114,18 +103,7 @@
     <div id="botonera">
          <button class="stdbtn btn_orange" onclick="G('<?=$pag_org?>?sw=1');" > 
           &nbsp;&nbsp;&nbsp;Nuevo&nbsp;&nbsp;&nbsp;</button>
-          
-          <input type="button" name="Button3" value=" Deshabilitar " onclick="Disable()" class="stdbtn btn_orange">
-
-          <?php //echo $_SESSION["s_cod"]; 
-            $sql="SELECT cod_nivel FROM usuario WHERE cod_usuario='".$_SESSION["s_cod"]."'"; 
-            $res=@mysql_query($sql,$link);
-            $urg=@mysql_fetch_array($res);
-           
-            if ($urg[0]==1) {
-          ?>
-           <input type="button" name="Button2" value=" Eliminar " onclick="Subm()" class="stdbtn btn_orange">
-          <?php } ?>
+          <input type="button" name="Button2" value=" Eliminar " onclick="Subm()" class="stdbtn btn_orange">
     </div> 
 
     <br> 
@@ -136,17 +114,8 @@
           $fila=@mysql_fetch_array($res);
             
 
-          $sql="select cod_producto as COD, 
-                concat('<img src=../productos/',imagen,' width=50 height=50>') as Img, 
-                descripcion as Descripcion, 
-                subcategorias.subcat as Subcat, 
-                precio, 
-                stock, 
-                marca.desc_marca as Marca, 
-                estado 
-                from producto, subcategorias, marca
-                where producto.cod_subcat = subcategorias.cod_subcat
-                and producto.cod_marca = marca.cod_marca"; 
+          $sql="SELECT cod_proveedor, razon_social, ruc, direccion, distrito, agent_percep 
+                FROM proveedor"; 
 
           $res=@mysql_query($sql,$link);
         ?>
@@ -156,26 +125,26 @@
         <table cellpadding="0" cellspacing="0" border="0" class="stdtable" id="dyntable2">
           <colgroup>
             <col class="con0" style="width: 1%" />
-             <col class="con1" style="width: 5%"/>
-            <col class="con0" style="width: 5%" />
-            <col class="con1" style="width: 38%" />
-            <col class="con0" style="width: 15%" />
+            <col class="con1" style="width: 5%"/>
+             <col class="con0" style="width: 30%" />
             <col class="con1" style="width: 8%" />
-            <col class="con1" style="width: 6%" />
-            <col class="con1" style="width: 10%" />
+            <col class="con0" style="width: 30%" />
+            <col class="con1" style="width: 15%" />
+<!--            <col class="con1" style="width: 8%" />
             <col class="con1" style="width: 8%" />
+            <col class="con1" style="width: 6%" /> -->
           </colgroup>
+         <!-- cod_proveedor, razon_social, ruc, direccion, distrito, agent_percep -->
           <thead>
             <tr>
               <th class="head1 nosort">
                 <input type="checkbox" name="allbox" onClick="CA();" title="Seleccionar o anular la selección de todos los registros" /></th>
               <th class="head1">COD</th>
-              <th class="head1">Imagen</th>
-              <th class="head1">Descripción</th>
-              <th class="head1">Subcategoría</th>
-              <th class="head1">Precio</th>
-              <th class="head1">Stock</th>
-              <th class="head1">Marca</th>
+              <th class="head1">Razón Social</th>
+              <th class="head1">RUC</th>
+              <th class="head1">Dirección</th>
+              <th class="head1">Distrito</th>
+              <!-- <th class="head1">AP</th> -->
               <th class="head1">EDITAR</th>
             </tr>
           </thead>
@@ -195,25 +164,18 @@
 
           <?php while($row1=@mysql_fetch_array($res))
                      {$i++;
-
-                      if ($row1['estado']==0) {
-                        $colorfil = "style='background: #E2C6FF;'";
-                      }else {
-                        $colorfil = "";
-                      }
           ?>  
 
-              <tr class="gradeX" <?=$colorfil?> >
+              <tr class="gradeX">
                 <td align="center"><span class="center">
                   <input type='checkbox' name='check[]' value="<?=$row1[0]?>" onClick='CCA(this);'>
                 </span></td>
-                <td align="center"><?php echo $row1[0]; ?></td>
-                <td align="center"><?php echo $row1[1]; ?></td>
+                <td><?php echo $row1[0]; ?></td>
+                <td align="left"><?php echo $row1[1]; ?></td>
                 <td><?php echo $row1[2]; ?></td>
                 <td class="center"><?php echo $row1[3]; ?></td>
-                <td align="right"><?php echo $row1[4]; ?></td>
-                <td align="center"><?php echo $row1[5]; ?></td>
-                <td class="center"><?php echo $row1[6]; ?></td>
+                <td align="left"><?php echo $row1[4]; ?></td>
+                <!-- <td class="center"><?php echo $row1[5]; ?></td> -->
                 <td class="center">
                   <a href="#" onclick="G('<?=$pag_org?>?id=<?=$row1[0]?>&sw=2');">
                     <img src="images/icons/editor.png" alt="">&nbsp;Editar</a>  </td>
@@ -236,7 +198,7 @@
 <div id="fra_crud">
   <br>
 
-  <form name="frm_producto" class="stdform stdform2" method="post" action="grabar.php" enctype="multipart/form-data" onSubmit="return validaFormProducto(this)">
+  <form name="frm_proveedor" class="stdform stdform2" method="post" action="grabar.php" enctype="multipart/form-data" onSubmit="return validaFormProveedor(this)">
   
   <table class="form_crud">
     <thead>
@@ -264,73 +226,76 @@
                 <b>CODIGO:</b>
                 <b><?=$id?></b> <input type='hidden' name='id' class='Text' value='<?=$id?>'>
               </p> 
+<!-- cod_proveedor, razon_social, ruc, direccion, distrito, agent_percep -->
 
+<!-- $id
+
+ -->
               <p>
-                <label>Descripción : </label>
+                <label>Razón social : </label>
                 <span class="field">
-                  <input type="text" name="des" id="des" value="<?=$des?>" size="50">
+                  <input type="text" name="rzs" id="rzs" value="<?=$rzs?>" size="50">
                 </span>
               </p>
                           
               <p>
-                <label>Subcategoria :</label>
+                <label>RUC :</label>
                 <span class="field">
-                <? llenarcombo('subcategorias','cod_subcat, subcat',' ORDER BY 2', $scat, '','codcat'); ?>
+                  <input type="text" name="ruc" id="ruc" value="<?=$ruc?>" size="50" class="smallinput" onKeyPress="return numeros(event)" maxLength="11">
                 </span>
               </p>
 
               <p>
-                <label>Precio :</label>
+                <label>Dirección :</label>
                 <span class="field">
-                  <input type="text" name="pre" id="pre" value="<?=$pre?>" onKeyPress="return numeros(event)" maxLength="10" class="smallinput"> Nuevos Soles (S/.)
+                  <input type="text" name="dir" id="dir" value="<?=$dir?>">
                 </span>
               </p>
 
               <p>
-                <label>Stock :</label>
+                <label>Distrito :</label>
                 <span class="field">
-                  <input type="text" name="stock" id="stock" value="<?=$sto?>" onKeyPress="return numeros(event)" maxlength="5" class="smallinput">
+                  <input type="text" name="dist" id="dist" value="<?=$dist?>">
                 </span>
               </p>
 
               <p>
-                <label>Marca:</label>
+                <label>Agente - Percepción:</label>
                 <span class="field">
-                  <? llenarcombo('marca','cod_marca, desc_marca',' ORDER BY 2', $marc, '','codmarca'); ?>
+                  <!-- <input type="text" name="agp" id="agp" value="<?=$agp?>" class="smallinput"> -->
+
+                  <?php if ($agp==1) {
+                      $sagp = "checked='checked'";
+                      // $chkagp = "1";
+                  } else {
+                      $sagp = "";
+                      // $chkagp = "0";
+                  } 
+                  ?>
+                  <input type="checkbox" name="agp" id="agp" <?=$sagp?> >
+
                 </span>
               </p>
 
-              <p>
+<!--               <p>
                 <label>Imagen:</label>
                 <span class="field">
                     <input type="file" name="imag" id="imag" class="smallinput" size="40">
                 </span>
-              </p>
+              </p> -->
 
                 <?php 
-                  if($_GET["sw"]==1){ 
-                    // echo "<p>
-                    //       <label>&nbsp;</label>
-                    //       <span class='field'>&nbsp;
-                    //       </span>
-                    //       </p>";
-                    echo "&nbsp;";
-                  }else{
-                    // echo "<tr>
-                    //       <td align='left'>Vista Previa :</td>
-                    //         <td align='left'>"."&nbsp;&nbsp; 
-                    //           <img src='../productos/$img' width='50' height='50'></td>
-                    //                   <input type='hidden' name='imgDef' value='".$img."'>
-                    //     </tr>";
-
-                    echo "<p>
-                          <label>Vista Previa :</label>
-                          <span class='field'>&nbsp;&nbsp;
-                            <img src='../productos/$img' width='50' height='50'>
-                            <input type='hidden' name='imgDef' value='".$img."'>
-                          </span>
-                          </p>";
-                  }
+                  // if($_GET["sw"]==1){ 
+                    // echo "&nbsp;";
+                  // }else{
+                  //   echo "<p>
+                  //         <label>Vista Previa :</label>
+                  //         <span class='field'>&nbsp;&nbsp;
+                  //           <img src='../productos/$img' width='50' height='50'>
+                  //           <input type='hidden' name='imgDef' value='".$img."'>
+                  //         </span>
+                  //         </p>";
+                  // }
                 ?>            
 
 
