@@ -954,6 +954,7 @@ select {
 .btnpag {
 	background: #25789C;
 	border: 1px solid #808080;
+	border-radius: 8px;
 	color: #FFFFFF;
 	font-family: Arial;
 	font-size: 14px;
@@ -964,6 +965,10 @@ select {
 
 .btnpag:active {
 	background: #34A0CF;
+}
+
+.btnpag:visited  {
+	background: #5AB3D8;
 }
 
 #msn_block {
