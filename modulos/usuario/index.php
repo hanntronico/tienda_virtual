@@ -23,7 +23,8 @@
 
           $res=@mysql_query("set names utf8",$link);
           $row=@mysql_fetch_array($res);
-          $res=mysql_query("select * from producto ORDER BY 1 limit 0,3",$link);
+          $res=@mysql_query("select * from producto ORDER BY 1 limit 0,3",$link);
+          echo 
 
           while ($rwc=mysql_fetch_array($res))
             {

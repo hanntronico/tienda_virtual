@@ -19,7 +19,7 @@ var hasChaser = 1;			// Enable Chaser menu (open on scroll) ?   1 - Yes / 0 - No
 				.appendTo(document.body)
 				.wrap("<div class='chaser'><div class='container'><div class='row'><div class='span12'></div></div></div></div>");
 			forch = $('#content').first();
-			forchBottom = forch.offset().top + 2;
+			// forchBottom = forch.offset().top + 2;
 			hidden();
 			win.on('scroll', function () {
 				var top = doc.scrollTop();
@@ -39,7 +39,7 @@ var hasChaser = 1;			// Enable Chaser menu (open on scroll) ?   1 - Yes / 0 - No
 	$(document).ready(function(e) {
 		
 		// activate placeholders for older browsers
-        $('input, textarea').placeholder();
+        // $('input, textarea').placeholder();
 		
 		/* Activate Superfish Menu */
 		var sfDelay = 200;

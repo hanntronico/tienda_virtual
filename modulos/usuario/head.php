@@ -321,6 +321,11 @@
                 document.getElementById('list').style.display = "none" ;
             }   
             
+            function srch () {
+                var dat=document.getElementById('txtbuscar').value;
+                document.location.href="principal.php?p="+dat;
+            }
+
             function checkKey (key, id) {
                 var unicode;
                 if (key.charCode)
@@ -337,17 +342,14 @@
 
                 if (unicode >= 48 && unicode <= 90){
                     var dat=document.getElementById('txtbuscar').value;
-                    // alert(dat);
-                    
+                    // alert(dat);                    
                     // var content = jQuery("#productos");
                     // content.fadeIn('slow').load("list_prod_bus.php?dat="+dat);
-
 
                     document.getElementById('bus_cont').style.display = "block";
                     var content = jQuery("#bus_cont");
                     content.fadeIn('slow').load("list_prod_bus2.php?dat="+dat);
                     
-
                     // document.getElementById('bus_cont').style.visibility = visible;
                 }
 

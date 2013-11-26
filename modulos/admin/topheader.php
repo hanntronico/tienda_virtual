@@ -16,7 +16,18 @@
         
         <div class="right">
         	<div class="notification">
-                <a class="count" href="ajax/noti.php"><span>9</span></a>
+                <a class="count" href="ajax/noti.php"><span>
+                    <?php 
+                        include("conectar.php");
+                        $link=Conectarse();
+                        $rs=@mysql_query("set names utf8",$link);
+                        $fila=@mysql_fetch_array($res);
+                        $sql="SELECT count(*) FROM mensajes"; 
+                        $res=@mysql_query($sql,$link);
+                        $row1=@mysql_fetch_array($res);
+                        echo $row1[0];
+                     ?>
+                </span></a>
         	</div>
             <div class="userinfo">
             	<img src="images/thumbs/admin.png" alt="" />

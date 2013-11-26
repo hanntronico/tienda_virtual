@@ -63,7 +63,7 @@
     $res=@mysql_query($sql,$link);
     $fila =mysql_fetch_object($res);
 
-// cod_producto, descripcion, cod_subcat, precio, imagen, stock, cod_marca, prom       
+// cod_producto, descripcion, cod_subcat, precio, imagen, stock, cod_marca, estado       
     $id  = $fila->cod_producto;
     $des = $fila->descripcion;    
     $scat = $fila->cod_subcat;
@@ -71,7 +71,7 @@
     $img = $fila->imagen;
     $sto = $fila->stock;
     $marc = $fila->cod_marca;
-    $prom = $fila->prom;
+    $est = $fila->estado;
    
     mysql_free_result($res);
 
@@ -96,16 +96,19 @@
         </div>
       <?php }  ?>
 
-        <div class="contenttitle2">
-          <h3><?php echo strtoupper($pag); ?></h3>
-        </div><!--contenttitle-->
-        <br>
-        <div id="botonera">
+    <div class="contenttitle2">
+      <h3><?php echo strtoupper($pag); ?></h3>
+    </div><!--contenttitle-->
+    
+    <br>
+    
+    <div id="botonera">
          <button class="stdbtn btn_orange" onclick="G('<?=$pag_org?>?sw=1');" > 
           &nbsp;&nbsp;&nbsp;Nuevo&nbsp;&nbsp;&nbsp;</button>
           <input type="button" name="Button2" value=" Eliminar " onclick="Subm()" class="stdbtn btn_orange">
-          
-        </div> <br> 
+    </div> 
+
+    <br> 
 
         <?php 
 
@@ -120,7 +123,7 @@
                 precio, 
                 stock, 
                 marca.desc_marca as Marca, 
-                prom 
+                estado 
                 from producto, subcategorias, marca
                 where producto.cod_subcat = subcategorias.cod_subcat
                 and producto.cod_marca = marca.cod_marca"; 

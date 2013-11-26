@@ -11,7 +11,7 @@ $link=Conectarse();
 $login=htmlentities($_POST["uscorreo"]);
 $clave=md5($_POST["uspassword"]);
 
-// echo  $row[0].' '.$row[1].' '.$row[2].' '.$login.' '.$clave;
+// echo  $row[0].' '.$row[1].' '.$row[2].' '.$login.' '.$_POST["uspassword"].' '.$clave;
 // exit();
 
 // $login=htmlentities($_POST["login"]);
@@ -78,7 +78,7 @@ if ($numfila<>0){
 	$res=mysql_query("select * from usuario where correo='$login'",$link);
 	if (mysql_num_rows($res)==0)
 	{
-		header("location: index.php?deny=0");
+		header("location: index.php?deny=6");
 		exit;	
 	}
 	$row=mysql_fetch_array($res);

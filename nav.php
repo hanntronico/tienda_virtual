@@ -10,6 +10,7 @@
             <div id="buscar">
               <form action="index_submit" method="get" accept-charset="utf-8">
                 <input type="text" name="txtbuscar" id="txtbuscar" placeholder="Ingrese lo que desea buscar">
+                 <!-- <input type="button" name="btnbus" id="btnbus" value=" Buscar " onclick="srch()"> -->
               </form>
             </div>
 

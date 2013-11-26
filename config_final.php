@@ -2,7 +2,7 @@
       <script type="text/javascript" src="js/plugins.js"></script><!-- jQuery Plugins -->
       <script type="text/javascript" src="addons/superfish_responsive/superfish_menu.js"></script>
       <!-- Superfish Menu -->
-      <script type="text/javascript" src="js/kalypso_script.js"></script><!-- custom scripts file -->
+      // <script type="text/javascript" src="js/kalypso_script.js"></script><!-- custom scripts file -->
       <!-- prettyphoto scripts & styles -->
       <link rel="stylesheet" href="addons/prettyphoto/prettyPhoto.css" type="text/css" />
       <script type="text/javascript" src="addons/prettyphoto/jquery.prettyPhoto.js"></script>

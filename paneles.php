@@ -5,8 +5,10 @@
           <!-- SIGN IN YOUR ACCOUNT TO HAVE ACCESS TO DIFFERENT FEATURES --></h3>
         <form id="login_form" name="login_form" action="login.php" method="post">
           <a href="#" class="create_account" onClick="ppOpen('#register_panel', '360');">REGISTRESE</a>
-          <input type="text" id="uscorreo" name="uscorreo" class="inputbox" placeholder="Correo">
-          <input type="password" id="uspassword" name="uspassword" class="inputbox" placeholder="Contraseña">
+          <!-- <input type="text" id="uscorreo" name="uscorreo" class="inputbox" placeholder="Correo"> -->
+          <input type="text" id="uscorreo" name="uscorreo" class="inputbox">
+          <!-- <input type="password" id="uspassword" name="uspassword" class="inputbox" placeholder="Contraseña"> -->
+          <input type="password" id="uspassword" name="uspassword" class="inputbox">
           <input type="submit" id="login" name="submit" value="ENTRAR">
           <!-- <a href="#" class="login_facebook">login with facebook</a> -->
         </form><br>
@@ -39,8 +41,11 @@
                 </td>
             </tr>
             <tr>
-                <td>Email: </td>
-                <td><input type="text" id="txtemail" name="txtemail" class="inputbox" placeholder="Correo electrónico" onblur="verifica_email()"></td>
+              <td>Email: </td>
+              <td>
+                <input type="text" id="txtemail" name="txtemail" class="inputbox" placeholder="Correo electrónico">
+                <!-- <input type="text" id="txtemail" name="txtemail" class="inputbox" placeholder="Correo electrónico" onblur="verifica_email()"> -->
+              </td>
             </tr>
 <!--             <tr>
                 <td>Password: </td>
@@ -176,7 +181,7 @@
         <table border="0" cellpadding="0" cellspacing="0" width="100%">
           <thead>
             <tr>
-              <th><h3 class="m_title">MENSAJE</h3></th>
+              <th><h3 class="m_title" align="center">MENSAJE</h3></th>
             </tr>
           </thead>
           <tbody>
@@ -192,7 +197,6 @@
         </table>
       </div>
     </div>
-
 
   </div><!-- end login register stuff -->
 

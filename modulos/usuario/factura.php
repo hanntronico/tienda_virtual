@@ -6,6 +6,6 @@
 	</tr>
 	<tr>
 		<td>RUC: </td>
-		<td><input type="text" name="txtruc" style="width: 100px;" maxlength="11"></td>
+		<td><input type="text" name="txtruc" style="width: 100px;" maxlength="11" onKeyPress="return numeros(event)"></td>
 	</tr>
 </table>

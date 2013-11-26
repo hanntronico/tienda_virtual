@@ -2,6 +2,13 @@
 session_start();
 $tipago=$_POST["chktipago"];
 
+// echo $_POST["txtrz"]." ".$_POST["txtruc"];
+// exit();
+// echo $_POST["swt"];
+// exit();
+
+
+
 // $fec_ent=strftime("%Y-%m-%d", $_POST["fecha"]);
 // $fec_ent= $_POST["fecha"];
 list($dia, $mes, $anio) = split('[/.-]', $_POST["fecha"]);
@@ -12,11 +19,59 @@ $grab = $_POST["grab_dir"];
 
 
 $hora_ent=$_POST["cbohora"];
-$nom_ent= $_POST["txtnom"];
-$dir_ent=$_POST["txtdir"];
+// $nom_ent= $_POST["txtnom"];
+
+// $dir_ent=$_POST["txtdir"];
+
+if ($_POST["swt"]=="F") {
+	$tel_ent=$_POST["txttelf"];
+
+	if ($_POST["dir_epec"]=="") {
+		$dir_ent=$_POST["txtdir"];	
+	}else{
+		$dir_ent = $_POST["dir_epec"]." ".
+	    		   $_POST["txtdir"]." - ".
+			       $_POST["dir_zona"]." ".
+				   $_POST["txtzona"];
+	}	
+
+}else{
+	if ($_POST["swt"]=="V") {
+		$tel_ent=$_POST["txttelf2"];
+		$dir_ent = $_POST["dir_epec2"]." ".
+				   $_POST["txtdir2"]." - ".
+		   		   $_POST["dir_zona2"]." ".
+		   		   $_POST["txtzona2"];
+	}
+}
+
+if ($_POST["swtnom"]=="F") {
+	$nom_ent= $_POST["txtnom"];
+}else{
+	$nom_ent= $_POST["txtnom2"];
+}
+
+// echo $dir_ent;
+// exit ();
+
 $rz_ent=$_POST["txtrz"];
 $ruc_ent=$_POST["txtruc"];
 $comp=$_POST["chkfac"];
+
+// echo $_POST["swtnom"];
+// echo $_POST["swt"];
+
+// echo "Tipo de pago: ".$tipago."<br>";
+// echo "Nombre de entrega: ".$nom_ent."<br>";
+// echo "Dirección de entrega: ".$dir_ent."<br>";
+// echo "Teléfono de entrega: ".$tel_ent."<br>";
+// echo "Fecha de entrega: ".$fec_ent."<br>";
+// echo "Hora de entrega: ".$hora_ent."<br>";
+// echo "Razon social: ".$rz_ent."<br>";
+// echo "RUC: ".$ruc_ent."<br>";
+// echo "Comprobante: ".$comp."<br>";
+
+// exit ();
 
 date_default_timezone_set('America/Lima');
 
@@ -86,9 +141,9 @@ if (count($k)>0)
 	// echo $tipago." ".$fec_ent." ".$hora_ent;
 	// exit();	
 
-	$res1=mysql_query($sql1,$link);
+	$res1=mysql_query($sql1,$link) or die ("Error insert pedido:$sql");
 	// $row1=mysql_fetch_array($res1);
-
+// :insert into det_pedidos() values ('104', '44', '6.26', '1', '6.26', '',1)
 	$idpedido = mysql_insert_id();
 
 	foreach( $k as $key => $value ) 
@@ -105,18 +160,20 @@ if (count($k)>0)
 			// cod_pedido	cod_producto	precio 	cantidad	subtotal	dscto  
 
 // cod_producto, descripcion, cod_tipo, precio, imagen, stock, cod_marca, prom
+			// if ($row['igv']==1) {
+			// }
 			
 			$sql="insert into det_pedidos() values ('".$idpedido."', '"
 												  .$row[0]."', '"
 												  .$row[3]."', '"
 												  .$value."', '"
 												  .($row[3]*$value)."', '"
-												  ."')";
+												  ."',".$row['igv'].")";
 
 				// echo $sql;
 				// echo "<br>";
 				// exit();
-				$rs=mysql_query($sql,$link) or die ("Error :$sql");
+				$rs=mysql_query($sql,$link) or die ("Error insert det_pedido:$sql");
 				
 				
 
@@ -148,20 +205,20 @@ if (count($k)>0)
 				      " WHERE cod_producto =".$idprod;	
 		// echo $sql2."<br>";
 		// exit();      
-		$rs3=mysql_query($sql2,$link) or die ("Error :$sql2");
+		$rs3=mysql_query($sql2,$link) or die ("Error update producto:$sql2");
 	}
 }
 
 // exit();
 
 if ($grab=="S") {
-$sql4="UPDATE usuario SET direccion = '".$dir_ent."' WHERE cod_usuario =".$_SESSION["s_cod"]." LIMIT 1";
+$sql4="UPDATE usuario SET direccion = '".$dir_ent."', telefono = '".$_POST["txttelf"]."'"." WHERE cod_usuario =".$_SESSION["s_cod"]." LIMIT 1";
 // echo $sql;
 // exit();
 $rs4=mysql_query($sql4,$link) or die ("Error :$sql");
 }
 
-
+/*********************************  ENVIO DE CORREO  **************************************/
 $onombre=$rf[3]." ".$rf[4];
 $omail=$rf[8];
 // $opass=$secpass;
@@ -174,9 +231,7 @@ $mensaje="Pedido ".$idpedido." realizado"."<br>".
 
 $mensaje2="<hr>Saludos ".$onombre.","."<br><br>".
 		  "Gracias por haber hecho tu compra en MERCADO VIRTUAL!"."<br>".
-		  "Tu Pedido Nº:".$idpedido." esta siendo procesada y será atendida a la brevedad."."<br>".
-		  "Para ver el detalle de su pedido entre a http://shop.grupochiappe.com/ 
-		  y acceda a su cuenta. <hr>";
+		  "Tu Pedido Nro: ".$idpedido." esta siendo procesado y ser&aacute atendido a la brevedad."."<br>"."Para ver el detalle de su pedido entre a <a href='http://shop.grupochiappe.com'>http://shop.grupochiappe.com</a> y acceda a su cuenta. <hr>";
 
 
 require_once('../../mail/clases/class.phpmailer.php');
@@ -217,6 +272,7 @@ if(!$mail->Send()) {
 // else {
 //   header("location: aviso.php");
 // }
+/************************************************************************************/
 
 unset($_SESSION["s_prod"]);
 header("location: finalizado.php");

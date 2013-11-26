@@ -4,8 +4,10 @@
               <?php 
                   $res=@mysql_query("set names utf8",$link);
                   $row=@mysql_fetch_array($res);
-                  $res=mysql_query("select * from producto where stock <> 0 and prom=1",$link);
-                  
+                  // $res=mysql_query("select * from producto where stock <> 0 and estado=2",$link);
+                  $cns="select * from producto where estado=1 and stock <> 0 ORDER BY 1 DESC limit 0,4";
+                  $res=mysql_query($cns,$link);
+
                   while ($rwc=mysql_fetch_array($res))
                     {
            // cod_producto descripcion cod_tipo  precio  imagen  stock cod_marca prom
@@ -25,7 +27,8 @@
                 </div>
                 
                 <div id="btnpro">
-                  <input type="button"  value=" Comprar " onClick="enviar(<?php echo $rwc[0]?>)" class="btnprod">
+                  <!-- <input type="button"  value=" Comprar " onClick="enviar(<?php echo $rwc[0]?>)" class="btnprod"> -->
+                  <input type="button"  value=" Comprar " class="btnprod">
                 </div>
               </section> 
 

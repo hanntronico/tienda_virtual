@@ -13,6 +13,7 @@
 * {
 	margin:0;
 	padding: 0;
+	behavior: url("pie/pie.htc");
 }
 
 img {
@@ -22,7 +23,7 @@ img {
 body {
 	/*background-color: #FD9E40;*/
 	background:url("../img/bg_all.jpg") no-repeat 50% 0%;
-	background-attachment:  fixed;
+	background-attachment: fixed;
 	color: #FFFFFF;
 	font-family: Arial;
 	font-size: 16px;
@@ -74,10 +75,14 @@ header {
 
 #loginB {
 	/*background: #808080;*/
-	background: url("../img/bg_cart.png");
-	background-repeat: no-repeat;
-	background-size: 25em;
-	background-position:  right bottom;
+	background: transparent;
+	background: url("../img/bg_cartB.png") no-repeat right bottom;
+	
+	/*-pie-background: url("../img/bg_cartB.png");*/ /*PIE*/
+	/*background-repeat: no-repeat;*/
+	/*background-size: 400px;*/
+	/*background-size: 400px;*/
+	/*background-position: right bottom;*/
 	width: 32%;
 	height: 147px;
 	/*margin-top: 45px;*/
@@ -85,7 +90,7 @@ header {
 	margin: 0px auto;
 	padding-top: 15px;
 	padding-left: 20%;
-	/*text-align: right;*/
+	z-index: -9999;
 }
 
 #menu, #regis, #menu2 {
@@ -143,6 +148,7 @@ header {
 	margin: 1.8em auto;
 	text-align: left;
 	padding-left: 40px;
+	z-index: 9999;
 }
 
 #b_pagar {
@@ -216,16 +222,19 @@ header {
 	text-align: right;
 	vertical-align: top;
 	width: 37%;
+	z-index: 9999;
 }
 
 #enl_reg a:link, #enl_log a:link,
 #enl_reg a:visited, #enl_log a:visited,
 #enl_reg a:active, #enl_log a:active {
 	color: #FFFFFF;
+	z-index: 9999;
 } 
 
 #enl_reg {
 	background: #C0C0C0 url("../img/sign-up-icon.png") no-repeat 4% 50%;
+	z-index: 9999;
 }
 
 #enl_reg:hover {
@@ -289,14 +298,14 @@ header {
 
 #buscar {
 	/*background: #808040;*/
-	background: url("../img/bg_search.gif") no-repeat;
+	background: url("../img/bg_search.gif") no-repeat 0% 50%;
 	background-size:  1.12em;
 	margin: 0px auto;
-	padding-left: 30px;
+	padding-left: 25px;
 	/*height: 30px;*/
 	/*width: 230px;*/
 	/*text-align: right;*/
-	width: 20%;
+	width: 28%;
 
 }
 
@@ -305,8 +314,21 @@ header {
 	border-style:  none;
 	color: #1E6381;
 	height: 22px;
-	padding: 0px 8px;
-	width: 90%;
+	padding: 0px 10px;
+	width: 64%;
+}
+
+#btnbus {
+	background: #1E6381;
+	border: none;
+	border-top: 2px solid #FFFFFF;
+	border-bottom: 2px solid #B4B4B4;
+	border-radius: 8px;
+	color: #FFFFFF;
+	font-size: 0.8em;
+	font-weight: bolder;
+	padding: 0px 4px;
+	/*width: 10%;*/
 }
 
 nav {
@@ -326,7 +348,7 @@ nav {
 nav ul {
 	/*background: #80FFFF;*/
 	/*width: 720px;*/
-	width: 75%
+	width: 68%
 
 }
 

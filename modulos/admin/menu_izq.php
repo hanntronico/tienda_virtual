@@ -9,15 +9,18 @@
                         <!-- <li><a href="#" onclick="carga_form(3); return false;">Subcategorías</a></li> -->
                         <li><a href="#" onclick="cargare('categoria.php'); return false;">Categorías</a></li>
                         <!-- <li><a href="#" onclick="carga_form(4); return false;">Marcas</a></li> -->
-                        <li><a href="#" onclick="cargare('marcas.php'); return false;">Marcas</a></li>
+                        <li><a href="#" onclick="cargare('marca.php'); return false;">Marcas</a></li>
                 </ul>
             </li>
             <!-- <li><a href="filemanager.html" class="gallery">Operaciones</a></li> -->
             <li><a href="#suboper" class="elements">Operaciones</a> <span class="arrow"></span>
                 <ul id="suboper">
-                        <li><a href="#" onclick="carga_form(4); return false;">Pedidos</a></li>
-                        <li><a href="#" onclick="carga_form(5); return false;">Pagos</a></li>
-                        <li><a href="#" onclick="carga_form(6); return false;">Facturación</a></li>
+                        <!-- <li><a href="#" onclick="carga_form(4); return false;">Pedidos</a></li> -->
+                        <li><a href="#" onclick="cargare('pedidos.php'); return false;">Pedidos</a></li>
+                        <!-- <li><a href="#" onclick="carga_form(6); return false;">Facturación</a></li> -->
+                        <li><a href="#" onclick="cargare('facturacion.php'); return false;">Facturación</a></li>
+                        <!-- <li><a href="#" onclick="carga_form(4); return false;">Pagos</a></li> -->
+                        <li><a href="#" onclick="cargare('reg_compras.php'); return false;">Registro de Compras</a></li>
                 </ul>
             </li>
 <!--             <li><a href="elements.html" class="elements">Elements</a></li>

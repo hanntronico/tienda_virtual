@@ -23,15 +23,14 @@ $link=Conectarse();
 <?php include ("head.php"); ?>
     
     <body <?php 
-      if ($_GET["deny"]==6) {
-            echo "onload='carga_msn();'";}
-
       if ($_GET["deny"]==1 || $_GET["deny"]==2 || $_GET["deny"]==3 || $_GET["deny"]==4) 
           { echo "onload='carga_registro();'";}
+
+      if ($_GET["deny"]==6) {
+            echo "onload='carga_msn();'";}
       
       if ($_GET["deny"]==5) {
             echo "onload='carga_forgot();'";}     
-
   ?> >
         
         <!--[if lt IE 7]>

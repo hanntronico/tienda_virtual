@@ -8,7 +8,7 @@
               <div id="menu">
                 Tu mercado, desde casa...<br>
 
-<!--                 <ul>
+<!--            <ul>
                   <li>&nbsp;</li>
                   <li>&nbsp;</li>
                   <li>&nbsp;</li>
@@ -18,8 +18,8 @@
               
               <div id="regis">
                 <!-- <a href="#login_panel" data-rel="prettyPhoto[login_panel]">REGISTRESE AQUÍ</a>  -->
-                
-                  <a href="#register_panel" id="reg" data-rel="prettyPhoto[register_panel]">
+
+                  <a href="#register_panel" data-rel="prettyPhoto[register_panel]" id="reg">
                    <div id="enl_reg">Regístrese</div></a>
               
                   <a href="#login_panel" data-rel="prettyPhoto[login_panel]">

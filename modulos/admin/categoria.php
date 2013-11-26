@@ -59,7 +59,7 @@
   }elseif($_GET["sw"]==2){  // EDITAR
 
     $rs=@mysql_query("set names utf8",$link);
-    $fila=@mysql_fetch_array($res);
+    $fila=@mysql_fetch_array($rs);
     $sql="SELECT * FROM categoria WHERE cod_tipo='".$_GET["id"]."'";
     $rs=mysql_query($sql,$link);
     $fila =mysql_fetch_object($rs);

@@ -1,6 +1,32 @@
 <ul class="notitab">
-	<li class="current"><a href="#messages">Mensajes (0)</a></li>
-    <li><a href="#activities">Pedidos (0)</a></li>
+	<li class="current"><a href="#messages">Mensajes 
+        <?php 
+            include("../conectar.php");
+            $link=Conectarse();
+            $rs=@mysql_query("set names utf8",$link);
+            $fila=@mysql_fetch_array($res);
+            $sql="SELECT count(*) FROM mensajes"; 
+            $res=@mysql_query($sql,$link);
+            $row1=@mysql_fetch_array($res);
+            // echo $row1[0];
+        ?>
+        (<?=$row1[0]?>)</a></li>
+    <li><a href="#activities">Pedidos 
+        <?php 
+            $rs=@mysql_query("set names utf8",$link);
+            $fila=@mysql_fetch_array($res);
+            $sql="SELECT count(*) FROM pedidos WHERE estado=1"; 
+            $res=@mysql_query($sql,$link);
+            $numpedidos = @mysql_num_rows($res);
+            
+            $sql="SELECT count(*) FROM pedidos WHERE estado=1"; 
+            $res=@mysql_query($sql,$link);
+            $numpedidos = @mysql_num_rows($res);
+
+            $row2=@mysql_fetch_array($res);
+         ?>
+
+        (<?=$numpedidos?>)</a></li>
 </ul>
 <div id="messages">
 <!--     <ul class="msglist">

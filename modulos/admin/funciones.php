@@ -6,7 +6,7 @@
       $fila=@mysql_fetch_array($res);
 
       $rs = mysql_query("select $campos from $tabla".$condicion,$link);
-      echo "<select name=".$name." ".$parametroselect." data-placeholder='Seleccione subcategoría...' class='chzn-select' style='width:350px;' tabindex='2'>";
+      echo "<select name=".$name." ".$parametroselect." data-placeholder='Seleccione ".$tabla."...' class='chzn-select' style='width:350px;' tabindex='2'>";
         echo "<option value=''></option>";
         while($cur = mysql_fetch_array($rs)){
           $seleccionar="";
@@ -30,10 +30,35 @@
       mysql_data_seek($rsTabla,$nreg-1);
       $ATabla=mysql_fetch_array($rsTabla);
     }
+    
     $cod=$ATabla[0]+1;
     $cod="0000000000".$cod;
     $generado=substr($cod,$numcaracteres);
     mysql_free_result($rsTabla);
+    
+    return $generado;
+  }
+
+
+function autogenerado2($tabla,$campocodigo,$numcaracteres){
+    Global $link;
+    //para extraer de la derecha se multiplica por -1
+    $numcaracteres=$numcaracteres*(-1);
+    $rsTabla=mysql_query("select count($campocodigo) from $tabla",$link);
+    $ATabla=mysql_fetch_array($rsTabla);
+    $nreg=$ATabla[0];
+    if($nreg>0) {
+      $rsTabla=mysql_query("select $campocodigo from $tabla",$link);
+      mysql_data_seek($rsTabla,$nreg-1);
+      $ATabla=mysql_fetch_array($rsTabla);
+    }
+
+
+    $cod=substr($ATabla[0],1)+1;
+    $cod="0000000000".$cod;
+    $generado="T".substr($cod,$numcaracteres);
+    mysql_free_result($rsTabla);
+    
     return $generado;
   }
 

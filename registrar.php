@@ -106,10 +106,11 @@ $mensaje="Mensaje desde la web<br>Nombre: "
 		.$onombre. "<br>Email: "
 		.$omail;
 
-$mensaje2="<hr>Hola ".$onombre.","."<br><br>"."Queremos darte la bienvenida a MERCADO VIRTUAL!"."<br>".
+$mensaje2="<hr>Estimado(a) ".$onombre.","."<br><br>"."Queremos darte la bienvenida a MERCADO VIRTUAL!"."<br>".
 		  "Tu usuario es : <b>".$omail."</b><br>".
 		  "Tu password es : ".$opass."</b><br><br>".
-		  "Entra ya a http://shop.grupochiappe.com/ y haz tu compras desde tu casa, con delivery directo a tu domicilio <hr>";
+		  "Entra ya a <a href='http://shop.grupochiappe.com'>http://shop.grupochiappe.com/</a> y haz tu compras desde tu casa, con delivery directo a tu domicilio 
+		  <hr>";
 
 
 date_default_timezone_set('America/Lima');
@@ -143,7 +144,7 @@ $mail->SetFrom('no-reply@shop.grupochiappe.com', 'Mercado Virtual');
 $mail->AddReplyTo("no-reply@shop.grupochiappe.com","Mercado Virtual");
 $address = $omail;
 $mail->AddAddress($address, $onombre);
-$mail->Subject = "Ud. se ha comunicado con Mercado Virtual";
+$mail->Subject = "Confirmacion de registro";
 $mail->AltBody = "Para poder ver el mensaje, por favor use un visor de correos compatible con HTML!"; // optional, comment out and test
                     //// $mail->MsgHTML($body);
 $mail->Body=$mensaje2;

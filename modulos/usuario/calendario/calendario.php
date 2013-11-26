@@ -12,4 +12,4 @@
 	})
 	</script>
 	
-	<input type="text" name="fecha" class="campofecha" size="12">
+	<input type="text" name="fecha" class="campofecha" size="12" readonly>

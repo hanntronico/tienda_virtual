@@ -2,7 +2,8 @@
 
 $res=@mysql_query("set names utf8",$link);
 $row=@mysql_fetch_array($res);
-$res=mysql_query("select * from producto ORDER BY 1 limit 0,3",$link);
+// select * from producto where estado=1 and stock <> 0 ORDER BY 1 DESC limit 0,4
+$res=mysql_query("select * from producto where estado=2 and stock <> 0 ORDER BY 1 limit 0,3",$link);
     // $row=mysql_fetch_array($res);
 ?>
           <section id="land">
@@ -22,7 +23,8 @@ $res=mysql_query("select * from producto ORDER BY 1 limit 0,3",$link);
             <div id="nompro">
               <div id="subnompro"><?php echo $rwc[1]?></div>
               <div id="prec">S/. <?php echo $rwc[3]?></div>
-              <a href="#caja_msn2" data-rel="prettyPhoto[caja_msn2]"><div id="nubecompra">COMPRAR <br>AHORA</div></a>
+              <a href="#caja_msn2" data-rel="prettyPhoto[caja_msn2]">
+                <div id="nubecompra">COMPRAR <br>AHORA</div></a>
             </div>
             <article>
                 <img src="modulos/productos/<?php echo $rwc[4];?>" alt="">

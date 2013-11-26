@@ -33,12 +33,18 @@
 <script type="text/javascript" src="js/plugins/charCount.js"></script>
 <script type="text/javascript" src="js/plugins/ui.spinner.min.js"></script>
 <script type="text/javascript" src="js/plugins/chosen.jquery.min.js"></script>
+
 <script type="text/javascript" src="js/custom/general.js"></script>
+
 <script type="text/javascript" src="js/custom/forms.js"></script>
 <script type="text/javascript" src="js/custom/tables.js"></script>
 <script type="text/javascript" src="js/custom/dashboard.js"></script>	
 
+
+
+
 <script language="JavaScript" src="funciones/validaciones.js"></script>
+
 
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/plugins/excanvas.min.js"></script><![endif]-->
 <!--[if IE 9]>
@@ -79,9 +85,19 @@
 		
 	}
 
+	function anula(cod) {
+		document.location.href='anular.php?id='+cod;
+	}
+
 	function cargare(UR) {
+		jQuery('#conte').html('<div style="padding:5px;"><img src="images/loaders/loader6.gif"/>&nbsp;Espero un momento porfavor</div>');
 		var content = jQuery("#conte");
-		content.fadeIn('slow').load(UR);
+		content.fadeIn('fast').load(UR);
+		// jQuery('#cargador').hide();
+		// content.load(UR).hide(200);
+		// jQuery('#conte').delay(1000).html('<div style="padding:5px;"><img 
+		// 	src="images/loaders/loader6.gif"/>&nbsp;Espero un momento porfavor</div>');
+		// content.load(UR).fadeIn(200);
 	}
 
 	function G(UR) {
@@ -198,6 +214,41 @@
 	// 	//location.href=UR+"&"+_UM;
 	// 	location.href=UR;
 	// }
+
+	var ventana=0;
+	function fventana(URLStr,width,height)
+	{
+
+	 
+	var left=(screen.width/2) - width/2;
+	//var top=(screen.height/2) - height/2;
+	var top=0;
+	  if(ventana)
+	  {
+	    if(!ventana.closed) ventana.close();
+	  }
+	  ventana = open(URLStr, 'ventana', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=yes,width='+width+',height='+height+',left='+left+', top='+top+',screenX='+left+',screenY='+top+'');
+	}
+
+	function printview(url)
+  	{
+   		fventana(url,500,600);
+   	}
+
+	function imprSelec(muestra)
+	{var ficha=document.getElementById(muestra);
+	 var ventimp=window.open(' ','popimpr');
+	 ventimp.document.write(ficha.innerHTML);
+	 ventimp.document.close();
+	 ventimp.print();
+	 ventimp.close();
+	}
+
+	function addprod(c1) {
+		// document.location.href='agreg_prod.php?id='+c1;
+		var content = jQuery("#list_prod");
+		content.fadeIn('slow').load("agreg_prod.php?id="+c1+"&sw=1");
+	}
 
 </script>
 </head>

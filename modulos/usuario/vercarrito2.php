@@ -16,6 +16,28 @@ function imprimir() {
 <!-- <link rel="stylesheet" href="../../funciones/style.css" type="text/css"> -->
 
 <script>
+
+function letras(e)
+{ // 1
+
+tecla = (document.all) ? e.keyCode : e.which; // 2
+if (tecla==8) return true; // 3
+patron =/[A-Za-z\s\Ñ\ñ\Á\É\Í\Ó\Ú\á\é\í\ó\ú\.\,]/; // 4
+te = String.fromCharCode(tecla); // 5
+return patron.test(te); // 6
+} 
+
+function numeros(n)
+{ // 
+
+tecla = (document.all) ? n.keyCode : n.which; // 2
+if (tecla==8) return true; // 3
+patron =/[0\1-9\-]/; // 4
+te = String.fromCharCode(tecla); // 5
+return patron.test(te); // 6
+} 
+
+
 function confirma(producto)
 {
 	if (confirm("Relamente desea eliminar "+producto+" de su carrito de compras?" ))
@@ -36,8 +58,6 @@ function ver_factura() {
  	}	
  		// alert(document.frm02.chkcomp[1].checked);
 
-
-
  // 	if (document.frm02.chkcomp[1].checked == true) {
  //      var content = jQuery("#raz_soc");
  //      content.fadeIn('slow').load("factura.php");
@@ -54,12 +74,56 @@ function ver_factura() {
 
 } 
 
+function ver_direc() {
+	// alert("hann");
+	// document.direc2.css.visibility('visible');
+	// document.getElementById("direc2").style.visibility="visible";
+	// var valor 
+	// alert(document.frm02.swt.value);
+	if (document.frm02.swt.value=='F'){
+		document.frm02.swt.value="V";
+		var content = jQuery("#direc2");
+    	content.fadeIn('slow').load("tel_dir.php");
+	}
+	else{
+		if(document.frm02.swt.value=='V')
+		{
+		 document.frm02.swt.value="F";	
+		 var content = jQuery("#direc2");
+    	content.fadeOut('slow').load("tel_dir.php");
+		}
+
+	}
+
+
+}
+
+function ver_nom2() {
+	if (document.frm02.swtnom.value=='F'){
+		document.frm02.swtnom.value="V";
+		var content = jQuery("#nom2");
+    	content.fadeIn('slow').load("txtnombre2.php");
+	}
+	else{
+		if(document.frm02.swtnom.value=='V')
+		{
+		document.frm02.swtnom.value="F";	
+		var content = jQuery("#nom2");
+   		// content.fadeOut('slow').load("txtnombre2.php");
+   		content.fadeOut('slow');
+		}
+
+	}
+
+
+}
+
 function recalcula () {
 	frm01.accion[0].click();
 }
 
 function valid_form() {
-	
+
 	if (document.frm02.chktipago[0].checked==false && document.frm02.chktipago[1].checked==false) 
 		{
 			alert("Por favor seleccionar tipo de pago");
@@ -72,22 +136,6 @@ function valid_form() {
 			document.frm02.fecha.focus();
 			return false;
 	}
-	if (document.frm02.txtnom.value=="") {
-			alert("Por favor ingrese fecha");
-			// document.frm02.txtnom.focus();
-			return false;
-	}
-	if (document.frm02.txtdir.value=="") {
-			alert("Por favor ingrese dirección");
-			// document.frm02.txtdir.focus();
-			return false;
-	}
-	if (document.frm02.txt3.value=="") {
-			alert("Por favor ingrese teléfono");
-			// document.frm02.txt3.focus();
-			return false;
-	}
-
 
 	var f = new Date();
 	var fec_ped = f.getFullYear() + "-" + (f.getMonth() +1) + "-" +  f.getDate();
@@ -99,31 +147,127 @@ function valid_form() {
 	var ent = Date.parse(fec_ent.toString());
 	var ped = Date.parse(fec_ped.toString());
 
+	// alert(ent+""+ped);
 	if(ent < ped){
  		alert("Por favor ingrese una fecha válida");
 		document.frm02.fecha.focus();
 		return false;
 	}
 
+	if(ent == ped){ 
+
+			var horasel=document.frm02.cbohora.value.toString().substring(0,2);
+			var ihorasel=parseInt(horasel);
+			var hora_act=parseInt(f.getHours());
+
+			if (ihorasel<hora_act+2) {
+				alert("Seleccione una hora válida por favor.");
+				return false;
+			};
+
+			if (document.frm02.txtnom.value=="") {
+					alert("Por favor ingrese fecha");
+					// document.frm02.txtnom.focus();
+					return false;
+			}
+	}
+
+
+	if (document.frm02.swtnom.value=='V') {
+		if (document.frm02.txtnom2.value=="") {
+			alert("Por favor ingrese nombre de entrega 2");
+			document.frm02.txtnom2.focus();
+			return false;
+		}
+	}
+
+	if (document.frm02.chkfac.checked) {
+		if (document.frm02.txtrz.value=="") {
+			alert("Por favor ingrese razón social");
+			document.frm02.txtrz.focus();
+			return false;
+		}
+
+		if (document.frm02.txtruc.value=="") {
+			alert("Por favor ingrese RUC");
+			document.frm02.txtruc.focus();
+			return false;
+		}
+
+		if (document.frm02.txtruc.value.length!=11) {
+			alert("Por favor ingrese RUC válido");
+			return false;
+		}
+	}
+
+	
+	if (document.frm02.swt.value=='F') {
+
+		if (document.frm02.txttelf.value=="") {
+			alert("Por favor ingrese teléfono");
+			document.frm02.txttelf.focus();
+			return false;
+		}
+
+		if (document.frm02.txtdir.value=="") {
+			alert("Por favor ingrese calle correctamente");
+			document.frm02.txtdir.focus();
+			return false;
+		}	
+
+		if (document.frm02.txtzona.value=="") {
+			alert("Por favor ingrese zona correctamente");
+			document.frm02.txtzona.focus();
+			return false;
+		}
+
+	}
+
+
+	if (document.frm02.swt.value=='V') {
+
+		if (document.frm02.txttelf2.value=="") {
+			alert("Por favor ingrese teléfono 2");
+			document.frm02.txttelf2.focus();
+			return false;
+		}
+
+		if (document.frm02.txtdir2.value=="") {
+			alert("Por favor ingrese calle 2 correctamente");
+			document.frm02.txtdir2.focus();
+			return false;
+		}	
+
+		if (document.frm02.txtzona2.value=="") {
+			alert("Por favor ingrese zona 2 correctamente");
+			document.frm02.txtzona2.focus();
+			return false;
+		}
+
+	}
+
+
+
+
 	// var hora_ped = f.getHours();
 	// alert(hora_ped);
 	// alert(document.frm02.cbohora.value.toString().substring(0,2));
 
-	if(ent == ped){
-		var hora_act = f.getHours();
+	// if(ent == ped){
+	// 	var hora_act = f.getHours();
 		
-		if (parseInt(hora_act)<=8) {
-			var hora = 8;
-			document.frm02.cbohora.value = (hora+2).toString()+":00";
-		}else if (parseInt(hora_act)<=18) {
-			// var strhora = document.frm02.cbohora.value.toString().substring(0,2);
-			// alert(hora_act.toString());
-			var hora = parseInt(hora_act);
-			document.frm02.cbohora.value = (hora+2).toString()+":00";
-		// alert((hora+2).toString());
+	// 	if (parseInt(hora_act)<=8) {
+	// 		var hora = 8;
+	// 		document.frm02.cbohora.value = (hora+2).toString()+":00";
+	// 	}else if (parseInt(hora_act)<=18) {
+	// 		// var strhora = document.frm02.cbohora.value.toString().substring(0,2);
+	// 		// alert(hora_act.toString());
+	// 		var hora = parseInt(hora_act);
+	// 		document.frm02.cbohora.value = (hora+2).toString()+":00";
+	// 	// alert((hora+2).toString());
 
-		}
-	}
+	// 	}
+	// }
 		
 	return true;
 }
@@ -207,7 +351,13 @@ if (count($k)>0)
 			<td colspan="2">Tipo de pago: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<input type="radio" name="chktipago" value="E" checked="checked" />
 				&nbsp;Efectivo contra entrega &nbsp;&nbsp;&nbsp;
-				<input type="radio" name="chktipago" value="T" />&nbsp;Tarjeta Visa
+				<input type="radio" name="chktipago" value="T" />&nbsp;Tarjeta de Crédito
+					<select id="tarjeta" name="tarjeta" style="width: 110px;">
+						<option value="vs">Visa</roption>
+						<option value="mc">Master Card</option>
+						<option value="ae">Am. Ex</option>
+						<option value="dc">Dinners</option>
+					</select>
 			</td>
 		</tr>
 		<tr> 
@@ -224,6 +374,7 @@ if (count($k)>0)
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				Hora:
 				<select name="cbohora" style="width: 80px;">
+					<option value="07:00">07:00</option>
 					<option value="08:00">08:00</option>
 					<option value="09:00">09:00</option>
 					<option value="10:00">10:00</option>
@@ -238,6 +389,7 @@ if (count($k)>0)
 					<option value="19:00">19:00</option>
 					<option value="20:00">20:00</option>
 				</select>
+				<span style="font-size:11px; color:#FF0000">Tener en cuenta 2 horas para su pedido.</span>
 			</td>
 		</tr>
 
@@ -253,7 +405,7 @@ if (count($k)>0)
 		
 		<tr>
 			<td>&nbsp;</td>
-			<td colspan="2">Nombre: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<td colspan="2">Nombre de entrega: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<?php $codusu=$_SESSION["s_cod"]; 
 					 // echo $codusu;
 
@@ -266,6 +418,30 @@ if (count($k)>0)
 				?>
 				<input type="text" name="txt1" value="<?php echo $row[3].' '.$row[4]; ?>" style="width: 400px;" disabled="disabled">
 				<input type="hidden" name="txtnom" value="<?php echo $row[3].' '.$row[4]; ?>">
+				
+				<span style="font-size:11px; color:#FF0000">Para agregar otro nombre de entrega, <a href="#" onclick="ver_nom2(); return false;">click aquí</a>.</span>
+
+				<input type="hidden" name="swtnom" id="swtnom" value="F">
+				<div id="nom2"></div>
+			</td>
+		</tr>
+
+		<tr>
+			<td>&nbsp;</td>
+			<td colspan="2">Teléfono: &nbsp;&nbsp;&nbsp;&nbsp;
+
+				<?php if ($row[7]!="") { ?>
+
+				<input type="text" name="txttelf" value="<?php echo $row[7]; ?>" style="width: 120px;" readonly>
+				<!-- <input type="hidden" name="txtdir" value="<?php echo $row[6]; ?>"> -->
+				<?php } else {?>
+				
+				<input type="text" name="txttelf" value="<?php echo $row[7]; ?>" style="width: 120px;" onKeyPress="return numeros(event)" maxLength="10">
+
+				<?php } ?>
+
+
+			
 			</td>
 		</tr>
 
@@ -275,31 +451,58 @@ if (count($k)>0)
 				
 				<?php if ($row[6]!="") { ?>
 
-				<input type="text" name="txt2" value="<?php echo $row[6]; ?>" style="width: 400px;" disabled="disabled">
+				<input type="text" name="txt2" value="<?php echo $row[6]; ?>" style="width: 400px;" readonly>
 				<input type="hidden" name="txtdir" value="<?php echo $row[6]; ?>">
+
+					<br>
+					<span style="font-size:11px; color:#FF0000">Para agregar otro teléfono de contacto y otra dirección de entrega diferentes, 
+					<a href="#" onclick="ver_direc(); return false;">click aquí</a>.</span>
+					
 
 				<?php } else { ?>
 					
-					<input type="text" name="txtdir" value="<?php echo $row[6]; ?>" style="width: 400px;">&nbsp;<span class="tit_grabar">*</span>
-					&nbsp;&nbsp;&nbsp;
-					<span class="tit_grabar">Grabar esta dirección?&nbsp;&nbsp;&nbsp;
+					<select id="dir_epec" name="dir_epec" style="width: 70px;">
+						<option value="calle">Calle</option>
+						<option value="avenida">Avenida</option>
+						<option value="jiron">Jirón</option>
+						<option value="avenida">Pasaje</option>
+					</select>
+
+					<input type="text" name="txtdir" value="<?php echo $row[6]; ?>" style="width: 180px;">
+
+					<select id="dir_zona" name="dir_zona" style="width: 110px;">
+						<option value="urb">Urbanización</option>
+						<option value="res">Residencial</option>
+						<option value="cond">Condominio</option>
+						<option value="uv">Unidad Vecinal</option>
+						<option value="pj">Pueblo Joven</option>
+					</select>
+					
+					<input type="text" name="txtzona" value="<?php echo $row[6]; ?>" style="width: 180px;">
+
+					
+					<br>
+					&nbsp;<span class="tit_grabar">*</span>
+					&nbsp;
+					
+					<span class="tit_grabar">Grabar el teléfono y la dirección en sus datos personales?&nbsp;&nbsp;&nbsp;
 					<input type="radio" name="grab_dir" value="S" checked="checked"> Sí &nbsp;
 					<input type="radio" name="grab_dir" value="N"> No</span>
-					<br>
-					<span class="tit_grabar">Si desea grabar otra dirección en sus datos 
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					
+					<span class="tit_grabar">Si desea actualizar sus datos 
 						<a href="cuenta.php">entrar aquí</a></span>
 
 				<?php } ?>
 
+					<input type="hidden" name="swt" id="swt" value="F">
+					<div id="direc2"></div>
 			
 			</td>
 		</tr>
-
 		<tr>
 			<td>&nbsp;</td>
-			<td colspan="2">Teléfono: &nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="text" name="txt3" value="<?php echo $row[7]; ?>" style="width: 120px;" disabled="disabled">
-			</td>
+			<td colspan="2"><span style="color:#FF0000">Por favor verificar que los datos ingresados sean verdaderos y correctos. De esta manera podremos cumplir con la entrega de su pedido.</span></td>
 		</tr>
 
 		<tr>

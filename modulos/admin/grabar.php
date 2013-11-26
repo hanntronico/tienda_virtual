@@ -60,7 +60,7 @@ case 'productos':
 			// cod_producto, descripcion, cod_subcat, precio, imagen, stock, cod_marca, prom			
 	
 			$rs=@mysql_query("set names utf8",$link);
-			$fila=@mysql_fetch_array($res);
+			$fila=@mysql_fetch_array($rs);
 
 			mysql_query("INSERT INTO producto (descripcion, cod_subcat, precio, imagen, stock, cod_marca) 
 						 VALUES('".$_POST["des"]."','" 
@@ -88,7 +88,7 @@ case 'productos':
 			   move_uploaded_file($temporal,"../productos/".$nombre);
 	
 				$rs=@mysql_query("set names utf8",$link);
-				$fila=@mysql_fetch_array($res);
+				$fila=@mysql_fetch_array($rs);
 				
 				mysql_query("UPDATE producto SET descripcion='".$_POST["des"].
 											 "', cod_subcat='".$_POST["codcat"].
@@ -121,30 +121,68 @@ case 'productos':
 case 'marca':
 			if($_POST["sw"]==1){
 			
-			$rs=mysql_query("SELECT * FROM marca WHERE desc_marca='".$_POST["marc"]."'",$link);
+			$rs=mysql_query("SELECT * FROM marca WHERE desc_marca='".$_POST["desm"]."'",$link);
 			$numfilas=mysql_num_rows($rs);
 			
-//		cod_marca 	desc_marca
-		
+//		cod_marca  desc_marca  img_marca
+// id
+// desm
+// imag
 			if($numfilas == 0 ){
-				mysql_query("INSERT INTO marca(desc_marca) 
-							VALUES('".$_POST["marc"]."')",$link);				
+
+				$temporal=$_FILES['imag']['tmp_name'];
+				$nombre=$_FILES['imag']['name'];
+				
+				move_uploaded_file($temporal,"../productos/marcas/".$nombre);
+				   
+				if ($nombre=="")
+				  {   
+				   $nombre ="no_image.png";
+				  }
+				
+				$rs=@mysql_query("set names utf8",$link);
+				$fila=@mysql_fetch_array($rs);
+
+				mysql_query("INSERT INTO marca(desc_marca, img_marca) 
+							VALUES('".$_POST["desm"]."','".$nombre."')",$link);	
+				$msn='m1';			
 				}
 			else
 			{ 
 			
-			$msg_error="Login ya existe, intente otro...";
-			
+			// $msg_error="Login ya existe, intente otro...";
+			$msn="em2";
 			 }
 			}elseif($_POST["sw"]==2){
 
-				mysql_query("UPDATE marca SET desc_marca='".$_POST["marc"]."' WHERE cod_marca='".$_POST["id"]."'",$link);
+
+			   $temporal=$_FILES['imag']['tmp_name'];
+			   $nombre=$_FILES['imag']['name'];
+			   
+			   $ruta=$nombre;
+			   
+			   if ($nombre =="")
+				{
+				 $ruta=$_POST["imgDef"];
+				}
+			
+			  move_uploaded_file($temporal,"../productos/marcas/".$nombre);
+	
+				$rs=@mysql_query("set names utf8",$link);
+				$fila=@mysql_fetch_array($rs);
+
+				mysql_query("UPDATE marca SET desc_marca='".$_POST["desm"]
+					."', img_marca='".$ruta
+					."' WHERE cod_marca='".$_POST["id"]."'",$link);
+
+				$msn='m1';
 	
 			}else{
 				$numreg=count($_POST["check"]);
 				for ($i=0;$i<=$numreg-1;$i++){
 						mysql_query("DELETE FROM marca WHERE cod_marca='".$_POST["check"][$i]."'",$link);
 				}
+				$msn='em1';
 			}
 			break;
 
@@ -172,7 +210,7 @@ case 'subcategorias':
 				  }
 				
 				$rs=@mysql_query("set names utf8",$link);
-				$fila=@mysql_fetch_array($res);
+				$fila=@mysql_fetch_array($rs);
 
 				mysql_query("INSERT INTO subcategorias (subcat, desc_subcat, img_subcat, cod_tipo) 
 							VALUES('".$_POST["nomc"]."','".$_POST["des"]."','".$nombre."','".$_POST["codcat"]."')",$link);	
@@ -200,7 +238,7 @@ case 'subcategorias':
 			  move_uploaded_file($temporal,"../productos/subcategorias/".$nombre);
 	
 				$rs=@mysql_query("set names utf8",$link);
-				$fila=@mysql_fetch_array($res);
+				$fila=@mysql_fetch_array($rs);
 	
 
 				mysql_query("UPDATE subcategorias SET subcat='".$_POST["nomc"].
@@ -244,7 +282,7 @@ case 'categoria':
 				  }
 				
 				$rs=@mysql_query("set names utf8",$link);
-				$fila=@mysql_fetch_array($res);
+				$fila=@mysql_fetch_array($rs);
 
 				mysql_query("INSERT INTO categoria (tipo, descripcion, imgcat) 
 							VALUES('".$_POST["tipo"]."','".$_POST["des"]."','".$nombre."')",$link);	
@@ -272,7 +310,7 @@ case 'categoria':
 			  move_uploaded_file($temporal,"../productos/categorias/".$nombre);
 	
 				$rs=@mysql_query("set names utf8",$link);
-				$fila=@mysql_fetch_array($res);
+				$fila=@mysql_fetch_array($rs);
 	
 				mysql_query("UPDATE categoria SET tipo='".$_POST["tipo"].
 								 "', descripcion='".$_POST["des"].

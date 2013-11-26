@@ -2,9 +2,12 @@
               <hgroup> <h1>Nuevos Productos</h1> </hgroup>
 
               <?php 
-                  $res=@mysql_query("set names utf8",$link);
-                  $row=@mysql_fetch_array($res);
-                  $res=mysql_query("select * from producto where stock <> 0 and prom=1",$link);
+                $res=@mysql_query("set names utf8",$link);
+                $row=@mysql_fetch_array($res);
+                // $res=mysql_query("select * from producto where stock <> 0 and estado=2",$link);
+                $cns="select * from producto where estado=1 and stock <> 0 ORDER BY 1 DESC limit 0,4";
+                $res=mysql_query($cns,$link);
+
                   
                   while ($rwc=mysql_fetch_array($res))
                     {

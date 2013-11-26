@@ -136,7 +136,7 @@ $total+=($row[3]*$value);
 <!-- 				<a onClick="return confirma('<?php echo $row[1]; ?>');" href="eli.php?idp=<?php echo $key; ?>" >
 				<img src="../../img/tacho.gif" alt="Eliminar" width="15" height="18" border="0"></a> -->
 				<a href="#" onClick="confirma('<?php echo $row[1]; ?>', <?php echo $key; ?>); return false;">
-				<img src="../../img/tacho.gif" alt="Eliminar" width="15" height="18" border="0"></a>
+				<img src="../../img/tacho.gif" alt="Eliminar" width="20" height="24" border="0"><!-- <span style="font-size:8px">ELIMINAR</span> --></a>
 			</div>
 		</td>
 	</tr>
