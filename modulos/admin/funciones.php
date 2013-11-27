@@ -62,5 +62,12 @@ function autogenerado2($tabla,$campocodigo,$numcaracteres){
     return $generado;
   }
 
+  function dma_shora($fec)
+    {
+      list($fecha,$hora)=explode(" ",$fec);
+      list($anio,$mes,$dia)=explode("-",$fecha); 
+      $fecresult = $dia."/".$mes."/".$anio;
+      return $fecresult;
+    }
 
  ?>

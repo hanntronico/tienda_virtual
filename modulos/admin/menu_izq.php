@@ -29,9 +29,9 @@
               <ul id="reportes">
                 <li><a href="#" onclick="cargare('rpt_ventas.php'); return false;">Reporte de Ventas</a></li>
 
-                <li><a href="#" onclick="cargare('#.php'); return false;">Reporte de Clientes</a></li>
+                <li><a href="#" onclick="cargare('rpt_clientes.php'); return false;">Reporte de Clientes</a></li>
 
-                <li><a href="#" onclick="cargare('#.php'); return false;">Reporte Productos</a></li>
+                <li><a href="#" onclick="cargare('123.php'); return false;">Reporte Productos</a></li>
               </ul>
             </li>
 <!--             <li><a href="elements.html" class="elements">Elements</a></li>

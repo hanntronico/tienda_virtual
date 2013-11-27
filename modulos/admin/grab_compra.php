@@ -4,12 +4,11 @@
   include("conectar.php");
   $link=Conectarse();
 
-  list($anio,$mes,$dia)=explode("/",$_POST["fec_em"]); 
-  $fec_em = $dia."-".$mes."-".$anio;
+  list($dia,$mes,$anio)=explode("/",$_POST["fec_em"]); 
+  $fec_em = $anio."-".$mes."-".$dia;
 
-  list($anio,$mes,$dia)=explode("/",$_POST["fec_vnc"]); 
-  $fec_vnc = $dia."-".$mes."-".$anio;
-
+  list($dia,$mes,$anio)=explode("/",$_POST["fec_vnc"]); 
+  $fec_vnc = $anio."-".$mes."-".$dia;
 
 	$consulta = "INSERT INTO compra 
 							(cod_proveedor, 
@@ -17,12 +16,16 @@
 							 fec_venc, 
 							 cod_usuario, 
 							 nro_comprobante) 
-				 VALUES (".$_POST["codprov"].", '".
+				 			VALUES (".$_POST["codprov"].", '".
 				 		   $fec_em."', '".
 				 		   $fec_vnc."', ".
 				 		   $_SESSION["s_cod"].", '".
 				 		   $_POST["nro_comp"]."')" ;
-
+	
+	// echo $fec_em."<br>";
+	// echo $fec_vnc."<br>";
+	// echo $consulta;
+	// exit();
 
 	$rs2=mysql_query($consulta,$link) or die ("error : $consulta");
 
