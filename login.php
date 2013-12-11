@@ -38,7 +38,7 @@ if ($numfila<>0){
 
 	$res=@mysql_query("set names utf8",$link);
     $row=@mysql_fetch_array($res);
-	$sql="insert into usuario (login, clave, nombre, apellidos, dni, direccion, telefono, correo, cod_nivel) 
+	$sql="insert into usuario (login, clave, nombre, apellidos, dni, direccion, telefono, correo, cod_nivel, estado) 
 					values ('".$rowu[1]."', '".
 							   md5($rowu[2])."','".
 							   $rowu[3]."', '".
@@ -46,7 +46,7 @@ if ($numfila<>0){
 							   $rowu[5]."', '".
 							   $rowu[6]."', '".
 							   $rowu[7]."', '".
-							   $rowu[8]."',2)";
+							   $rowu[8]."',3,1)";
 	// echo "<br>";
 	// echo $sql;
 	// echo $rowu[0];	
@@ -84,7 +84,7 @@ if ($numfila<>0){
 	$row=mysql_fetch_array($res);
 	$codu=$row[0];
 	
-	$res=mysql_query("select * from usuario where cod_usuario='$codu' and clave='$clave'",$link);
+	$res=mysql_query("select * from usuario where cod_usuario='$codu' and clave='$clave' and estado=1",$link);
 	if (mysql_num_rows($res)>0)
 	{
 		$row=mysql_fetch_array($res);
@@ -93,6 +93,7 @@ if ($numfila<>0){
 		$_SESSION["s_tipo"]=$row["cod_nivel"];
 		$_SESSION["s_solonom"]=htmlentities($row["nombre"]);
 		$_SESSION["s_nombreC"]=htmlentities($row["nombre"]." ".$row["apellidos"]);
+		$_SESSION["s_correousu"]=htmlentities($row["correo"]);
 
 		// echo $_SESSION["s_cod"]." ".$_SESSION["s_tipo"]." ".$_SESSION["s_nombreC"];
 		// exit();

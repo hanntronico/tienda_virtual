@@ -10,29 +10,28 @@
   	switch ($_GET["pag"]) {
   		
   		case 'productos':
-		  	$consulta = "UPDATE producto SET estado=0 where cod_producto = ".$_GET["id"];
-        $rs2=mysql_query($consulta,$link) or die ("error : $consulta");
+		  	$consulta = "UPDATE producto SET estado=1 where cod_producto = ".$_GET["id"];
+			  $rs2=mysql_query($consulta,$link) or die ("error : $consulta");
         $msn='d1';
   		break;
 
       case 'product2':
-        $consulta = "UPDATE producto SET estado=1 where cod_producto = ".$_GET["id"];
+        $consulta = "UPDATE producto SET estado=2 where cod_producto = ".$_GET["id"];
         $rs2=mysql_query($consulta,$link) or die ("error : $consulta");
-        $msn='dpr2';
+        $msn='dpr1';
       break;
 
       case 'productigv':
-        $consulta = "UPDATE producto SET igv=0 where cod_producto = ".$_GET["id"];
+        $consulta = "UPDATE producto SET igv=1 where cod_producto = ".$_GET["id"];
         $rs2=mysql_query($consulta,$link) or die ("error : $consulta");
-        $msn='igv2';
+        $msn='igv1';
       break;
 
   		case 'usuarios':
-		  	$consulta = "UPDATE usuario SET estado=0 where cod_usuario = ".$_GET["id"];
+		  	$consulta = "UPDATE usuario SET estado=1 where cod_usuario = ".$_GET["id"];
         $rs2=mysql_query($consulta,$link) or die ("error : $consulta");
         $msn='ud1';
   		break;
-
 
   	}
     header('location: main_admin.php'.'?msn='.$msn)

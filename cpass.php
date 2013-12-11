@@ -5,8 +5,8 @@ $link=Conectarse();
 $res=@mysql_query("set names utf8",$link);
 $row=@mysql_fetch_array($res);
 $sq="select * from usuario where cod_usuario=".$_SESSION["s_cod"];
-$res=mysql_query($sq,$link);
-$rowus=mysql_fetch_array($res);
+$res=@mysql_query($sq,$link);
+$rowus=@mysql_fetch_array($res);
 
 // if (isset($_SESSION["s_cod"]))
 // {
@@ -28,7 +28,7 @@ $rowus=mysql_fetch_array($res);
 ?>
 
 <?php include ("head.php"); ?>
-    
+
     <body <?php 
       if ($_GET["deny"]==1 || $_GET["deny"]==2 || $_GET["deny"]==3 || $_GET["deny"]==4) 
           {echo "onload='carga_registro();'";} ?> >
@@ -47,7 +47,7 @@ $rowus=mysql_fetch_array($res);
           <?php// include ("modulos/usuario/cambiapass.php"); ?>
           <section id="msn_block">
             <fieldset>
-            <form name="frm_cambiopass" action="cambiapass2.php" method="post" accept-charset="utf-8" onsubmit="return validar();">
+            <form name="frm_cambiopass" action="cambiapass2.php" method="post" accept-charset="utf-8" onsubmit="return valida_cambiopass();">
             <!-- cod_usuario  login clave nombre  apellidos dni direccion telefono  correo  cod_nivel -->
             <input type="hidden" name="cod_usu" value="<?php echo $rowus[0]?>">
             <table border="0" cellpadding="10" cellspacing="10" width="100%" class="tbdatper">

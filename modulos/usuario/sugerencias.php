@@ -35,11 +35,11 @@
                   <tbody>
                     <tr>
                       <td width="25%"><b>Nombre y Apellidos:</b></td>
-                      <td><input type="text" name="txtnomape" style="width:180px"></td>
+                      <td><input type="text" name="txtnomape" style="width:350px" value="<?=$_SESSION["s_nombreC"]?>" readonly></td>
                     </tr>
                     <tr>
                       <td><b>Correo electrónico:<b></td>
-                      <td><input type="text" name="txtemail" style="width:180px"></td>
+                      <td><input type="text" name="txtemail" style="width:250px" value="<?=$_SESSION["s_correousu"]?>" readonly></td>
                     </tr>
                     <tr>
                       <td><b>Mensaje:</b></td>

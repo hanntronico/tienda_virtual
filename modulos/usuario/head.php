@@ -254,7 +254,8 @@
                 if (newpass!=confpass){
                     alert ("Contraseñas no coinciden");
                     return false;
-                }    
+                }
+  
                 return true;    
             }    
             
@@ -371,7 +372,41 @@
 
             function accion(){
               setTimeout("cerrar()",3000);
-            }      
+            }    
+
+            function valida_suger () {
+              var nomape = document.frm_suger.txtnomape.value; 
+              if (nomape==""){
+                  alert ("Por favor ingresar nombres y apellidos");
+                  document.frm_suger.txtnomape.focus();
+                  return false;        
+              }
+
+              var email = document.frm_suger.txtemail.value; 
+              if (email==""){
+                  alert ("Por favor ingresar su correo");
+                  document.frm_suger.txtemail.focus();
+                  return false;        
+              }
+
+              var atpos=email.indexOf("@");
+              var dotpos=email.lastIndexOf(".");
+                if (atpos<1 || dotpos<atpos+2 || dotpos+2>=email.length)
+                  {
+                  alert("Ingrese una dirección de correo válida");
+                  document.frm_suger.txtemail.focus();
+                  return false;
+                  }
+
+              var msn = document.frm_suger.txtmensaje.value.length
+              if (msn==0) {
+                alert ("Por favor ingresar su correo");
+                document.frm_suger.txtmensaje.focus();
+                return false;
+              }
+
+              return true
+            }  
 
         </script>       
         

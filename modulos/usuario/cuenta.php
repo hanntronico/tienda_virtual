@@ -22,7 +22,12 @@
           <div id='msn_box_ok'>
               Sus datos se grabaron con exito!!
           </div>
-          <?php } ?>  
+          <?php } ?> 
+          <?php  //if ($_GET['deny']==1) { ?>
+<!--           <div id='msn_box_ok'>
+              Sus datos se grabaron con exito!!
+          </div> -->
+          <?php //} ?>  
           
       <!-- <a href="#" onclick="show_msn(); return false;" id="ha1">hann</a> -->
     <!--  <script type="text/javascript">

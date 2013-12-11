@@ -37,7 +37,7 @@
 <?php
   include("conectar.php");
   $link=Conectarse();
-  $pag = "Comprobante";
+  $pag = "ENTREGA - EMISION DE COMPROBANTE";
 
   $pag_org = parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH);
   //verificamos si en la ruta nos han indicado el directorio en el que se encuentra
@@ -108,7 +108,7 @@
         $sql="SELECT dp.cod_producto,
                      concat('<img src=../productos/',p.imagen,' width=50 height=50>') as Img,
                      p.descripcion, 
-                     p.precio, 
+                     dp.precio, 
                      dp.cantidad, 
                      dp.subtotal
               FROM det_pedidos dp
@@ -122,7 +122,7 @@
           $total = $total + $row1[5];
         }
 
-        $ticket = autogenerado2("comprobante","nro_tiket",10);
+        $ticket = autogenerado3("comprobante","nro_tiket",10);
         $id=$row2[0];
 
         if ($row2[8]==F) {
@@ -193,29 +193,46 @@
         <?php 
 
           $rs=@mysql_query("set names utf8",$link);
-          $fila=@mysql_fetch_array($res);
+          $fila=@mysql_fetch_array($rs);
             
-
-          // $sql="SELECT cod_pedido as 'COD', 
-          //              concat(usuario.nombre, ' ', usuario.apellidos) as 'USUARIO', 
+          // $sql="SELECT pedidos.cod_pedido as 'COD', 
           //              fecpedido as 'FEC_PEDIDO', 
           //              comprob, 
           //              rs_clie, 
           //              ruc_clie, 
-          //              estado 
-          //              FROM pedidos INNER JOIN usuario 
-          //              ON pedidos.cod_usuario = usuario.cod_usuario
-          //              order by 1 Desc"; 
+          //              comprobante.estado 
+          //              FROM pedidos LEFT JOIN comprobante 
+          //              ON pedidos.cod_pedido = comprobante.cod_pedido
+          //              order by 1 asc";
+
+          // $sql="SELECT pedidos.cod_pedido as 'COD', 
+          //              fecpedido as 'FEC_PEDIDO', 
+          //              comprob, 
+          //              rs_clie, 
+          //              ruc_clie, 
+          //              comprobante.estado,
+          //              cod_usuario 
+          //              FROM pedidos LEFT JOIN comprobante 
+          //              ON pedidos.cod_pedido = comprobante.cod_pedido
+          //              INNER JOIN usuario
+          //              ON pedidos.cod_usuario = usuario.cod_usuario 
+          //              WHERE pedidos.estado > 2
+          //              order by 6, 1 asc";
 
           $sql="SELECT pedidos.cod_pedido as 'COD', 
                        fecpedido as 'FEC_PEDIDO', 
                        comprob, 
                        rs_clie, 
                        ruc_clie, 
-                       comprobante.estado 
-                       FROM pedidos LEFT JOIN comprobante 
-                       ON pedidos.cod_pedido = comprobante.cod_pedido
-                       order by 1 asc";
+                       comprobante.estado,
+                       concat(u.nombre, ' ', u.apellidos) as Usuario 
+                FROM pedidos LEFT JOIN comprobante 
+                ON pedidos.cod_pedido = comprobante.cod_pedido
+                INNER JOIN usuario u
+                ON pedidos.cod_usuario = u.cod_usuario 
+                WHERE pedidos.estado > 2
+                ORDER BY 6, 1 ASC";
+
 // WHERE comprobante.estado = 1
           $res=@mysql_query($sql,$link);
         ?>
@@ -225,6 +242,13 @@
         <table cellpadding="0" cellspacing="0" border="0" class="stdtable" id="dyntable2">
           <colgroup>
             <col class="con0" style="width: 1%" />
+            <col class="con1" style="width: 1%" />
+            <col class="con1" style="width: 2%" />
+            <col class="con1" style="width: 8%" />
+            <col class="con1" style="width: 2%" />
+            <col class="con1" style="width: 12%" />
+            <col class="con1" style="width: 2%" />
+            <col class="con1" style="width: 3%" />
             <col class="con1" style="width: 5%" />
 
           </colgroup>
@@ -233,12 +257,13 @@
               <th class="head1 nosort">
                 <input type="checkbox" name="allbox" onClick="CA();" title="Seleccionar o anular la selección de todos los registros" /></th>
               <th class="head1">COD</th>
-              <th class="head1">FECHA PEDIDO</th>
+              <th class="head1">FEC. PEDIDO</th>
+              <th class="head1">CLIENTE</th>
               <th class="head1">COMPROB.</th>
               <th class="head1">RAZON SOCIAL</th>
-              <th class="head1">RUC</th>
+              <th class="head1" style="text-align: center;">RUC</th>
               <th class="head1">ESTADO</th>
-              <th class="head1">ACCION</th>
+              <th class="head1 nosort" style="text-align: center;">ACCION</th>
             </tr>
           </thead>
 
@@ -247,12 +272,12 @@
           <?php while($row1=@mysql_fetch_array($res))
                      {$i++;
             if ($row1[5]==NULL) {
-              $color_row="#D7D7D7";
+              $color_row=" #D7D7D7";
             }elseif ($row1[5]==0) {
               // $color_row=" #FFFF91";
-              $color_row=" #FFAA82;";
+              $color_row=" #FFAA82";
             }elseif ($row1[5]==1) {
-              $color_row="#A8FFA8";
+              $color_row=" #A8FFA8";
             }
           ?>  
 
@@ -261,12 +286,13 @@
                   <input type='checkbox' name='check[]' value="<?=$row1[0]?>" onClick='CCA(this);'>
                 </span></td>
                 <td align="center"><?php echo $row1[0]; ?></td>
-                <td><?php echo $row1[1]; ?></td>
+                <td><?php echo dma_shora($row1[1]); ?></td>
+                <td><?php echo $row1[6]; ?></td>
                 <td><?php if ($row1[2]=="B") {echo "BOLETA";} else {echo "FACTURA";} 
                 //echo $row1[2]; ?></td>
-                <td align="right"><?php echo $row1[3]; ?></td>
+                <td align="left"><?php echo $row1[3]; ?></td>
                 <td class="center"><?php if ($row1[4]==0) {echo "-----";} else {echo $row1[4];} //echo $row1[4]; ?></td>
-                <td class="center"><?php 
+                <td align="center"><?php 
                     //echo $row1[5];
                     if ($row1[5]==NULL) {
                       echo "<span style='color: #757575; font-weight: bolder;'>Sin Comprobante</span>";
@@ -281,7 +307,10 @@
                 <td class="center" align="center">
                   <a href="#" onclick="G('<?=$pag_org?>?id=<?=$row1[0]?>&sw=2');">
                     <!-- <img src="images/icons/editor.png" alt=""> -->
-                    <span style="text-decoration: underline; color: #004080; font-weight: bolder; ">Verificar</span></a>  
+                    <span style="text-decoration: underline; color: #004080; font-weight: bolder; ">VER</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="#" onclick="form_child('edit_entrega.php?id=<?=$row1[0]?>&sw=2');">
+                    <!-- <img src="images/icons/editor.png" alt=""> -->
+                    <span style="text-decoration: underline; color: #004080; font-weight: bolder; ">CAMBIAR</span></a> 
                 </td>
               </tr>
           <?php } ?>    

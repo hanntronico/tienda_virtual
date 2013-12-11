@@ -9,6 +9,8 @@
 
 	$ord = substr($_GET["ord"], 1);
 	$_SESSION["prec_prod"][$ord]=$_GET["dt"];
+
+
 	// echo var_dump($_SESSION["prec_prod"]);
 	// echo $_SESSION["prec_prod"][$ord];
 

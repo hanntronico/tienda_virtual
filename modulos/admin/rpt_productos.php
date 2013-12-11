@@ -55,7 +55,7 @@
 
 			// alert(param.substring(0,((param.length)-3)));
 			var content = jQuery("#view_rpt");
-			content.fadeIn('slow').load("proc_rpt02.php?band=1");
+			content.fadeIn('slow').load("proc_rpt03.php?band=1");
 			// content.fadeIn('slow').load("proc_rpt02.php?pr1="+param.substring(0,(param.length-3)));
   	
   	};	
@@ -96,12 +96,12 @@
   	  // var content = jQuery("#view_rpt");
 			// content.fadeIn('slow').load("proc_rpt01.php?fci="+fini+"&fcf="+ffin);
 			var content = jQuery("#view_rpt");
-			content.fadeIn('slow').load("proc_rpt02.php?band=2");
+			content.fadeIn('slow').load("proc_rpt03.php?band=2");
   	};
 
   	if (opc01[2].checked) {
 			var content = jQuery("#view_rpt");
-			content.fadeIn('slow').load("proc_rpt02.php?band=3");
+			content.fadeIn('slow').load("proc_rpt03.php?band=3");
   	};
 
   }
@@ -115,16 +115,16 @@
 		
 	  	if (opc01[0].checked) {
 				// printview('print_rpt01.php?pr1='+parabus);
-				printview2('print_rpt02.php?band=1');
+			printview2('print_rpt03.php?band=1');
 	  	};	
 
 	  	if (opc01[1].checked) {
 	  		// printview('print_rpt01.php?fci='+fini+'&fcf='+ffin);
-	  		printview2('print_rpt02.php?band=2');
+	  		printview2('print_rpt03.php?band=2');
 	  	};
 
 	  	if (opc01[2].checked) {
-	  		printview2('print_rpt02.php?band=3');
+	  		printview2('print_rpt03.php?band=3');
   		};
 	}	
   
@@ -137,7 +137,7 @@
 <?php
   include("conectar.php");
   $link=Conectarse();
-  $pag = "REPORTE DE CLIENTES";
+  $pag = "REPORTE DE PRODUCTOS";
 
   $pag_org = parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH);
   //verificamos si en la ruta nos han indicado el directorio en el que se encuentra
@@ -186,11 +186,11 @@
 			        <tbody>
 			          <tr>
 			            <td colspan="2">
-			            	<input type="radio" name="opt1" value="1" checked="checked">Clientes Validados
+			            	<input type="radio" name="opt1" value="1" checked="checked">Productos más vendidos
 			            	&nbsp;&nbsp;&nbsp;
-			            	<input type="radio" name="opt1" value="2">Clientes sin validar
+			            	<input type="radio" name="opt1" value="2">Productos sin stock
 			            	&nbsp;&nbsp;&nbsp;
-			            	<input type="radio" name="opt1" value="3">Clientes con más Compras
+			            	<input type="radio" name="opt1" value="3">Productos con stock mínimo
 			            </td>
 			          </tr>    	
 

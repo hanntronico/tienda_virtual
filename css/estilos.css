@@ -699,18 +699,19 @@ section#wrapper {
 .register-panel input[type=submit],
 .forgot-panel input[type=submit],
 .login-panel .login_facebook {
+	background: #004080;
 	border:  none;
+	border-radius: 3px;
+	color: white; 
 	display: inline-block; 
+	font-size: 12px; 
 	line-height: 30px; 
 	/*background: #E12121; */
-	background: #004080;
-	color: white; 
-	font-size: 14px; 
 	padding: 0 10px; 
-	margin-right:30px;
+	margin-right:8px;
 	-webkit-border-radius: 3px; 
 	-moz-border-radius: 3px; 
-	border-radius: 3px;
+	text-decoration: none;
 }
 
 .login-panel .create_account:hover,
@@ -729,7 +730,7 @@ section#wrapper {
 	/*background: #E12121; */
 	background: #004080;
 	color: white; 
-	font-size: 14px; 
+	font-size: 12px; 
 	padding: 0 10px; 
 	/*margin-right:30px;*/
 	-webkit-border-radius: 3px; 
@@ -1291,7 +1292,10 @@ fieldset {
 
 #bus_cont a:hover {
 	text-decoration: underline;
+
 }
+
+
 
 /*footer {
 	background: #1E6381;

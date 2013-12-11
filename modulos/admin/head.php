@@ -173,11 +173,40 @@
 		}
 		if(sw!=1){
 			alert("No hay ningun registro seleccionado.");
+			// jAlert('No hay ningun registro seleccionado.', 'Mensaje del Sistema');
 			return(false);
 		}
 		rpta=confirm("Esta seguro de Eliminar estos Registros?");
 		if (rpta==false){
 			return(false);
+		}
+	}
+
+	function Enable(act,first,dosub,e) {
+		if (act=='delete'){
+			if (!e)	var e=window.event;
+			e.cancelBubble=true;
+		}
+		if (act=='notbulkmail'){
+			frm.action="/cgi-bin/notbulk";
+		}else if (act=='report'){
+			frm.action="/cgi-bin/kill";
+			frm.ReportLevel.value="1";
+		}
+
+		num=vChk(frmList);
+		// alert(num);
+		if (num!=false){
+			// frmList.submit();
+			var npag= frmList.pag.value;
+			for(var i=0;i<frmList.length;i++){
+				if(frmList.elements[i].checked){
+					var chkid = frmList.elements[i].value;
+					// alert(chkid);
+					// alert(npag);
+					document.location.href='enabler.php?id='+chkid+'&pag='+npag;
+				}		
+		 	}
 		}
 	}
 
@@ -197,26 +226,16 @@
 		// alert(num);
 		if (num!=false){
 			// frmList.submit();
+			var npag= frmList.pag.value;
 			for(var i=0;i<frmList.length;i++){
 				if(frmList.elements[i].checked){
 					var chkid = frmList.elements[i].value;
 					// alert(chkid);
-					document.location.href='disabler.php?id='+chkid;
+					// alert(npag);
+					document.location.href='disabler.php?id='+chkid+'&pag='+npag;
 				}		
 		 	}
 		}
-
-	// 	//num=((first) ? slct1st(frm) : numChecked(frm));
-	// 	num=vChk(frmList);
-	// //	alert (num);
-	// 	if (num!=false){
-	// 	//if (num>0){
-	// 		//frm._HMaction.value=act;
-	// 		//if (dosub)
-	// 		frmList.submit();
-	// 	//}else{
-	// 		//Err("150995652");
-	// 	}
 	}
 
 	function Subm(act,first,dosub,e){
@@ -273,6 +292,11 @@
    		fventana(url,500,600);
    	}
 
+   	function printview2(url)
+  	{
+   		fventana(url,750,600);
+   	}
+
 	function imprSelec(muestra)
 	{var ficha=document.getElementById(muestra);
 	 var ventimp=window.open(' ','popimpr');
@@ -289,11 +313,33 @@
 	}
 
 	function eliprod(c1) {
-		// document.location.href='agreg_prod.php?id='+c1;
-		var content = jQuery("#list_prod");
-		content.fadeIn('slow').load("eli_prod.php?id="+c1+"&sw=1");
+		// var content = jQuery("#list_prod");
+		// content.fadeIn('slow').load("eli_prod.php?id="+c1+"&sw=1");
+
+	 // var content = jQuery("#dep");
+	 // content.fadeIn('slow').load("ing_cant.php?ord="+id+"&dt="+elementos[0].value.trim());
+	 	var content = jQuery("#dep");
+		content.fadeIn('slow').load("eli_prod2.php?id="+c1+"&sw=1");
+
+	    var content = jQuery("#list_prod");
+	    // var nid = id.substring(1)
+	    // content.fadeIn('slow').load("agreg_prod.php?id="+c1+"&sw=2");
+	    content.fadeIn('slow').load("agreg_prod.php");
+
 	}
 
+	function form_child(url)
+  	{
+   		// fventana(url,700,500);
+   		var content = jQuery("#conte");
+		content.fadeIn('slow').load(url);
+   	}
 
+   	function w_child(url)
+  	{
+   		fventana(url,800,600);
+  //  		var content = jQuery("#conte");
+		// content.fadeIn('slow').load(url);
+   	}
 </script>
 </head>

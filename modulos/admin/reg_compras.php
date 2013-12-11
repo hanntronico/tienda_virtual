@@ -26,6 +26,10 @@
 
 
 <script type="text/javascript">
+  jQuery("form[name='frm_regcompra']" ).submit(function( event ) {
+    event.preventDefault();
+  });
+
   jQuery('.notibar .close').click(function(){
     jQuery(this).parent().fadeOut(function(){
       jQuery(this).remove();
@@ -58,9 +62,12 @@
     content.fadeIn('fast').load("tbl_productos.php?dat="+dato);
   }
 
-
   function checkKey (key, id) {
-    
+
+    jQuery("form[name='frm_regcompra']" ).submit(function( event ) {
+        event.preventDefault();
+    });
+
     var unicode;
     if (key.charCode)
     {unicode=key.charCode;}
@@ -72,12 +79,9 @@
       jQuery("form[name='frm_regcompra']" ).submit(function( event ) {
         event.preventDefault();
       });
-
+      // document.getElementById('bus_prod').click();
       result_bus ();
     };
-
-
-
   }
 
   function checkKey2 (key, id) {
@@ -97,17 +101,19 @@
        // result_bus ();
       var elementos = document.getElementsByName(id);
       // alert(id);
-      // alert(elementos[0].value);
-      var content = jQuery("#dep");
-      content.fadeIn('slow').load("ing_precio.php?ord="+id+"&dt="+elementos[0].value);
+      // alert(elementos[0].value.trim());
+/********* OK ************/
+    var content = jQuery("#dep");
+    content.fadeIn('slow').load("ing_precio.php?ord="+id+"&dt="+elementos[0].value.trim());
 
       var content = jQuery("#list_prod");
       var nid = id.substring(1)
       content.fadeIn('slow').load("agreg_prod.php?id="+nid+"&sw=2");
+/********************************/
     };
   }
 
-    function checkKey3 (key, id) {
+  function checkKey3 (key, id) {
    
     var unicode;
     if (key.charCode)
@@ -125,7 +131,7 @@
       // alert(id);
       // alert(elementos[0].value);
       var content = jQuery("#dep");
-      content.fadeIn('slow').load("ing_cant.php?ord="+id+"&dt="+elementos[0].value);
+      content.fadeIn('slow').load("ing_cant.php?ord="+id+"&dt="+elementos[0].value.trim());
 
       var content = jQuery("#list_prod");
       var nid = id.substring(1)
@@ -141,9 +147,9 @@
 
   function validar() {
 
-      jQuery("form[name='frm_regcompra']" ).submit(function( event ) {
-        event.preventDefault();
-      });
+    jQuery("form[name='frm_regcompra']" ).submit(function( event ) {
+      event.preventDefault();
+    });
 
     var prov = document.frm_regcompra.codprov.value;    
     // alert(telf);
@@ -230,21 +236,34 @@
     // $ing2 = 0;
 
   }elseif($_GET["sw"]==2){  // EDITAR
+  
+    $cod=$_GET["id"];
 
-    // $rs=@mysql_query("set names utf8",$link);
-    // $fila=@mysql_fetch_array($res);
+    $rs=@mysql_query("set names utf8",$link);
+    $fila=@mysql_fetch_array($rs);
 
-    // $sql="SELECT *
-    //       FROM comprobante
-    //       WHERE cod_pedido ='".$_GET["id"]."'"; 
-    // // echo $sql       
+    $sql="SELECT c.cod_compra, 
+                 pr.razon_social,
+                 pr.ruc,  
+                 c.fec_emision,
+                 c.fec_venc, 
+                 c.nro_comprobante
+          FROM compra c inner join proveedor pr
+          ON c.cod_proveedor = pr.cod_proveedor 
+          WHERE cod_compra = ".$_GET["id"]; 
+    // echo $sql       
    
-    // $res=@mysql_query($sql,$link);
-    // $rowA=@mysql_fetch_array($res);
+    $res=@mysql_query($sql,$link);
+    $rwa=@mysql_fetch_array($res);
+
+
+    // $rwb=@mysql_fetch_array($res1);
+
+
     // $numfilas = @mysql_num_rows($res);
     // echo "  Filas:".$numfilas;
 
-    if ($numfilas==0){
+    // if ($numfilas==0){
         // $rs=@mysql_query("set names utf8",$link);
         // $fila=@mysql_fetch_array($res);
         // $sql="SELECT * 
@@ -277,13 +296,160 @@
  
               
       
-    }else{
+    // }else{
 
-    }
+    // }
+    // echo "hanntronico";
+   
+   ?>
+      <div id="fra_crud2" style="padding:10px;">
+        <table class="form_crud">
+          <thead>
+            <tr>
+              <th>DATOS COMPRA COD: <?=$_GET["id"]?></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+
+                <table cellpadding="0" cellspacing="0" border="1" class="stdtable">
+                  <tbody>
+                      <tr>
+                        <td width="10%"><b>COD :</b></td>
+                        <td width="30%"><?=$rwa[0]?></td>
+                        <td width="12%"><b>NRO. COMPROB. :</b></td>
+                        <td width="40%"><?=$rwa[5]?></td>
+                      </tr>
+                      <tr>
+                        <td><b>PROVEEDOR :</b></td>
+                        <td><?=$rwa[1]?></td>
+                        <td><b>RUC :</b></td>
+                        <td><?=$rwa[2]?></td>
+                      </tr>
+                      <tr>
+                        <td><b>FEC. EMISION :</b></td>
+                        <td><?=dma_shora($rwa[3])?></td>
+                        <td><b>FEC. VENC. :</b></td>
+                        <td><?=dma_shora($rwa[4])?></td>
+                      </tr>
+                  </tbody>
+                </table>
+
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div id="bt_nav" style="padding:10px;">
+                  <input type="button" name="imprimir" value="  Imprimir  " class="stdbtn btn_orange" onclick="printview('print_compra.php?id=<?php echo $cod; ?>'); return false;">
+                  &nbsp;&nbsp;&nbsp;
+                  <input type="button" name="salir" value="  Salir  " class="stdbtn btn_orange" onclick="salirp('reg_compras.php');">
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              <!-- <br> -->
+              <table cellpadding="0" cellspacing="0" border="0" class="stdtable">
+                  <colgroup>
+                    <col class="con1" style="width: 5%"/>
+                    <col class="con0" style="width: 60%" />
+                    <col class="con1" style="width: 8%" />
+                    <col class="con0" style="width: 8%" />
+                    <col class="con0" style="width: 8%" />
+                    <!-- <col class="con0" style="width: 15%" /> -->
+                    <!-- <col class="con1" style="width: 6%" /> -->
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th class="head1">COD</th>
+                      <th class="head1">Descripción</th>
+                      <th class="head1">Cantidad</th>
+                      <th class="head1">Prec. Unit.</th>
+                      <th class="head1">Valor</th>
+                      <!-- <th class="head1">Acción</th> -->
+                      <!-- <th class="head1">EDITAR</th> -->
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                  <?php 
+                        $sql1="SELECT p.cod_producto, 
+                                      p.descripcion, 
+                                      dc.cantidad, 
+                                      dc.prec_unit, 
+                                      dc.dscto, 
+                                      dc.subtotal
+                              FROM det_compra dc INNER JOIN producto p
+                              ON dc.cod_producto = p.cod_producto 
+                              WHERE cod_compra=".$_GET["id"]; 
+                    $res1=@mysql_query($sql1,$link);  
+                    while($row1=@mysql_fetch_array($res1))
+                          {$i++;
+                  ?>  
+
+                      <tr class="gradeX">
+                        <td align="center"><?php echo $row1[0]; ?></td>
+                        <td><?php echo $row1[1]; ?></td>
+                        <td align="center"><?php echo $row1[2]; ?></td>
+                        <td align="right"><?php echo $row1[3]; ?></td>
+                        <td align="right"><?php echo $row1[5]; ?></td>
+<!--                         <td class="center">
+                          <a href="#" onclick="addprod(<?=$row1[0]?>); return false;">
+                            <img src="images/icons/attachment.png" alt="">&nbsp;Agregar
+                          </a>  
+                        </td> -->
+                      </tr>
+                  <?php 
+                       $valor = $valor + $row1[5];
+                      } 
+                  ?>    
+                    <tr>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td colspan="2" align="right">VALOR :</td>
+                      <td align="right"><?=sprintf("%01.2f",$valor)?></td>
+                    </tr>
+                    <tr>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td colspan="2" align="right">I.G.V. :</td>
+                      <td align="right"><?=sprintf("%01.2f",($valor*0.18))?></td>
+                    </tr>
+                    <tr>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td colspan="2" align="right">SUB-TOTAL :</td>
+                      <td align="right"><?=sprintf("%01.2f",($valor*1.18))?></td>
+                    </tr>                                        
+                    <tr>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td colspan="2" align="right">PERCEPCION :</td>
+                      <td align="right"><?=sprintf("%01.2f",(($valor*1.18)*0.02))?></td>
+                    </tr>
+                    <tr>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td colspan="2" align="right">TOTAL A PAGAR :</td>
+                      <td align="right"><?=sprintf("%01.2f",(($valor*1.18)*1.02))?></td>
+                    </tr>                                        
+                  </tbody>
+              </table>
 
 
+              </td>
+            </tr> 
+
+          </tbody>
+        </table>  
+      </div>
+    </body>
+    </html>
+
+  <?php
+    exit();
   // mysql_free_result($res);
-
   }else{ //   LISTA
   
   ?>
@@ -298,13 +464,13 @@
             </div>
       <?php }  ?>
 
-      <?php //if ($_GET["msn"]=='an1') { ?>
-            <!-- // <script type="text/javascript">setTimeout("cerrar()",6000);</script> -->
-            <!-- <div class="notibar msgsuccess"> -->
-              <!-- <a class="close" id="equis"></a> -->
-              <!-- <p>El comprobante se anuló con exito!!!</p>; -->
-            <!-- </div> -->
-      <?php //}  ?>
+      <?php if ($_GET["msn"]=='rce1') { ?>
+            <script type="text/javascript">setTimeout("cerrar()",6000);</script>
+            <div class="notibar msgerror">
+              <a class="close" id="equis"></a>
+              <p>Ocurrió un error al grabar!!!</p>;
+            </div>
+      <?php }  ?>
         
         <div class="contenttitle2">
           <h3><?php echo strtoupper($pag); ?></h3>
@@ -421,8 +587,8 @@
                 </td>
                 <td><?php echo $row1[6]; ?></td>
                 <td class="center" align="center">
-                  <!-- <a href="#" onclick="G('<?=$pag_org?>?id=<?=$row1[0]?>&sw=2');"> -->
-                  <a href="#" onclick="javascript:alert('ver');return false;">
+                  <a href="#" onclick="G('<?=$pag_org?>?id=<?=$row1[0]?>&sw=2');">
+                  <!-- <a href="#" onclick="javascript:alert('ver');return false;"> -->
                     <!-- <img src="images/icons/editor.png" alt=""> -->
                     <span style="text-decoration: underline; color: #004080; font-weight: bolder; ">Ver</span></a>  
                 </td>
@@ -446,6 +612,7 @@
   <br>
 
   <form action="grab_compra.php" method="post" enctype="multipart/form-data" name="frm_regcompra" onSubmit="return validar(this)">
+  <!-- <form action="grab_compra.php" method="post" enctype="multipart/form-data" name="frm_regcompra" onSubmit="return false"> -->
     <table class="form_crud">
       <thead>
         <tr>
@@ -515,19 +682,20 @@
                 
               </td>
 
-<!--               <td><label>Fecha emisión : </label></td>
-              <td><span class="field">
-                    <input type="text" name="tipoc" id="tipoc" value="<?=$tipo?>" 
-                    class="smallinput" style="width:10%; text-align:center;" readonly>
-                    <input type="text" id="fec_vnc" name="fec_vnc" class="width100" />
-                </span></td> -->
             </tr> 
             <tr>
               <td colspan="2">
                 Ingrese producto :
-                <input type="text" name="txtbusqueda" id="txtbusqueda" style="width:25%" onkeydown="checkKey(event,'txtbusqueda');">
+                <form name="frmboton" method="post" onSubmit="return false;">
+                  <input type="text" name="txtbusqueda" id="txtbusqueda" style="width:25%" onkeydown="checkKey(event,'txtbusqueda');">
+                </form>
                 &nbsp;&nbsp;&nbsp;
-                <a href="" class="btn btn_orange btn_search radius50" onclick="result_bus();return false;"><span>Busca</span></a><br><br>
+
+                <a href="" id="bus_prod" class="btn btn_orange btn_search radius50" onclick="result_bus();return false;"><span>Busca</span></a>
+                &nbsp;&nbsp;&nbsp;
+                
+                <a href="" class="btn btn_orange btn_search radius50" onclick="w_child('prod.php?sw=1');return false;"><span>Nuevo</span></a>
+                <br><br>
                 <!-- <a href="#" onclick="result_bus();return false;">BUSCA</a><br><br> -->
                 <div id="res_bus" style="border: 1px solid #FF8040;">&nbsp;</div>
 
@@ -569,7 +737,7 @@
                     <input type="button" name="salir" value="  Salir  " class="stdbtn btn_orange" onclick="salirp('reg_compras.php');">
 
                     <div id="dep" style="visibility: hidden;">&nbsp;</div>
-
+                    <!-- <div id="dep"></div> -->
                     <input type="hidden" value="<?php echo $_GET["id"]; ?>" name="id">
                   </p>
                 </td>

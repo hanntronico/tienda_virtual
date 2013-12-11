@@ -77,7 +77,7 @@ $obj-> CerrarConexion();
 									// echo $secpass;
 									// exit();	
 									$sql="insert into usuario_temporal (clave, nombre, apellidos, dni, telefono, correo, cod_nivel, estado) 
-												  values ('".$secpass."', '".$nom."','".$ape."', '".$dni."', '".$telf."', '".$email."', 2, 1)";	
+												  values ('".$secpass."', '".$nom."','".$ape."', '".$dni."', '".$telf."', '".$email."', 3, 1)";	
 
 									// echo $sql."<br>".$secpass;
 									// exit(); 			  	

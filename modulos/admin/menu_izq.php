@@ -14,26 +14,39 @@
                 </ul>
             </li>
             <!-- <li><a href="filemanager.html" class="gallery">Operaciones</a></li> -->
-            <li><a href="#suboper" class="elements">Operaciones</a> <span class="arrow"></span>
+            <li><a href="#suboper" class="addons">Operaciones</a> <span class="arrow"></span>
               <ul id="suboper">
                 <!-- <li><a href="#" onclick="carga_form(4); return false;">Pedidos</a></li> -->
                 <li><a href="#" onclick="cargare('pedidos.php'); return false;">Pedidos</a></li>
                 <!-- <li><a href="#" onclick="carga_form(6); return false;">Facturación</a></li> -->
-                <li><a href="#" onclick="cargare('facturacion.php'); return false;">Facturación</a></li>
+                <li><a href="#" onclick="cargare('despacho.php'); return false;">Despacho</a></li>
+                <li><a href="#" onclick="cargare('facturacion.php'); return false;">Entrega</a></li>
+                <li><a href="#" onclick="cargare('liquidacion.php'); return false;">Liquidación</a></li>
+
                 <!-- <li><a href="#" onclick="carga_form(4); return false;">Pagos</a></li> -->
-                <li><a href="#" onclick="cargare('reg_compras.php'); return false;">Registro de Compras</a></li>
               </ul>
             </li>
 
-            <li><a href="#reportes" class="elements">Reportes</a> <span class="arrow"></span>
+            <li><a href="#control" class="elements">Control</a> <span class="arrow"></span>
+                <ul id="control">
+                    <li><a href="#" onclick="cargare('reg_compras.php'); return false;">Registro de Compras</a></li>
+                    <li><a href="#" onclick="cargare('usuarios.php'); return false;">Gestión de Usuarios</a></li>
+                    <li><a href="#" onclick="cargare('product2.php'); return false;">Gestión de Promociones</a></li>
+                    <li><a href="#" onclick="cargare('productigv.php'); return false;">Gestión de IGV</a></li>
+                </ul>    
+            </li>
+
+            <li><a href="#reportes" class="tables">Reportes</a> <span class="arrow"></span>
               <ul id="reportes">
                 <li><a href="#" onclick="cargare('rpt_ventas.php'); return false;">Reporte de Ventas</a></li>
 
                 <li><a href="#" onclick="cargare('rpt_clientes.php'); return false;">Reporte de Clientes</a></li>
 
-                <li><a href="#" onclick="cargare('123.php'); return false;">Reporte Productos</a></li>
+                <li><a href="#" onclick="cargare('rpt_productos.php'); return false;">Reporte Productos</a></li>
               </ul>
             </li>
+
+        
 <!--             <li><a href="elements.html" class="elements">Elements</a></li>
             <li><a href="widgets.html" class="widgets">Widgets</a></li> -->
 			

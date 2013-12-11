@@ -12,7 +12,7 @@ if ($_GET['sw']==1){
   unset($_SESSION["prec_prod"][$_GET["id"]]);
 
 }
-
+exit();
 // echo var_dump($_SESSION["prec_prod"]);
 
 // $origen=$_SERVER['HTTP_REFERER'];

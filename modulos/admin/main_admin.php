@@ -1,4 +1,4 @@
-<?php //session_start(); ?> 
+<?php session_start(); ?> 
 <?php include 'head.php'; ?>
 
 <!-- <body class="withvernav" onload="cargare('productos.php?msn=p1');"> -->
@@ -50,6 +50,10 @@ if ($_GET['msn']=='at1') {
     $strcarga = "cargare('pedidos.php?msn=at1')";
 }
 
+if ($_GET['msn']=='dp1') { 
+    $strcarga = "cargare('despacho.php?msn=dp1')";
+}
+
 if ($_GET['msn']=='et1') { 
     $strcarga = "cargare('facturacion.php?msn=et1')";
 }
@@ -60,6 +64,36 @@ if ($_GET['msn']=='an1') {
 
 if ($_GET['msn']=='rc1') { 
     $strcarga = "cargare('reg_compras.php?msn=rc1')";
+}
+
+if ($_GET['msn']=='rce1') { 
+    $strcarga = "cargare('reg_compras.php?msn=rce1')";
+}
+
+if ($_GET['msn']=='u1') { 
+    $strcarga = "cargare('usuarios.php?msn=u1')";
+}
+if ($_GET['msn']=='ue1') { 
+    $strcarga = "cargare('usuarios.php?msn=ue1')";
+}
+if ($_GET['msn']=='ud1') { 
+    $strcarga = "cargare('usuarios.php?msn=ud1')";
+}
+
+if ($_GET['msn']=='dpr1') { 
+    $strcarga = "cargare('product2.php?msn=dpr1')";
+}
+
+if ($_GET['msn']=='dpr2') { 
+    $strcarga = "cargare('product2.php?msn=dpr2')";
+}
+
+if ($_GET['msn']=='igv1') { 
+    $strcarga = "cargare('productigv.php?msn=igv1')";
+}
+
+if ($_GET['msn']=='igv2') { 
+    $strcarga = "cargare('productigv.php?msn=igv2')";
 }
 
 ?>

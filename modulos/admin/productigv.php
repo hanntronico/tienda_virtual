@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <script type="text/javascript" src="js/plugins/jquery-1.7.min.js"></script>
 <script type="text/javascript" src="js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
 <script type="text/javascript" src="js/plugins/jquery.cookie.js"></script>
@@ -37,7 +38,7 @@
 <?php
   include("conectar.php");
   $link=Conectarse();
-  $pag = "categorias";
+  $pag = "gestion de IGV para Productos ";
 
   $pag_org = parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH);
   //verificamos si en la ruta nos han indicado el directorio en el que se encuentra
@@ -48,36 +49,39 @@
  
   $pag_sext=preg_replace('/\.php$/', '' ,$pag_org);
 
-// cod_tipo, tipo, descripcion, imgcat
   
 
   if($_GET["sw"]==1){     // NUEVO
-    $id=autogenerado("categoria","cod_tipo",6); 
+    $id=autogenerado("producto","cod_producto",6); 
     // $ing = 0;
     // $ing2 = 0;
 
   }elseif($_GET["sw"]==2){  // EDITAR
 
     $rs=@mysql_query("set names utf8",$link);
-    $fila=@mysql_fetch_array($rs);
-    $sql="SELECT * FROM categoria WHERE cod_tipo='".$_GET["id"]."'";
-    $rs=mysql_query($sql,$link);
-    $fila =mysql_fetch_object($rs);
+    $fila=@mysql_fetch_array($res);
+    $sql="SELECT * FROM producto WHERE cod_producto='".$_GET["id"]."'"; 
+    $res=@mysql_query($sql,$link);
+    $fila =mysql_fetch_object($res);
 
-// cod_tipo, tipo, descripcion, imgcat       
-    $id  = $fila->cod_tipo;
-    $tip = $fila->tipo;
+// cod_producto, descripcion, cod_subcat, precio, imagen, stock, cod_marca, estado       
+    $id  = $fila->cod_producto;
     $des = $fila->descripcion;    
-    $img = $fila->imgcat;
-  
-    mysql_free_result($rs);
+    $scat = $fila->cod_subcat;
+    $pre = $fila->precio;
+    $img = $fila->imagen;
+    $sto = $fila->stock;
+    $marc = $fila->cod_marca;
+    $est = $fila->estado;
+   
+    mysql_free_result($res);
 
   }else{ //   LISTA
   
   ?>
 
     <div id="fra_crud">
-      <?php if ($_GET["msn"]=='c1') { ?>
+      <?php if ($_GET["msn"]=='p1') { ?>
         <script type="text/javascript">setTimeout("cerrar()",6000);</script>
         <div class="notibar msgsuccess">
           <a class="close" id="equis"></a>
@@ -85,7 +89,7 @@
         </div>
       <?php }  ?> 
         
-      <?php if ($_GET["msn"]=='ec1') { ?>
+      <?php if ($_GET["msn"]=='e1') { ?>
         <script type="text/javascript">setTimeout("cerrar()",6000);</script>
         <div class="notibar msgsuccess">
           <a class="close" id="equis"></a>
@@ -93,35 +97,66 @@
         </div>
       <?php }  ?>
 
-      <?php if ($_GET["msn"]=='ec2') { ?>
+      <?php if ($_GET["msn"]=='igv1') { ?>
         <script type="text/javascript">setTimeout("cerrar()",6000);</script>
-        <div class="notibar msgalert">
+        <div class="notibar msgsuccess">
           <a class="close" id="equis"></a>
-          <p>Su registro ya existe, intente otro nombre!!!</p>;
+          <p>El IGV ha sido Habilitado con exito!!!</p>;
         </div>
       <?php }  ?>
 
-        <div class="contenttitle2">
-          <h3><?php echo strtoupper($pag); ?></h3>
-        </div><!--contenttitle-->
-        <br>
-        <div id="botonera">
-         <button class="stdbtn btn_orange" onclick="G('<?=$pag_org?>?sw=1');" > 
-          &nbsp;&nbsp;&nbsp;Nuevo&nbsp;&nbsp;&nbsp;</button>
-          <input type="button" name="Button2" value=" Eliminar " onclick="Subm()" class="stdbtn btn_orange">
+      <?php if ($_GET["msn"]=='igv2') { ?>
+        <script type="text/javascript">setTimeout("cerrar()",6000);</script>
+        <div class="notibar msgsuccess">
+          <a class="close" id="equis"></a>
+          <p>El IGV ha sido Deshabilitado con exito!!!</p>;
+        </div>
+      <?php }  ?>
+
+    <div class="contenttitle2">
+      <h3><?php echo strtoupper($pag); ?></h3>
+    </div><!--contenttitle-->
+    
+    <br>
+    
+    <div id="botonera">
+<!--          <button class="stdbtn btn_orange" onclick="G('<?=$pag_org?>?sw=1');" > 
+          &nbsp;&nbsp;&nbsp;Nuevo&nbsp;&nbsp;&nbsp;</button> -->
           
-        </div> <br> 
+          <!-- <input type="button" name="Button3" value=" Deshabilitar " onclick="Disable()" class="stdbtn btn_orange"> -->
+
+          <?php //echo $_SESSION["s_cod"]; 
+            $sql="SELECT cod_nivel FROM usuario WHERE cod_usuario='".$_SESSION["s_cod"]."'"; 
+            $res=@mysql_query($sql,$link);
+            $urg=@mysql_fetch_array($res);
+           
+            if ($urg[0]==1) {
+          ?>
+           <input type="button" name="Button2" value=" Eliminar " onclick="Subm()" class="stdbtn btn_orange">
+          <?php } ?>
+    </div> 
+
+    <br> 
 
         <?php 
 
           $rs=@mysql_query("set names utf8",$link);
-          $fila=@mysql_fetch_array($rs);
+          $fila=@mysql_fetch_array($res);
             
-// cod_tipo, tipo, descripcion, imgcat 
-          
-          $sql="select cod_tipo,  
-                concat('<img src=../productos/categorias/',imgcat,' width=50 height=50>') as Img, tipo, descripcion
-                from categoria"; 
+
+          $sql="select cod_producto as COD, 
+                concat('<img src=../productos/',imagen,' width=50 height=50>') as Img, 
+                descripcion as Descripcion, 
+                subcategorias.subcat as Subcat, 
+                precio, 
+                stock, 
+                marca.desc_marca as Marca, 
+                estado,
+                igv
+                from producto, subcategorias, marca
+                where producto.cod_subcat = subcategorias.cod_subcat
+                and producto.cod_marca = marca.cod_marca
+                order by 9,1 asc"; 
 
           $res=@mysql_query($sql,$link);
         ?>
@@ -131,14 +166,15 @@
         <table cellpadding="0" cellspacing="0" border="0" class="stdtable" id="dyntable2">
           <colgroup>
             <col class="con0" style="width: 1%" />
-            <col class="con1" style="width: 3%"/>
+             <col class="con1" style="width: 5%"/>
             <col class="con0" style="width: 5%" />
+            <col class="con1" style="width: 38%" />
             <col class="con0" style="width: 15%" />
-            <col class="con1" style="width: 25%" />
-            <col class="con1" style="width: 10%" />
-            <col class="con1" style="width: 6%" />
             <col class="con1" style="width: 8%" />
-
+            <col class="con1" style="width: 6%" />
+            <col class="con1" style="width: 10%" />
+<!--             <col class="con1" style="width: 8%" /> -->
+            <col class="con1" style="width: 5%" />
           </colgroup>
           <thead>
             <tr>
@@ -146,9 +182,13 @@
                 <input type="checkbox" name="allbox" onClick="CA();" title="Seleccionar o anular la selección de todos los registros" /></th>
               <th class="head1">COD</th>
               <th class="head1">Imagen</th>
-              <th class="head1">Categoría</th>
               <th class="head1">Descripción</th>
-              <th class="head1">EDITAR</th>
+              <th class="head1">Subcategoría</th>
+              <th class="head1">Precio</th>
+              <th class="head1">Stock</th>
+              <th class="head1">Marca</th>
+              <!-- <th class="head1">EDITAR</th> -->
+              <th class="head1">IGV</th>
             </tr>
           </thead>
     <!--       <tfoot>
@@ -167,19 +207,39 @@
 
           <?php while($row1=@mysql_fetch_array($res))
                      {$i++;
+
+                      if ($row1['igv']==0) {
+                        $colorfil = "style='background: #E2C6FF;'";
+                      }else {
+                        $colorfil = "";
+                      }
           ?>  
 
-              <tr class="gradeX">
+              <tr class="gradeX" <?=$colorfil?> >
                 <td align="center"><span class="center">
                   <input type='checkbox' name='check[]' value="<?=$row1[0]?>" onClick='CCA(this);'>
                 </span></td>
-                <td><?php echo $row1[0]; ?></td>
+                <td align="center"><?php echo $row1[0]; ?></td>
                 <td align="center"><?php echo $row1[1]; ?></td>
                 <td><?php echo $row1[2]; ?></td>
                 <td class="center"><?php echo $row1[3]; ?></td>
-                <td class="center">
+                <td align="right"><?php echo $row1[4]; ?></td>
+                <td align="center"><?php echo $row1[5]; ?></td>
+                <td class="center"><?php echo $row1[6]; ?></td>
+<!--                 <td class="center">
                   <a href="#" onclick="G('<?=$pag_org?>?id=<?=$row1[0]?>&sw=2');">
-                    <img src="images/icons/editor.png" alt="">&nbsp;Editar</a>  </td>
+                    <img src="images/icons/editor.png" alt="">&nbsp;Editar</a>  </td> -->
+                <?php 
+                    if ($row1['igv']==1) {
+                      $fun_str="Disable(); return false;";
+                      $act_str="<img src='images/sw_on.png'>";
+                    }elseif ($row1['igv']==0) {
+                      $fun_str="Enable(); return false;";
+                      $act_str="<img src='images/sw_off.png'>";
+                    }
+                ?>
+                <td><a href="#" onclick="<?=$fun_str?>"><?=$act_str?></a></td>      
+
               </tr>
           <?php } ?>    
           </tbody>
@@ -229,17 +289,37 @@
               </p> 
 
               <p>
-                <label>Nombre de categoría : </label>
+                <label>Descripción : </label>
                 <span class="field">
-                  <input type="text" name="tipo" id="tipo" value="<?=$tip?>" size="30" class="smallinput">
+                  <input type="text" name="des" id="des" value="<?=$des?>" size="50">
                 </span>
               </p>
                           
               <p>
-                <label>Descripción :</label>
+                <label>Subcategoria :</label>
                 <span class="field">
-                  <input type="text" name="des" id="des" value="<?=$des?>" size="50">
-                <!-- <? //llenarcombo('subcategorias','cod_subcat, subcat',' ORDER BY 2', $scat, '','codcat'); ?> -->
+                <? llenarcombo('subcategorias','cod_subcat, subcat',' ORDER BY 2', $scat, '','codcat'); ?>
+                </span>
+              </p>
+
+              <p>
+                <label>Precio :</label>
+                <span class="field">
+                  <input type="text" name="pre" id="pre" value="<?=$pre?>" onKeyPress="return numeros(event)" maxLength="10" class="smallinput"> Nuevos Soles (S/.)
+                </span>
+              </p>
+
+              <p>
+                <label>Stock :</label>
+                <span class="field">
+                  <input type="text" name="stock" id="stock" value="<?=$sto?>" onKeyPress="return numeros(event)" maxlength="5" class="smallinput">
+                </span>
+              </p>
+
+              <p>
+                <label>Marca:</label>
+                <span class="field">
+                  <? llenarcombo('marca','cod_marca, desc_marca',' ORDER BY 2', $marc, '','codmarca'); ?>
                 </span>
               </p>
 
@@ -252,12 +332,24 @@
 
                 <?php 
                   if($_GET["sw"]==1){ 
+                    // echo "<p>
+                    //       <label>&nbsp;</label>
+                    //       <span class='field'>&nbsp;
+                    //       </span>
+                    //       </p>";
                     echo "&nbsp;";
                   }else{
+                    // echo "<tr>
+                    //       <td align='left'>Vista Previa :</td>
+                    //         <td align='left'>"."&nbsp;&nbsp; 
+                    //           <img src='../productos/$img' width='50' height='50'></td>
+                    //                   <input type='hidden' name='imgDef' value='".$img."'>
+                    //     </tr>";
+
                     echo "<p>
                           <label>Vista Previa :</label>
                           <span class='field'>&nbsp;&nbsp;
-                            <img src='../productos/categorias/$img' width='50' height='50'>
+                            <img src='../productos/$img' width='50' height='50'>
                             <input type='hidden' name='imgDef' value='".$img."'>
                           </span>
                           </p>";

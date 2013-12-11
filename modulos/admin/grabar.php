@@ -6,16 +6,37 @@
 
 	switch ($_POST["pag"]) {
 		
-		case 'usuario':
+		case 'usuarios':
 			if($_POST["sw"]==1){
 			
-			$rs=mysql_query("SELECT * FROM usuario WHERE login='".$_POST["login"]."'",$link);
+			$rs=mysql_query("SELECT * FROM usuario WHERE login='".$_POST["log"]."'",$link);
 			$numfilas=mysql_num_rows($rs);
 			
 		
 			if($numfilas == 0 ){
-				
-				mysql_query("INSERT INTO usuario( nombre, apellidos,dni, direccion, telefono, correo, login, clave, cod_nivel) VALUES('".$_POST["nom"]."','".$_POST["ape"]."','".$_POST["dni"]."','".$_POST["dir"]."','".$_POST["tel"]."','".$_POST["email"]."','".$_POST["login"]."','".$_POST["pwd"]."','".$_POST["codniv"]."')",$link);				
+				$rs=@mysql_query("set names utf8",$link);
+          		@mysql_fetch_array($rs);
+				$sql="INSERT INTO usuario(login, 
+										  clave,
+										  nombre,
+										  apellidos,
+										  dni,
+										  direccion,
+										  telefono,
+										  correo,
+										  cod_nivel, estado) 
+					         VALUES('".$_POST["log"]."','".
+					         	       md5($_POST["clave"])."','".
+					         	       $_POST["nombre"]."','".
+					         	       $_POST["apellidos"]."','".
+					         	       $_POST["dni"]."','".
+					         	       $_POST["dir"]."','".
+					         	       $_POST["tel"]."','".
+					         	       $_POST["correo"]."','".
+					         	       $_POST["codnivel"]."',1)";
+				// echo $sql; exit();	
+				@mysql_query($sql,$link);
+				$msn='u1';				
 				}
 			else
 			{ 
@@ -24,14 +45,36 @@
 			
 			 }
 			}elseif($_POST["sw"]==2){
+				$rs=@mysql_query("set names utf8",$link);
+          		@mysql_fetch_array($rs);
+				
+				if ($_POST["clave"]==$_POST["ant_clave"]) {
+					$pass=$_POST["ant_clave"];
+				}else{
+					$pass=md5($_POST["clave"]);
+				}
 
-				mysql_query("UPDATE usuario SET nombre='".$_POST["nom"]."', apellidos='".$_POST["ape"]."', dni='".$_POST["dni"]."', direccion='".$_POST["dir"]."', telefono='".$_POST["tel"]."', correo='".$_POST["email"]."', login='".$_POST["login"]."',clave='".$_POST["pwd"]."',cod_nivel='".$_POST["codniv"]."' WHERE cod_usuario='".$_POST["id"]."'",$link);
+				$sql="UPDATE usuario 
+					         SET login='".$_POST["log"].
+					         "', clave='".$pass.
+					         "', nombre='".$_POST["nombre"].
+					         "', apellidos='".$_POST["apellidos"].
+					         "', dni='".$_POST["dni"].
+					         "', direccion='".$_POST["dir"].
+					         "', telefono='".$_POST["tel"].
+					         "', correo='".$_POST["correo"].
+					         "', cod_nivel='".$_POST["codnivel"].
+					         "' WHERE cod_usuario='".$_POST["id"]."'";
+				// echo $sql; exit();
+				@mysql_query($sql,$link);
+				$msn='u1';
 	
 			}else{
 				$numreg=count($_POST["check"]);
 				for ($i=0;$i<=$numreg-1;$i++){
 						mysql_query("DELETE FROM usuario WHERE cod_usuario='".$_POST["check"][$i]."'",$link);
 				}
+				$msn='ue1';
 			}
 			break;
 				
@@ -57,18 +100,19 @@ case 'productos':
 			  }
 
 			/*			move_uploaded_file($_FILES[imag][tmp_name],"../../imagenes/Productos/img".$_POST["id"]);*/
-			// cod_producto, descripcion, cod_subcat, precio, imagen, stock, cod_marca, prom			
+			// cod_producto, descripcion, cod_subcat, precio, imagen, stock, cod_marca, prom
+			// cod_producto, descripcion, cod_subcat, precio, imagen, stock, cod_marca, estado, igv			
 	
 			$rs=@mysql_query("set names utf8",$link);
 			$fila=@mysql_fetch_array($rs);
 
-			mysql_query("INSERT INTO producto (descripcion, cod_subcat, precio, imagen, stock, cod_marca) 
+			mysql_query("INSERT INTO producto (descripcion, cod_subcat, precio, imagen, stock, cod_marca, estado, igv)
 						 VALUES('".$_POST["des"]."','" 
 								  .$_POST["codcat"]."','"
 								  .$_POST["pre"]."','"
 								  .$nombre."','"
 								  .$_POST["stock"]."','"
-								  .$_POST["codmarca"]."')",$link);
+								  .$_POST["codmarca"]."', 1, 1)",$link);
 			$msn='p1';
 	
 			}	

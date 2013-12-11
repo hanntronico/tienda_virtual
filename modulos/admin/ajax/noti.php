@@ -18,18 +18,13 @@
             $sql="SELECT count(*) FROM pedidos WHERE estado=1"; 
             $res=@mysql_query($sql,$link);
             $numpedidos = @mysql_num_rows($res);
-            
-            $sql="SELECT count(*) FROM pedidos WHERE estado=1"; 
-            $res=@mysql_query($sql,$link);
-            $numpedidos = @mysql_num_rows($res);
-
             $row2=@mysql_fetch_array($res);
          ?>
 
         (<?=$numpedidos?>)</a></li>
 </ul>
 <div id="messages">
-<!--     <ul class="msglist">
+    <ul class="msglist">
         <li>
             <a href="messages.html">
             	<span class="thumb"><img src="images/thumbs/avatar1.png" alt="" /></span>
@@ -40,7 +35,7 @@
                 </span>
             </a>
         </li>
-        <li>
+<!--         <li>
             <a href="messages.html">
             	<span class="thumb"><img src="images/thumbs/avatar2.png" alt="" /></span>
                 <span class="msgdetails">
@@ -69,8 +64,8 @@
                     <span class="time">May 19</span>
                 </span>
             </a>
-        </li>
-    </ul> -->
+        </li> -->
+    </ul>
 
 	<div class="msgbutton">
     	<a href="">Todos los mensajes</a>

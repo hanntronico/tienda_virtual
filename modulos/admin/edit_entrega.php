@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="css/style.default.css" type="text/css" />
+<link rel="stylesheet" href="../../css/estilos_admin.css" type="text/css" />
+
 <script type="text/javascript" src="js/plugins/jquery-1.7.min.js"></script>
 <script type="text/javascript" src="js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
 <script type="text/javascript" src="js/plugins/jquery.cookie.js"></script>
@@ -21,8 +24,6 @@
 <script type="text/javascript" src="js/custom/tables.js"></script>
 <script type="text/javascript" src="js/custom/dashboard.js"></script>
 
-
-
 <script type="text/javascript">
   jQuery('.notibar .close').click(function(){
     jQuery(this).parent().fadeOut(function(){
@@ -31,51 +32,45 @@
   });
 
 
-
-  
-    // jQuery(".cantidad2").click(function(){
-    //     var txt=jQuery(this).attr("rel");
-    //     var p1=txt.split("&")[0].split("=")[1];
-    //     var p2=txt.split("&")[1].split("=")[1];
-        
-    //     alert( p1 +" --- "+ p2 );
-        
-    //     return false;
-    // });    
-
-
   jQuery('.cantidad2').click
   (function(){
     var txt=jQuery(this).attr("rel");
     var p1=txt.split("&")[0].split("=")[1];
     var p2=txt.split("&")[1].split("=")[1];
 
-    <?php  
-      // include("conectar.php");
-      // $link=Conectarse();
+    <?php 
+      include("conectar.php");
+      $link=Conectarse(); 
+      $sql="SELECT dni FROM usuario WHERE cod_usuario=1"; 
+      $res=@mysql_query($sql,$link);
+      $cod_admin=@mysql_fetch_array($res)
+    ?>  
 
-      // $rs=@mysql_query("set names utf8",$link);
-      // $fila=@mysql_fetch_array($res);
-      // $sql="SELECT descripcion
-      //       FROM producto
-      //       WHERE cod_producto ='".$_GET["id"]."'"; 
-      // $res=@mysql_query($sql,$link);
-      // $fila =mysql_fetch_object($res);
-    ?>
+    var clave = <?php echo $cod_admin[0]; ?>;
 
-    jPrompt('Ingrese cantidad para producto '+p2+':', '', 'Modificar cantidad', function(r) {
-      if( r ) {
-        jConfirm('Esta seguro que quiere cambiar la CANTIDAD del producto '+p2+'?', 'Confirmar operación', function(re) {
-          // jAlert('Confirmed: ' + r, 'Confirmation Results');
-          if( re ) {
-            var content = jQuery("#contenito");
-            content.fadeIn('slow').load("edit_cant.php?cpe="+p1+"&cpd="+p2+"&cnt="+r);
-          }
-          // var content = jQuery("#conte");
-          // content.fadeIn('slow').load("pedidos.php?id="+p1+"&sw=2");
-        });
-      }
-    });
+      jPrompt('Ingrese clave de autorización :', '', 'Contraseña', function(rp) {
+        if ( rp == clave ) {
+
+          jPrompt('Ingrese cantidad para producto '+p2+':', '', 'Modificar cantidad', function(r) {
+            if( r ) {
+              jConfirm('Esta seguro que quiere cambiar la CANTIDAD del producto '+p2+'?', 'Confirmar operación', function(re) {
+                // jAlert('Confirmed: ' + r, 'Confirmation Results');
+                if( re ) {
+                  var content = jQuery("#contenito");
+                  content.fadeIn('slow').load("edit_cant_ent.php?cpe="+p1+"&cpd="+p2+"&cnt="+r);
+                }
+                // var content = jQuery("#conte");
+                // content.fadeIn('slow').load("pedidos.php?id="+p1+"&sw=2");
+              });
+            }
+          });
+
+        }else{
+          jAlert('CLAVE INCORRECTA','Aviso del Sistema');
+        }
+      });
+
+
     
     return false;
   });
@@ -94,9 +89,8 @@
 <body>
 
 <?php
-  include("conectar.php");
-  $link=Conectarse();
-  $pag = "pedidos";
+
+  $pag = "DESPACHO";
 
   $pag_org = parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH);
   //verificamos si en la ruta nos han indicado el directorio en el que se encuentra
@@ -142,11 +136,11 @@
   ?>
 
     <div id="fra_crud">
-      <?php if ($_GET["msn"]=='at1') { ?>
+      <?php if ($_GET["msn"]=='dp1') { ?>
             <script type="text/javascript">setTimeout("cerrar()",6000);</script>
             <div class="notibar msgsuccess">
               <a class="close" id="equis"></a>
-              <p>El pedido fue atendido con exito!!!</p>;
+              <p>El pedido fue despachado con exito!!!</p>;
             </div>
       <?php }  ?>
         
@@ -181,7 +175,8 @@
                        pedidos.estado 
                        FROM pedidos INNER JOIN usuario 
                        ON pedidos.cod_usuario = usuario.cod_usuario
-                       order by 12,1 asc"; 
+                       and pedidos.estado <> 1
+                       order by 1 Desc"; 
 
           $res=@mysql_query($sql,$link);
         ?>
@@ -232,18 +227,13 @@
 
           <?php while($row1=@mysql_fetch_array($res))
                      {$i++;
-            if ($row1[11]==1) {
-              $color_row="#FFFF91";
-            }elseif ($row1[11]==2) {
-              // $color_row=" #A8FFA8";
+            if ($row1[11]==2) {
+              // $color_row="#FFFF91";
               $color_row="#FED89E";
             }elseif ($row1[11]==3) {
               // $color_row=" #A8FFA8";
               $color_row="#D2E9FF";
-            }elseif ($row1[11]==4) {
-              // $color_row=" #A8FFA8";
-              $color_row="#A8FFA8";
-            }  
+            }
           ?>  
 
               <tr class="gradeX" style="background:<?=$color_row?>">
@@ -268,22 +258,12 @@
                 <td class="center"><?php echo $row1[5]; ?></td>
                 <td class="center"><?php echo $row1[6]; ?></td>
                 <td class="center"><?php 
-                    if ($row1[11]==1) {
-                      echo "<span style='color: #CF940A; font-weight: bolder;'>Pendiente-1</span>";
-                    } elseif ($row1[11]==2) {
-                      echo "<span style='color: #F57223; font-weight: bolder;'>Verificado-2</span>";
-                    }elseif ($row1[11]==3) {
-                       // $color_row=" #A8FFA8";
-                      // $color_row=" #D2E9FF";
-                      echo "<span style='color: #0683FF; font-weight: bolder;'>Preparado-3</span>";
-                    }elseif ($row1[11]==4) {
-                      // $color_row=" #A8FFA8";
-                      // $color_row="#A8FFA8";
-                      echo "<span style='color: #008000; font-weight: bolder;'>Entregado-4</span>";
-
-                    }    
-                     
-
+                    if ($row1[11]==2) {
+                      echo "<span style='color: #CF940A; font-weight: bolder;'>2</span>";
+                    } elseif ($row1[11]==3) {
+                      echo "<span style='color: #0683FF; font-weight: bolder;'>3</span>";
+                    } 
+                    
                     ?>
 
                 </td>
@@ -314,7 +294,7 @@
 <div id="fra_crud2">
   <div id="contenito"></div>
   <br>
-  <form action="atender.php" method="post" enctype="multipart/form-data" name="form1" onSubmit="return validar(this)">
+  <form action="despachar.php" method="post" enctype="multipart/form-data" name="form1" onSubmit="return validar(this)">
     <table class="form_crud">
       <thead>
         <tr>
@@ -355,11 +335,18 @@
               <th class="head1">SUBTOTAL</th>
 
               <?php 
-                $sql="SELECT estado FROM pedidos WHERE cod_pedido ='".$_GET["id"]."'"; 
+                // $sql="SELECT estado FROM pedidos WHERE cod_pedido ='".$_GET["id"]."'"; 
+                $sql="SELECT comprobante.estado
+                      FROM pedidos LEFT JOIN comprobante 
+                      ON pedidos.cod_pedido = comprobante.cod_pedido 
+                      WHERE pedidos.cod_pedido ='".$_GET["id"]."'";
+
+                // echo $sql; 
                 $qry1=@mysql_query($sql,$link);
                 $tup1=@mysql_fetch_array($qry1);
-              
-                if ($tup1[0]==1) {
+                // echo $tup1[0]." - ".$sql;
+
+                if ($tup1[0]==NULL) {
               ?>
                   <th class="head1">ACCION</th>
               <?php } ?> 
@@ -432,7 +419,7 @@
                 </td>
                 <td align="right"><?php echo $row1[5]; ?></td>
                 <?php 
-                  if ($tup1[0]==1) {
+                  if ($tup1[0]==NULL) {
                 ?>
                   <td align="center">
                     <a href="#" id="getItem_1" class="cantidad2" rel="p1=<?=$_GET['id']?>&p2=<?=$row1[0]?>"> 
@@ -539,17 +526,17 @@
                   <p class="stdformbutton">
                     
                     <?php 
-                      if ($tup1[0]==1) {
+                      //if ($tup1[0]==3) {
                     ?> 
-                        <input name="grabar" type="submit" value="   Verificar   " class="boton">
-                        &nbsp;&nbsp;&nbsp;
-                      <?php  }  ?>
+                        <!-- <input name="grabar" type="submit" value="   Despachar   " class="boton"> -->
+                        <!-- &nbsp;&nbsp;&nbsp; -->
+                      <?php  //}  ?>
 
                     <?php $cod=$_GET["id"] ?>      
 
-                    <input type="button" name="imprimir" value="  Imprimir  " class="stdbtn btn_orange" onclick="printview('print_pedido.php?id=<?php echo $cod; ?>'); return false;">
+                    <input type="button" name="imprimir" value="  Imprimir  " class="stdbtn btn_orange" onclick="printview('print_guia.php?id=<?php echo $cod; ?>'); return false;">
                     &nbsp;&nbsp;&nbsp;
-                    <input type="button" name="salir" value="  Salir  " class="stdbtn btn_orange" onclick="G('<?=$pag_org?>');">
+                    <input type="button" name="salir" value="  Salir  " class="stdbtn btn_orange" onclick="G('facturacion.php');">
 
 <!--                     <a href="" class="anchorbutton cantidad2" id="a1">
                       Dialog with HTML support</a> -->

@@ -208,7 +208,7 @@
               $sql="SELECT dp.cod_producto,
                            concat('<img src=../productos/',p.imagen,' width=50 height=50>') as Img,
                            p.descripcion, 
-                           p.precio, 
+                           dp.precio, 
                            dp.cantidad, 
                            dp.subtotal,
                            dp.igv

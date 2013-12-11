@@ -33,6 +33,6 @@
 
 <script type="text/javascript">
     var content = jQuery("#conte");
-	content.fadeIn('slow').load("pedidos.php?id="+<?=$_GET["cpe"]?>+"&sw=2");
+	content.fadeIn('slow').load("despacho.php?id="+<?=$_GET["cpe"]?>+"&sw=2");
     // alert("hann");    
 </script>

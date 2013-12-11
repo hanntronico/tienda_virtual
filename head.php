@@ -46,6 +46,36 @@
               event.returnValue = false;
             }
 
+            function valida_cambiopass() {
+                var passact = document.frm_cambiopass.txtpassact.value; 
+                if (passact==""){
+                  alert ("Por favor ingresar contraseña actual");
+                  document.frm_cambiopass.txtpassact.focus();
+                  return false;        
+                }
+
+                var newpass = document.frm_cambiopass.txtnuevapass.value;    
+                if (newpass==""){
+                  alert ("Por favor ingresar nueva contraseña");
+                  document.frm_cambiopass.txtnuevapass.focus();
+                  return false;        
+                }
+
+                var confpass = document.frm_cambiopass.txtconfpass.value;    
+                if (confpass==""){
+                  alert ("Por favor confirme contraseña");
+                  document.frm_cambiopass.txtconfpass.focus();
+                  return false;        
+                }
+                
+                if (newpass!=confpass){
+                    alert ("Contraseñas no coinciden");
+                    return false;
+                }
+
+                return true;
+            }  
+
             function validaform() {
 
                 var nom = document.register_form[1].txtnombres.value; 
@@ -106,6 +136,40 @@
 
             function accion(){
               setTimeout("cerrar()",3000);
+            }
+
+            function valida_suger () {
+              var nomape = document.frm_suger.txtnomape.value; 
+              if (nomape==""){
+                  alert ("Por favor ingresar nombres y apellidos");
+                  document.frm_suger.txtnomape.focus();
+                  return false;        
+              }
+
+              var email = document.frm_suger.txtemail.value; 
+              if (email==""){
+                  alert ("Por favor ingresar su correo");
+                  document.frm_suger.txtemail.focus();
+                  return false;        
+              }
+
+              var atpos=email.indexOf("@");
+              var dotpos=email.lastIndexOf(".");
+                if (atpos<1 || dotpos<atpos+2 || dotpos+2>=email.length)
+                  {
+                  alert("Ingrese una dirección de correo válida");
+                  document.frm_suger.txtemail.focus();
+                  return false;
+                  }
+
+              var msn = document.frm_suger.txtmensaje.value.length
+              if (msn==0) {
+                alert ("Por favor ingresar su correo");
+                document.frm_suger.txtmensaje.focus();
+                return false;
+              }
+
+              return true
             }
 
         </script>

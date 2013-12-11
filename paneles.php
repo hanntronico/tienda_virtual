@@ -4,17 +4,24 @@
         <h3 class="m_title">INGRESE CON SU USUARIO PARA PODER COMPRAR
           <!-- SIGN IN YOUR ACCOUNT TO HAVE ACCESS TO DIFFERENT FEATURES --></h3>
         <form id="login_form" name="login_form" action="login.php" method="post">
-          <a href="#" class="create_account" onClick="ppOpen('#register_panel', '360');">REGISTRESE</a>
+          <a href="#" class="create_account" onClick="ppOpen('#register_panel', '360');">
+            REGISTRESE</a>
           <!-- <input type="text" id="uscorreo" name="uscorreo" class="inputbox" placeholder="Correo"> -->
+          <span style="font-size:12px;">Correo:</span>
           <input type="text" id="uscorreo" name="uscorreo" class="inputbox">
           <!-- <input type="password" id="uspassword" name="uspassword" class="inputbox" placeholder="Contraseña"> -->
+          <span style="font-size:12px;">Contraseña:</span> 
           <input type="password" id="uspassword" name="uspassword" class="inputbox">
           <input type="submit" id="login" name="submit" value="ENTRAR">
+          
           <!-- <a href="#" class="login_facebook">login with facebook</a> -->
         </form><br>
         <div class="links">
-          <a href="#" onClick="ppOpen('#forgot_panel', '350');" id="olv">Olvidó su usuario?</a> / 
-          <a href="#" onClick="ppOpen('#forgot_panel', '350');">Olvidó su contraseña?</a></div>
+          <a href="#" onClick="ppOpen('#forgot_panel', '350');" id="olv">
+            Olvidó su usuario?</a>&nbsp; / &nbsp; 
+          <a href="#" onClick="ppOpen('#forgot_panel', '350');">Olvidó su contraseña?</a>
+          <!-- <a href="">Salir</a> -->
+        </div>
       </div>
     </div><!-- end login panel -->
 
