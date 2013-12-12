@@ -101,15 +101,15 @@
   ?>
 
     <div id="fra_crud">
-      <?php if ($_GET["msn"]=='et1') { ?>
+      <?php if ($_GET["msn"]=='lq1') { ?>
             <script type="text/javascript">setTimeout("cerrar()",6000);</script>
             <div class="notibar msgsuccess">
               <a class="close" id="equis"></a>
-              <p>El comprobante se emitió con exito!!!</p>;
+              <p>El comprobante se liquidó con exito!!!</p>;
             </div>
       <?php }  ?>
 
-      <?php if ($_GET["msn"]=='an1') { ?>
+      <?php if ($_GET["msn"]=='elq1') { ?>
             <script type="text/javascript">setTimeout("cerrar()",6000);</script>
             <div class="notibar msgsuccess">
               <a class="close" id="equis"></a>
@@ -184,7 +184,7 @@
             }elseif ($row1['cod_liquid']==0) {
               // $color_row=" #FFFF91";
               $color_row=" #FFAA82";
-            }elseif ($row1['cod_liquid']==1) {
+            }elseif ($row1['cod_liquid']!=NULL) {
               $color_row=" #A8FFA8";
             }
           ?>  
@@ -215,7 +215,7 @@
                     //echo $row1[5];
                     if ($row1["cod_liquid"]==NULL) {
                       echo "<span style='color: #757575; font-weight: bolder;'>Sin Comprobante</span>";
-                    } elseif ($row1["cod_liquid"]==1) {
+                    } elseif ($row1["cod_liquid"]!=NULL) {
                       echo "<span style='color: #008000; font-weight: bolder;'>LIQUIDADO</span>";
                     } elseif ($row1["cod_liquid"]==0) {
                       echo "<span style='color: #FF0000; font-weight: bolder;'>ANULADA</span>";

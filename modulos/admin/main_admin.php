@@ -107,6 +107,10 @@ if ($_GET['msn']=='igv2') {
     $strcarga = "cargare('productigv.php?msn=igv2')";
 }
 
+if ($_GET['msn']=='lq1') { 
+    $strcarga = "cargare('liquidacion.php?msn=lq1')";
+}
+
 ?>
 
 

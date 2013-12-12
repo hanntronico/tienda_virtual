@@ -20,6 +20,6 @@
 	$consulta = "UPDATE comprobante SET estado=2 where cod_comprob=".$_POST["id"];
 	$rs2=mysql_query($consulta,$link) or die ("error : $consulta");
 
-	$msn='et1';
+	$msn='lq1';
 	header('location: main_admin.php'.'?msn='.$msn)
 ?>
