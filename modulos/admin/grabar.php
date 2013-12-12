@@ -4,6 +4,7 @@
 	$link=Conectarse();
 	$loc="location: ".$_POST["pag"].".php";
 
+	// echo $loc; exit();
 	switch ($_POST["pag"]) {
 		
 		case 'usuarios':

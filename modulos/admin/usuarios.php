@@ -272,7 +272,7 @@
 <div id="fra_crud">
   <br>
 
-  <form name="frm_producto" class="stdform stdform2" method="post" action="grabar.php" enctype="multipart/form-data" onSubmit="return validaFormProducto(this)">
+  <form name="frm" class="stdform stdform2" method="post" action="grabar.php" enctype="multipart/form-data" onSubmit="return validaFormUsuario(this)">
   
   <table class="form_crud">
     <thead>
@@ -299,45 +299,6 @@
                 <b>CODIGO:</b>
                 <b><?=$id?></b> <input type='hidden' name='id' class='Text' value='<?=$id?>'>
               </p> 
-
-              <p>
-                <label>Login : </label>
-                <span class="field">
-                  <!-- <input type="text" name="log" id="log" value="<?=$log?>" class="smallinput" > -->
-                  <select name="log" id="log" class="uniformselect" style='width:350px;'>
-                    <?php 
-                      // while($cur = mysql_fetch_array($rs)){
-                      //   $seleccionar="";
-                      //   if($cur[0]==$seleccionado) $seleccionar="selected";
-                      //   echo "<option value=".$cur[0]." ".$seleccionar.">".$cur[1]."</option>";
-                      // }
-                     ?>
-                    <option value="Vendedor" <?php if ($log=="Vendedor"){echo "selected";} ?>>Vendedor</option>
-                    <option value="Despachador" <?php if ($log=="Despachador"){echo "selected";} ?>>Despachador</option>
-                    <option value="Repartidor" <?php if ($log=="Repartidor"){echo "selected";} ?>>Repartidor</option>
-                  </select>
-                </span>
-              </p>
-                          
-<!--               <p>
-                <label>Subcategoria :</label>
-                <span class="field">
-                <? //llenarcombo('subcategorias','cod_subcat, subcat',' ORDER BY 2', $scat, '','codcat'); ?>
-                </span>
-              </p> -->
-
-<!--               <p>
-                <label>Clave :</label>
-                <span class="field">
-                  <input type="text" name="clave" id="clave" value="<?=$clave?>" onKeyPress="return numeros(event)" maxLength="10" class="smallinput"></span>
-              </p> -->
-
-              <p>
-                <label>Clave :</label>
-                <span class="field">
-                  <input type="password" name="clave" id="clave" value="<?=$clave?>" class="password" size="58"></span>
-                  <input type="hidden" name="ant_clave" id="ant_clave" value="<?=$clave?>">
-              </p>
 
               <p>
                 <label>Nombre :</label>
@@ -379,6 +340,25 @@
                 <span class="field">
                   <input type="text" name="correo" id="correo" value="<?=$correo?>" class="smallinput">
                 </span>
+              </p>
+
+              <p>
+                <label>Login : </label>
+                <span class="field">
+                  <!-- <input type="text" name="log" id="log" value="<?=$log?>" class="smallinput" > -->
+                  <select name="log" id="log" class="uniformselect" style='width:350px;'>
+                    <option value="Vendedor" <?php if ($log=="Vendedor"){echo "selected";} ?>>Vendedor</option>
+                    <option value="Despachador" <?php if ($log=="Despachador"){echo "selected";} ?>>Despachador</option>
+                    <option value="Repartidor" <?php if ($log=="Repartidor"){echo "selected";} ?>>Repartidor</option>
+                  </select>
+                </span>
+              </p>
+                          
+              <p>
+                <label>Clave :</label>
+                <span class="field">
+                  <input type="password" name="clave" id="clave" value="<?=$clave?>" class="password" size="58"></span>
+                  <input type="hidden" name="ant_clave" id="ant_clave" value="<?=$clave?>">
               </p>
 
               <p>

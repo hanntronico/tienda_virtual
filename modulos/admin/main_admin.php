@@ -16,6 +16,17 @@ if ($_GET['msn']=='d1') {
     $strcarga = "cargare('productos.php?msn=d1')";
 }
 
+if ($_GET['msn']=='pr1') { 
+    $strcarga = "cargare('proveedores.php?msn=pr1')";
+}
+if ($_GET['msn']=='epr1') { 
+    $strcarga = "cargare('proveedores.php?msn=epr1')";
+}
+
+if ($_GET['msn']=='d1') { 
+    $strcarga = "cargare('proveedores.php?msn=d1')";
+}
+
 if ($_GET['msn']=='s1') { 
     $strcarga = "cargare('subcategorias.php?msn=s1')";
 }

@@ -694,7 +694,7 @@
                 <a href="" id="bus_prod" class="btn btn_orange btn_search radius50" onclick="result_bus();return false;"><span>Busca</span></a>
                 &nbsp;&nbsp;&nbsp;
                 
-                <a href="" class="btn btn_orange btn_search radius50" onclick="w_child('prod.php?sw=1');return false;"><span>Nuevo</span></a>
+                <a href="" class="btn btn_orange btn_book radius50" onclick="w_child('prod.php?sw=1');return false;"><span>Nuevo</span></a>
                 <br><br>
                 <!-- <a href="#" onclick="result_bus();return false;">BUSCA</a><br><br> -->
                 <div id="res_bus" style="border: 1px solid #FF8040;">&nbsp;</div>

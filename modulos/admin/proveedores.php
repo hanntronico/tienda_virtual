@@ -78,7 +78,7 @@
   ?>
 
     <div id="fra_crud">
-      <?php if ($_GET["msn"]=='p1') { ?>
+      <?php if ($_GET["msn"]=='pr1') { ?>
         <script type="text/javascript">setTimeout("cerrar()",6000);</script>
         <div class="notibar msgsuccess">
           <a class="close" id="equis"></a>
@@ -86,7 +86,7 @@
         </div>
       <?php }  ?> 
         
-      <?php if ($_GET["msn"]=='e1') { ?>
+      <?php if ($_GET["msn"]=='epr1') { ?>
         <script type="text/javascript">setTimeout("cerrar()",6000);</script>
         <div class="notibar msgsuccess">
           <a class="close" id="equis"></a>
@@ -198,7 +198,7 @@
 <div id="fra_crud">
   <br>
 
-  <form name="frm_proveedor" class="stdform stdform2" method="post" action="grabar.php" enctype="multipart/form-data" onSubmit="return validaFormProveedor(this)">
+  <form name="frm_proveedor" class="stdform stdform2" method="post" action="grabar.php" enctype="multipart/form-data" onSubmit="return validaFormProvee(this)">
   
   <table class="form_crud">
     <thead>

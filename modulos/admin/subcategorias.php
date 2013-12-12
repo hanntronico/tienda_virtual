@@ -203,7 +203,7 @@
 <div id="fra_crud">
   <br>
 
-  <form name="frm_producto" class="stdform stdform2" method="post" action="grabar.php" enctype="multipart/form-data" onSubmit="return validaFormProducto(this)">
+  <form name="frm" class="stdform stdform2" method="post" action="grabar.php" enctype="multipart/form-data" onSubmit="return validaFormSubCateg(this)">
   
   <table class="form_crud">
     <thead>

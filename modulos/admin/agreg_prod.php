@@ -14,7 +14,14 @@ if ($_GET['sw']==1){
 // echo $_SESSION["ls_prod"][1];
 // echo $_GET["id"];
 ?>
-
+<script type="text/javascript">
+  var prov = document.frm_regcompra.codprov.value;
+  var content = jQuery("#perc");
+  content.fadeIn('fast').load("percepcion.php?id="+prov);
+  // alert('<?php session_start();echo $_SESSION["precep"];?>');
+</script>
+<!-- <div id="perc" style="visibility: hidden;"></div> -->
+<div id="perc"></div>
 <table cellpadding="0" cellspacing="0" border="0" class="stdtable" id="listprod">
     <colgroup>
       <col class="con1" style="width: 5%"/>
@@ -105,7 +112,15 @@ if ($_GET['sw']==1){
         <tr>
           <td colspan="3"></td>
           <td colspan="2" align="right">PERCEPCION</td>
-          <td align="right"><?=sprintf("%01.2f",(($valor*1.18)*0.02))?></td>
+          <td align="right">
+            <?php 
+              if ($_SESSION["precep"]==1) {
+                echo sprintf("%01.2f",(($valor*1.18)*0.02));
+              }elseif ($_SESSION["precep"]==0) {
+                echo "---";
+              }
+            ?>
+          </td>
           <td>&nbsp;</td>
         </tr>   
         <tr>

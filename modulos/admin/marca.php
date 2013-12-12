@@ -193,7 +193,7 @@
 <div id="fra_crud">
   <br>
 
-  <form name="frm_producto" class="stdform stdform2" method="post" action="grabar.php" enctype="multipart/form-data" onSubmit="return validaFormMarca(this)">
+  <form name="frm_marca" class="stdform stdform2" method="post" action="grabar.php" enctype="multipart/form-data" onSubmit="return validaFormMarca(this)">
   
   <table class="form_crud">
     <thead>
