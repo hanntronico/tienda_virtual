@@ -148,9 +148,9 @@
         <table cellpadding="0" cellspacing="0" border="0" class="stdtable" id="dyntable2">
           <colgroup>
             <col class="con0" style="width: 1%" />
-            <col class="con1" style="width: 1%" />
-            <col class="con1" style="width: 2%" />
-            <col class="con1" style="width: 4%" />
+            <col class="con1" style="width: 3%" />
+            <col class="con1" style="width: 3%" />
+            <col class="con1" style="width: 3%" />
             <col class="con1" style="width: 4%" />
             <col class="con1" style="width: 4%" />
             <col class="con1" style="width: 3%" />
@@ -161,14 +161,14 @@
           </colgroup>
           <thead>
             <tr>
-              <th class="head1 nosort">
+              <th class="head1 nosort" style="text-align: center;">
                 <input type="checkbox" name="allbox" onClick="CA();" title="Seleccionar o anular la selección de todos los registros" /></th>
-              <th class="head1">COD</th>
+              <th class="head1">COD. COMP.</th>
+              <th class="head1">COD. PEDIDO</th>
               <th class="head1">NRO. TICKET</th>
               <th class="head1" style="text-align: center;">FEC. EMISION</th>
               <th class="head1" style="text-align: center;">FEC. LIQUID</th>
               <th class="head1">TIPO COMP.</th>
-              <th class="head1">COD. PEDIDO</th>
               <!-- <th class="head1" style="text-align: center;">RUC</th> -->
               <th class="head1" style="text-align: center;">ESTADO</th>
               <th class="head1 nosort" style="text-align: center;">ACCION</th>
@@ -194,12 +194,13 @@
                   <input type='checkbox' name='check[]' value="<?=$row1[0]?>" onClick='CCA(this);'>
                 </span></td>
                 <td align="center"><?php echo $row1[0]; ?></td>
+                <td align="center"><?php echo $row1[3]; ?></td>
                 <td><?php echo $row1[1]; ?></td>
                 <td align="center"><?php echo dma_shora($row1[2]); ?></td>
                 <td align="center">
                     <?php if ($row1["cod_liquid"]==NULL) {
                         echo "-------";
-                    } elseif ($row1["cod_liquid"]==1) {
+                    } elseif ($row1["cod_liquid"]!=NULL) {
                         echo dma_shora($row1["fec_liquid"]);
                     }
                   ?>
@@ -207,14 +208,13 @@
                 </td>
                 <td><?php if ($row1[4]=="B") {echo "BOLETA";} else {echo "FACTURA";} 
                 //echo $row1[2]; ?></td>
-                <td align="left"><?php echo $row1[3]; ?></td>
 <!--                 <td class="center">
                   <?php //if ($row1[4]==0) {echo "-----";} else {echo $row1[4];} ?>
                 </td> -->
                 <td align="center"><?php 
                     //echo $row1[5];
                     if ($row1["cod_liquid"]==NULL) {
-                      echo "<span style='color: #757575; font-weight: bolder;'>Sin Comprobante</span>";
+                      echo "<span style='color: #757575; font-weight: bolder;'>Sin liquidar</span>";
                     } elseif ($row1["cod_liquid"]!=NULL) {
                       echo "<span style='color: #008000; font-weight: bolder;'>LIQUIDADO</span>";
                     } elseif ($row1["cod_liquid"]==0) {
@@ -223,7 +223,7 @@
                     ?>
                 </td>
                 <td class="center" align="center">
-                  <a href="#" onclick="G('<?=$pag_org?>?id=<?=$row1[0]?>&sw=2');">
+                  <a href="#" onclick="G('<?=$pag_org?>?id=<?=$row1[0]?>&sw=2');return false">
                     <!-- <img src="images/icons/editor.png" alt=""> -->
                     <span style="text-decoration: underline; color: #004080; font-weight: bolder; ">VER</span></a>
                     <!-- &nbsp;&nbsp;&nbsp;&nbsp; -->

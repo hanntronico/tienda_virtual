@@ -219,6 +219,20 @@
           //              WHERE pedidos.estado > 2
           //              order by 6, 1 asc";
 
+          // $sql="SELECT pedidos.cod_pedido as 'COD', 
+          //              fecpedido as 'FEC_PEDIDO', 
+          //              comprob, 
+          //              rs_clie, 
+          //              ruc_clie, 
+          //              comprobante.estado,
+          //              concat(u.nombre, ' ', u.apellidos) as Usuario 
+          //       FROM pedidos LEFT JOIN comprobante 
+          //       ON pedidos.cod_pedido = comprobante.cod_pedido
+          //       INNER JOIN usuario u
+          //       ON pedidos.cod_usuario = u.cod_usuario 
+          //       WHERE (pedidos.estado >= 3 and (comprobante.estado is NULL or comprobante.estado<=1 ))
+          //       ORDER BY 6, 1 ASC";
+
           $sql="SELECT pedidos.cod_pedido as 'COD', 
                        fecpedido as 'FEC_PEDIDO', 
                        comprob, 
@@ -230,7 +244,7 @@
                 ON pedidos.cod_pedido = comprobante.cod_pedido
                 INNER JOIN usuario u
                 ON pedidos.cod_usuario = u.cod_usuario 
-                WHERE pedidos.estado > 2
+                WHERE (pedidos.estado >= 3)
                 ORDER BY 6, 1 ASC";
 
 // WHERE comprobante.estado = 1
@@ -254,7 +268,7 @@
           </colgroup>
           <thead>
             <tr>
-              <th class="head1 nosort">
+              <th class="head1 nosort" style="text-align: center;">
                 <input type="checkbox" name="allbox" onClick="CA();" title="Seleccionar o anular la selección de todos los registros" /></th>
               <th class="head1">COD</th>
               <th class="head1">FEC. PEDIDO</th>
@@ -278,6 +292,8 @@
               $color_row=" #FFAA82";
             }elseif ($row1[5]==1) {
               $color_row=" #A8FFA8";
+            }elseif ($row1[5]==2) {
+              $color_row=" #C9C992";
             }
           ?>  
 
@@ -285,7 +301,7 @@
                 <td align="center"><span class="center">
                   <input type='checkbox' name='check[]' value="<?=$row1[0]?>" onClick='CCA(this);'>
                 </span></td>
-                <td align="center"><?php echo $row1[0]; ?></td>
+                <td align="center"><?php echo $row1[0]?></td>
                 <td><?php echo dma_shora($row1[1]); ?></td>
                 <td><?php echo $row1[6]; ?></td>
                 <td><?php if ($row1[2]=="B") {echo "BOLETA";} else {echo "FACTURA";} 
@@ -300,6 +316,8 @@
                       echo "<span style='color: #008000; font-weight: bolder;'>EMITIDA</span>";
                     } elseif ($row1[5]==0) {
                       echo "<span style='color: #FF0000; font-weight: bolder;'>ANULADA</span>";
+                    } elseif ($row1[5]==2) {
+                      echo "<span style='color: #808040; font-weight: bolder;'>LIQUIDADA</span>";
                     } 
                     ?>
 
