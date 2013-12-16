@@ -112,10 +112,7 @@ function ver_nom2() {
    		// content.fadeOut('slow').load("txtnombre2.php");
    		content.fadeOut('slow');
 		}
-
 	}
-
-
 }
 
 function recalcula () {
@@ -124,129 +121,359 @@ function recalcula () {
 
 function valid_form() {
 
-	if (document.frm02.chktipago[0].checked==false && document.frm02.chktipago[1].checked==false) 
-		{
+
+	if (document.frm02.chktipago[0].checked!=false || document.frm02.chktipago[1].checked!=false){
+
+			if (document.frm02.fecha.value!="") {
+				
+				var f = new Date();
+				var fec_ped = f.getFullYear() + "-" + (f.getMonth() +1) + "-" +  f.getDate();
+				
+				var str=document.frm02.fecha.value;
+			  var n=str.split("/",3);
+				var fec_ent = n[2]+"-"+n[1]+"-"+n[0];
+
+				var ent = Date.parse(fec_ent.toString());
+				var ped = Date.parse(fec_ped.toString());
+
+				if(ent < ped){
+			 		alert("Por favor ingrese una fecha válida");
+					document.frm02.fecha.focus();
+					return false;
+				} else {
+
+					if(ent == ped){ 
+							var horasel=document.frm02.cbohora.value.toString().substring(0,2);
+							var ihorasel=parseInt(horasel);
+							var hora_act=parseInt(f.getHours());
+
+							if (ihorasel<hora_act+2) {
+								alert("Seleccione una hora válida por favor.");
+								return false;
+							}else {
+
+								if (document.frm02.swtnom.value=='V') {
+									if (document.frm02.txtnom2.value=="") {
+										alert("Por favor ingrese nombre de entrega 2");
+										document.frm02.txtnom2.focus();
+										return false;
+									}
+								}	
+
+								
+								if (document.frm02.swt.value=='F') {
+									// alert(document.frm02.txttelf.value);
+									if (document.frm02.txttelf.value=="") {
+										alert("Por favor ingrese teléfono");
+										document.frm02.txttelf.focus();
+										return false;
+									}
+									
+									if (document.frm02.txtdir.value=="") {
+										alert("Por favor ingrese calle correctamente");
+										document.frm02.txtdir.focus();
+										return false;
+									}		
+									
+									if (document.frm02.txtzona.value=="") {
+										alert("Por favor ingrese zona correctamente");
+										document.frm02.txtzona.focus();
+										return false;
+									}								
+								}else{
+									
+									if (document.frm02.txttelf2.value=="") {
+											alert("Por favor ingrese teléfono 2");
+											document.frm02.txttelf2.focus();
+											return false;
+										}
+
+										if (document.frm02.txtdir2.value=="") {
+											alert("Por favor ingrese calle 2 correctamente");
+											document.frm02.txtdir2.focus();
+											return false;
+										}	
+
+										if (document.frm02.txtzona2.value=="") {
+											alert("Por favor ingrese zona 2 correctamente");
+											document.frm02.txtzona2.focus();
+											return false;
+										}
+								}
+									
+								if (document.frm02.chkfac.checked) {
+									if (document.frm02.txtrz.value=="") {
+										alert("Por favor ingrese razón social");
+										document.frm02.txtrz.focus();
+										return false;
+									}
+
+									if (document.frm02.txtruc.value=="") {
+										alert("Por favor ingrese RUC");
+										document.frm02.txtruc.focus();
+										return false;
+									}
+
+									if (document.frm02.txtruc.value.length!=11) {
+										alert("Por favor ingrese RUC válido");
+										return false;
+									}
+								}
+								// alert("ok pasele"); return false;
+
+								if (confirm("Seguro que desea finalizar su compra?")) {
+									return true;	
+								}else{
+									return false;
+								}								
+					
+							}
+
+					}else {
+/***************************************  OJO  *********************************************/
+								if (document.frm02.swtnom.value=='V') {
+									if (document.frm02.txtnom2.value=="") {
+										alert("Por favor ingrese nombre de entrega 2");
+										document.frm02.txtnom2.focus();
+										return false;
+									}
+								}	
+
+								
+								if (document.frm02.swt.value=='F') {
+
+									if (document.frm02.txttelf.value=="") {
+										alert("Por favor ingrese teléfono");
+										document.frm02.txttelf.focus();
+										return false;
+									}
+									
+									if (document.frm02.txtdir.value=="") {
+										alert("Por favor ingrese calle correctamente");
+										document.frm02.txtdir.focus();
+										return false;
+									}		
+									
+									if (document.frm02.txtzona.value=="") {
+										alert("Por favor ingrese zona correctamente");
+										document.frm02.txtzona.focus();
+										return false;
+									}								
+								}else{
+									
+									if (document.frm02.txttelf2.value=="") {
+											alert("Por favor ingrese teléfono 2");
+											document.frm02.txttelf2.focus();
+											return false;
+										}
+
+										if (document.frm02.txtdir2.value=="") {
+											alert("Por favor ingrese calle 2 correctamente");
+											document.frm02.txtdir2.focus();
+											return false;
+										}	
+
+										if (document.frm02.txtzona2.value=="") {
+											alert("Por favor ingrese zona 2 correctamente");
+											document.frm02.txtzona2.focus();
+											return false;
+										}
+								}
+									
+								if (document.frm02.chkfac.checked) {
+									if (document.frm02.txtrz.value=="") {
+										alert("Por favor ingrese razón social");
+										document.frm02.txtrz.focus();
+										return false;
+									}
+
+									if (document.frm02.txtruc.value=="") {
+										alert("Por favor ingrese RUC");
+										document.frm02.txtruc.focus();
+										return false;
+									}
+
+									if (document.frm02.txtruc.value.length!=11) {
+										alert("Por favor ingrese RUC válido");
+										return false;
+									}
+								}
+
+								if (confirm("Seguro que desea finalizar su compra?")) {
+									return true;	
+								}else{
+									return false;
+								}
+/*******************************************************************************************/
+					}
+
+				}
+
+
+			}else{
+				alert("Por favor ingrese fecha");
+				document.frm02.fecha.focus();
+				return false;
+			}
+
+		}else {
+			alert("Por favor seleccionar tipo de pago");
+			document.frm02.chktipago[0].focus();
+			return false;			
+		}
+
+
+}
+
+function valid_form1() {
+
+	if (document.frm02.chktipago[0].checked==false && document.frm02.chktipago[1].checked==false){
 			alert("Por favor seleccionar tipo de pago");
 			document.frm02.chktipago[0].focus();
 			return false;
-		}
+		} 
+
 
 	if (document.frm02.fecha.value=="") {
-			alert("Por favor ingrese fecha");
-			document.frm02.fecha.focus();
-			return false;
-	}
-
-	var f = new Date();
-	var fec_ped = f.getFullYear() + "-" + (f.getMonth() +1) + "-" +  f.getDate();
-	
-	var str=document.frm02.fecha.value;
-    var n=str.split("/",3);
-	var fec_ent = n[2]+"-"+n[1]+"-"+n[0];
-
-	var ent = Date.parse(fec_ent.toString());
-	var ped = Date.parse(fec_ped.toString());
-
-	// alert(ent+""+ped);
-	if(ent < ped){
- 		alert("Por favor ingrese una fecha válida");
+		alert("Por favor ingrese fecha");
 		document.frm02.fecha.focus();
 		return false;
-	}
+	
+	} else {
+			// console.log("Desea finalizar la compra? - 1");
+			// return false;
 
-	if(ent == ped){ 
+			var f = new Date();
+			var fec_ped = f.getFullYear() + "-" + (f.getMonth() +1) + "-" +  f.getDate();
+			
+			var str=document.frm02.fecha.value;
+		  var n=str.split("/",3);
+			var fec_ent = n[2]+"-"+n[1]+"-"+n[0];
 
-			var horasel=document.frm02.cbohora.value.toString().substring(0,2);
-			var ihorasel=parseInt(horasel);
-			var hora_act=parseInt(f.getHours());
+			var ent = Date.parse(fec_ent.toString());
+			var ped = Date.parse(fec_ped.toString());
 
-			if (ihorasel<hora_act+2) {
-				alert("Seleccione una hora válida por favor.");
+			// alert(ent+""+ped);
+			if(ent < ped){
+		 		alert("Por favor ingrese una fecha válida");
+				document.frm02.fecha.focus();
 				return false;
-			};
+			}
 
-			if (document.frm02.txtnom.value=="") {
+			if(ent == ped){ 
+
+				var horasel=document.frm02.cbohora.value.toString().substring(0,2);
+				var ihorasel=parseInt(horasel);
+				var hora_act=parseInt(f.getHours());
+
+				if (ihorasel<hora_act+2) {
+					alert("Seleccione una hora válida por favor.");
+					return false;
+				}
+
+				if (document.frm02.txtnom.value=="") {
 					alert("Por favor ingrese fecha");
 					// document.frm02.txtnom.focus();
 					return false;
+				}	
+				// console.log("Desea finalizar la compra? - 2");
+				// return false;
 			}
-	}
 
 
-	if (document.frm02.swtnom.value=='V') {
-		if (document.frm02.txtnom2.value=="") {
-			alert("Por favor ingrese nombre de entrega 2");
-			document.frm02.txtnom2.focus();
-			return false;
+			if (document.frm02.swtnom.value=='V') {
+				if (document.frm02.txtnom2.value=="") {
+					alert("Por favor ingrese nombre de entrega 2");
+					document.frm02.txtnom2.focus();
+					return false;
+				}
+			}
+
+			if (document.frm02.chkfac.checked) {
+				if (document.frm02.txtrz.value=="") {
+					alert("Por favor ingrese razón social");
+					document.frm02.txtrz.focus();
+					return false;
+				}
+
+				if (document.frm02.txtruc.value=="") {
+					alert("Por favor ingrese RUC");
+					document.frm02.txtruc.focus();
+					return false;
+				}
+
+				if (document.frm02.txtruc.value.length!=11) {
+					alert("Por favor ingrese RUC válido");
+					return false;
+				}
+				
 		}
-	}
+			
 
-	if (document.frm02.chkfac.checked) {
-		if (document.frm02.txtrz.value=="") {
-			alert("Por favor ingrese razón social");
-			document.frm02.txtrz.focus();
-			return false;
-		}
+			if (document.frm02.swt.value=='F') {
 
-		if (document.frm02.txtruc.value=="") {
-			alert("Por favor ingrese RUC");
-			document.frm02.txtruc.focus();
-			return false;
-		}
+				if (document.frm02.txttelf.value=="") {
+					alert("Por favor ingrese teléfono");
+					document.frm02.txttelf.focus();
+					return false;
+				}
 
-		if (document.frm02.txtruc.value.length!=11) {
-			alert("Por favor ingrese RUC válido");
-			return false;
-		}
-	}
+				if (document.frm02.txtdir.value=="") {
+					alert("Por favor ingrese calle correctamente");
+					document.frm02.txtdir.focus();
+					return false;
+				}	
 
-	
-	if (document.frm02.swt.value=='F') {
-
-		if (document.frm02.txttelf.value=="") {
-			alert("Por favor ingrese teléfono");
-			document.frm02.txttelf.focus();
-			return false;
-		}
-
-		if (document.frm02.txtdir.value=="") {
-			alert("Por favor ingrese calle correctamente");
-			document.frm02.txtdir.focus();
-			return false;
-		}	
-
-		if (document.frm02.txtzona.value=="") {
-			alert("Por favor ingrese zona correctamente");
-			document.frm02.txtzona.focus();
-			return false;
-		}
-
-	}
+				if (document.frm02.txtzona.value=="") {
+					alert("Por favor ingrese zona correctamente");
+					document.frm02.txtzona.focus();
+					return false;
+				}
+			}
 
 
-	if (document.frm02.swt.value=='V') {
+			if (document.frm02.swt.value=='V') {
 
-		if (document.frm02.txttelf2.value=="") {
-			alert("Por favor ingrese teléfono 2");
-			document.frm02.txttelf2.focus();
-			return false;
-		}
+				if (document.frm02.txttelf2.value=="") {
+					alert("Por favor ingrese teléfono 2");
+					document.frm02.txttelf2.focus();
+					return false;
+				}
 
-		if (document.frm02.txtdir2.value=="") {
-			alert("Por favor ingrese calle 2 correctamente");
-			document.frm02.txtdir2.focus();
-			return false;
-		}	
+				if (document.frm02.txtdir2.value=="") {
+					alert("Por favor ingrese calle 2 correctamente");
+					document.frm02.txtdir2.focus();
+					return false;
+				}	
 
-		if (document.frm02.txtzona2.value=="") {
-			alert("Por favor ingrese zona 2 correctamente");
-			document.frm02.txtzona2.focus();
-			return false;
-		}
+				if (document.frm02.txtzona2.value=="") {
+					alert("Por favor ingrese zona 2 correctamente");
+					document.frm02.txtzona2.focus();
+					return false;
+				}
+			} 
 
-	}
+	} 
+	// else {
+
+	// 	console.log("Desea finalizar la compra? - 2");
+	//   return false;
+	// }  
+
+	// console.log("Desea finalizar la compra? - 2");
+	// return false;
 
 
+
+
+
+
+
+	// if (confirm("Seguro que desea finalizar su compra?")) {
+	// 	return true;	
+	// }else{
+	// 	return false;
+	// }
 
 
 	// var hora_ped = f.getHours();
@@ -271,8 +498,6 @@ function valid_form() {
 		
 	return true;
 }
-
-
 
 </script>
 
@@ -417,6 +642,7 @@ if (count($k)>0)
 			 		 
 				?>
 				<input type="text" name="txt1" value="<?php echo $row[3].' '.$row[4]; ?>" style="width: 400px;" disabled="disabled">
+				<!--   ************* AQUI MODIFIQUE ALGO  ******************** -->
 				<input type="hidden" name="txtnom" value="<?php echo $row[3].' '.$row[4]; ?>">
 				
 				<span style="font-size:11px; color:#FF0000">Para agregar otro nombre de entrega, <a href="#" onclick="ver_nom2(); return false;">click aquí</a>.</span>
@@ -453,6 +679,8 @@ if (count($k)>0)
 
 				<input type="text" name="txt2" value="<?php echo $row[6]; ?>" style="width: 400px;" readonly>
 				<input type="hidden" name="txtdir" value="<?php echo $row[6]; ?>">
+				<input type="hidden" name="txtzona" value=".">
+
 
 					<br>
 					<span style="font-size:11px; color:#FF0000">Para agregar otro teléfono de contacto y otra dirección de entrega diferentes, 

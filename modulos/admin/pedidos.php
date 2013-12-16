@@ -252,7 +252,7 @@
                 </span></td>
                 <td align="center"><?php echo $row1[0]; ?></td>
                 <td><?php echo $row1[1]; ?></td>
-                <td><?php echo $row1[2]; ?></td>
+                <td><?php echo dma_chora($row1[2]); ?></td>
                 <td class="center">
                   <?php 
                     if ($row1[3]=='E') {
@@ -264,7 +264,7 @@
                     //echo $row1[3]; 
                   ?>
                 </td>
-                <td align="right"><?php echo $row1[4]; ?></td>
+                <td align="left"><?php echo dma_shora($row1[4]); ?></td>
                 <td class="center"><?php echo $row1[5]; ?></td>
                 <td class="center"><?php echo $row1[6]; ?></td>
                 <td class="center"><?php 

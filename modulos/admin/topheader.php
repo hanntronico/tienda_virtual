@@ -22,7 +22,7 @@
                         $link=Conectarse();
                         $rs=@mysql_query("set names utf8",$link);
                         $fila=@mysql_fetch_array($res);
-                        $sql="SELECT count(*) FROM mensajes"; 
+                        $sql="SELECT count(*) FROM mensajes WHERE estado =0"; 
                         $res=@mysql_query($sql,$link);
                         $row1=@mysql_fetch_array($res);
                         echo $row1[0];

@@ -85,6 +85,14 @@ function autogenerado3($tabla,$campocodigo,$numcaracteres){
       return $fecresult;
     }
 
+  function dma_chora($fec)
+    {
+      list($fecha,$hora)=explode(" ",$fec);
+      list($anio,$mes,$dia)=explode("-",$fecha); 
+      $fecresult = $dia."/".$mes."/".$anio." - ".$hora;
+      return $fecresult;
+    }  
+
   function extrae($cadena,$num_caracteres){
       //Extracto de los primeros numeros de caracteres definidos en $num_caracteres;
       $cadena_ext = substr($cadena,0, $num_caracteres);

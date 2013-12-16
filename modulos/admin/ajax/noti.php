@@ -6,7 +6,7 @@
             $link=Conectarse();
             $rs=@mysql_query("set names utf8",$link);
             $fila=@mysql_fetch_array($res);
-            $sql="SELECT count(*) FROM mensajes ORDER BY 1 DESC LIMIT 0,5"; 
+            $sql="SELECT count(*) FROM mensajes WHERE estado = 0 ORDER BY 1"; 
             $res=@mysql_query($sql,$link);
             $row1=@mysql_fetch_array($res);
             // echo $row1[0];
@@ -29,7 +29,7 @@
         <?php 
             $rs=@mysql_query("set names utf8",$link);
             $fila=@mysql_fetch_array($res);
-            $sql="SELECT * FROM mensajes ORDER BY 1 DESC LIMIT 0,5";
+            $sql="SELECT * FROM mensajes WHERE estado = 0 ORDER BY 1 DESC LIMIT 0,5";
             $res=@mysql_query($sql,$link);
             while ($row3=@mysql_fetch_array($res)) { 
         ?>
@@ -37,7 +37,7 @@
             <!-- <a href="messages.html"> -->
 
             <a href="#">
-            	<span class="thumb"><img src="images/thumbs/avatar1.png" alt="" /></span>
+            	<span class="thumb"><img src="images/thumbs/avatar_clie.png" alt="" /></span>
                 <span class="msgdetails">
                     <span class="name"><?=$row3[1]?></span>
                     <span class="msg"><?php echo extrae($row3[4], 35)." ...";?></span>
@@ -84,8 +84,8 @@
     </ul>
 
 	<div class="msgbutton">
-    	<a href="">Todos los mensajes</a>
-        <a href="">Responder</a>
+    	<a href="#" onclick="cargare('mensajes.php'); return false;">Todos los mensajes</a>
+        <!-- <a href="">Responder</a> -->
     </div><!--msgbutton-->
 </div>
 

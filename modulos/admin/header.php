@@ -2,8 +2,8 @@
     	<ul class="headermenu">
         	<li class="current">
         		<a href="main_admin.php"><span class="icon icon-flatscreen"></span>Panel</a></li>
-<!--        <li><a href="manageblog.html"><span class="icon icon-pencil"></span>Manage Blog</a></li>
-            <li><a href="messages.html"><span class="icon icon-message"></span>Messages</a></li>
+            <li><a href="#" onclick="cargare('mensajes.php'); return false;"><span class="icon icon-message"></span>Mensajes</a></li>
+<!--        <li><a href="messages.html"><span class="icon icon-message"></span>Messages</a></li>
             <li><a href="reports.html"><span class="icon icon-chart"></span>Reports</a></li> -->
         </ul>
         
