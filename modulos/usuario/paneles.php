@@ -88,6 +88,7 @@
         <h3 class="m_title">Olvidó sus datos de registro?</h3>
         <form id="forgot_form" name="forgot_form" method="post">
           <p>
+            Correo electrónico:
             <input type="text" id="forgot-email" name="email" class="inputbox" placeholder="Correo electrónico" cols="150">
           </p>
           <p>
