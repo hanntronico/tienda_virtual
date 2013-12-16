@@ -1,4 +1,3 @@
-<?php session_start(); ?> 
 <?php include 'head.php'; ?>
 
 <!-- <body class="withvernav" onload="cargare('productos.php?msn=p1');"> -->
@@ -133,7 +132,6 @@ if ($_GET['msn']=='lq1') {
           </div>
           <br><br><br><br>
         </div>
-
       </div><br>
     </div>
 	</div>
