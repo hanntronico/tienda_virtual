@@ -53,9 +53,10 @@
                 	<h4><?php echo $row1['nombre']; ?></h4><br>
                     <span class="email"><?php echo $row1['correo']; ?></span>
                     <ul>
-                    	<li><a href="editprofile.html">Editar cuenta</a></li>
-                        <li><a href="accountsettings.html">Configuración</a></li>
-                        <li><a href="salir.php">Salir</a></li>
+                    	<li><a href="#">Editar cuenta</a></li>
+                        <li><a href="#">Configuración</a></li>
+                        <!-- <li><a href="salir.php">Salir</a></li> -->
+                        <li><a href="#" onclick="salir();return false;">Salir</a></li>
                     </ul>
                 </div><!--userdata-->
             </div><!--userinfodrop-->

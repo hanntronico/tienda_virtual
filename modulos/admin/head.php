@@ -343,5 +343,11 @@
 		// content.fadeIn('slow').load(url);
    	}
 
+   	function salir() {
+  		if (confirm("Seguro que desea salir del sistema?")) {
+   			location.href = "salir.php"
+   		};
+   	}
+
 </script>
 </head>
