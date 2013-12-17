@@ -16,7 +16,11 @@
   			// echo substr($param1[$i], 0, -2);
   			$prmt = $prmt.str_replace("20", " ", $param1[$i]);
   		}
-  	}
+  	}else {
+      $prmt = $_GET["pr1"];
+    }
+
+
   	// echo $prmt;
   	// exit();
 
@@ -28,36 +32,40 @@
 
   	if ($_GET["pr1"]!="") {
   		$sql="select pe.cod_pedido, 
-              u.cod_usuario,
-              concat(u.nombre, ' ', u.apellidos) as usuario,
-              pe.fecpedido, 
-              pe.tipo_pago, 
-              pe.fec_entrega, 
-              pe.hora_entrega, 
-              pe.comprob, 
-              pe.rs_clie, 
-              pe.ruc_clie 
-              from pedidos pe inner join usuario u on pe.cod_usuario = u.cod_usuario 
-              where pe.estado = 2 
-              and (concat(u.nombre, ' ', u.apellidos) like '".$_GET["pr1"]."%'
-              or u.cod_usuario like '".$_GET["pr1"]."%')";
-              // echo $sql; exit();
+                   u.cod_usuario, 
+                   concat(u.nombre, ' ', u.apellidos) as usuario, 
+                   pe.fecpedido, 
+                   pe.tipo_pago, 
+                   pe.fec_entrega, 
+                   pe.hora_entrega, 
+                   pe.comprob, 
+                   pe.rs_clie, 
+                   pe.ruc_clie 
+          from comprobante c inner join pedidos pe
+          on c.cod_pedido = pe.cod_pedido
+          inner join usuario u
+          on pe.cod_usuario = u.cod_usuario
+          where (concat(u.nombre, ' ', u.apellidos) like '".$prmt."%'
+          or u.cod_usuario like '".$prmt."%')";
+          // echo $sql; exit();
   	}
 
   	if ($_GET["fci"]!="" && $_GET["fcf"]!="") {
   		$sql="select pe.cod_pedido, 
-              u.cod_usuario,
-              concat(u.nombre, ' ', u.apellidos) as usuario, 
-              pe.fecpedido, 
-              pe.tipo_pago, 
-              pe.fec_entrega, 
-              pe.hora_entrega, 
-              pe.comprob, 
-              pe.rs_clie, 
-              pe.ruc_clie 
-              from pedidos pe inner join usuario u on pe.cod_usuario = u.cod_usuario 
-              where pe.estado = 2 
-              and pe.fecpedido between '".$fec_ini."' AND '".$fec_fin."'";
+                   u.cod_usuario, 
+                   concat(u.nombre, ' ', u.apellidos) as usuario, 
+                   pe.fecpedido, 
+                   pe.tipo_pago, 
+                   pe.fec_entrega, 
+                   pe.hora_entrega, 
+                   pe.comprob, 
+                   pe.rs_clie, 
+                   pe.ruc_clie 
+            from comprobante c inner join pedidos pe
+            on c.cod_pedido = pe.cod_pedido
+            inner join usuario u
+            on pe.cod_usuario = u.cod_usuario
+            where pe.fecpedido between '".$fec_ini."' AND '".$fec_fin."'";
   	}
 
         $rs=@mysql_query("set names utf8",$link);
