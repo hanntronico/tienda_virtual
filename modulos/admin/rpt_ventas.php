@@ -203,7 +203,7 @@
 			            <td colspan="2">
 			            	<input type="radio" name="opt1" value="1">Por Clientes
 			            	&nbsp;&nbsp;&nbsp;
-			            	<input type="radio" name="opt1" value="2">Por Fechas
+			            	<input type="radio" name="opt1" value="2">Por Fecha de pedido
 			            	&nbsp;&nbsp;&nbsp;
 			            </td>
 			          </tr>    	
