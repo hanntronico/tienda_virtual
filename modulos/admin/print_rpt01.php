@@ -12,37 +12,41 @@
 
     if ($_GET["pr1"]!="") {
       $sql="select pe.cod_pedido, 
-              u.cod_usuario,
-              concat(u.nombre, ' ', u.apellidos) as usuario,
-              pe.fecpedido, 
-              pe.tipo_pago, 
-              pe.fec_entrega, 
-              pe.hora_entrega, 
-              pe.comprob, 
-              pe.rs_clie, 
-              pe.ruc_clie 
-              from pedidos pe inner join usuario u on pe.cod_usuario = u.cod_usuario 
-              where pe.estado = 2 
-              and (concat(u.nombre, ' ', u.apellidos) like '".$_GET["pr1"]."%'
-              or u.cod_usuario like '".$_GET["pr1"]."%')";
+                   u.cod_usuario, 
+                   concat(u.nombre, ' ', u.apellidos) as usuario, 
+                   pe.fecpedido, 
+                   pe.tipo_pago, 
+                   pe.fec_entrega, 
+                   pe.hora_entrega, 
+                   pe.comprob, 
+                   pe.rs_clie, 
+                   pe.ruc_clie 
+          from comprobante c inner join pedidos pe
+          on c.cod_pedido = pe.cod_pedido
+          inner join usuario u
+          on pe.cod_usuario = u.cod_usuario
+          where (concat(u.nombre, ' ', u.apellidos) like '".$_GET["pr1"]."%'
+          or u.cod_usuario like '".$_GET["pr1"]."%')";
               // echo $sql; exit();
         $titulo = "Cliente : ".$_GET["pr1"];
     }
 
     if ($_GET["fci"]!="" && $_GET["fcf"]!="") {
       $sql="select pe.cod_pedido, 
-              u.cod_usuario,
-              concat(u.nombre, ' ', u.apellidos) as usuario, 
-              pe.fecpedido, 
-              pe.tipo_pago, 
-              pe.fec_entrega, 
-              pe.hora_entrega, 
-              pe.comprob, 
-              pe.rs_clie, 
-              pe.ruc_clie 
-              from pedidos pe inner join usuario u on pe.cod_usuario = u.cod_usuario 
-              where pe.estado = 2 
-              and pe.fecpedido between '".$fec_ini."' AND '".$fec_fin."'";
+                   u.cod_usuario, 
+                   concat(u.nombre, ' ', u.apellidos) as usuario, 
+                   pe.fecpedido, 
+                   pe.tipo_pago, 
+                   pe.fec_entrega, 
+                   pe.hora_entrega, 
+                   pe.comprob, 
+                   pe.rs_clie, 
+                   pe.ruc_clie 
+            from comprobante c inner join pedidos pe
+            on c.cod_pedido = pe.cod_pedido
+            inner join usuario u
+            on pe.cod_usuario = u.cod_usuario
+            where pe.fecpedido between '".$fec_ini."' AND '".$fec_fin."'";
       $titulo = "Fechas : ".$fec_ini." al ".$fec_fin;        
     }
 
